@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080808" />
+
+  <!--
+    ============================================================
+      CALIBER CAR SERVICE
+      To customize, edit config.js only.
+      • Content, links, copy   → config.js
+      • Colors / theme         → config.js (CONFIG.theme)
+      • Styles & layout        → styles.css
+      • Animations & rendering → main.js
+    ============================================================
+  -->
+
+  <!-- Fallback title/description — overridden by config.js -->
+  <title>Caliber Car Service — Executive Black Car</title>
+  <meta name="description" content="Chauffeured airport transfers, corporate accounts, and as-directed luxury transport across Long Island, NYC, NJ, and CT. 24/7." />
+
+  <!-- Fonts: Bebas Neue + DM Sans via @fontsource on jsDelivr -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/bebas-neue@5.0.13/index.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/dm-sans@5.0.20/400.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/dm-sans@5.0.20/500.css" />
+
+  <!-- GSAP 3 + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Config: data + applies theme CSS vars immediately -->
+  <script src="config.js"></script>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot"  aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- App shell — sections injected here by main.js -->
+  <main id="app"></main>
+
+  <script src="main.js"></script>
+</body>
+</html>
