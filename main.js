@@ -378,41 +378,6 @@ function setupLenis() {
 }
 
 /* ----------------------------------------------------------------
-   CUSTOM CURSOR (disabled on touch / coarse pointers via CSS)
----------------------------------------------------------------- */
-function setupCursor() {
-  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-
-  const dot  = document.querySelector('.cursor-dot');
-  const ring = document.querySelector('.cursor-ring');
-  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-  let rx = mx, ry = my;
-
-  document.addEventListener('mousemove', (e) => {
-    mx = e.clientX; my = e.clientY;
-    gsap.to(dot, { x: mx, y: my, duration: 0.08, ease: 'none' });
-  });
-
-  (function tick() {
-    rx += (mx - rx) * 0.13;
-    ry += (my - ry) * 0.13;
-    gsap.set(ring, { x: rx, y: ry });
-    requestAnimationFrame(tick);
-  }());
-
-  document.addEventListener('mouseover', (e) => {
-    if (e.target.closest('a, button, .fleet-image-wrap, .service-row, .coverage-group li')) {
-      document.body.classList.add('cursor-hover');
-    }
-  });
-  document.addEventListener('mouseout', (e) => {
-    if (e.target.closest('a, button, .fleet-image-wrap, .service-row, .coverage-group li')) {
-      document.body.classList.remove('cursor-hover');
-    }
-  });
-}
-
-/* ----------------------------------------------------------------
    MOBILE NAV TOGGLE
 ---------------------------------------------------------------- */
 function setupNav() {
@@ -688,7 +653,6 @@ function initFleetTilt() {
 ---------------------------------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
   render();
-  setupCursor();
   setupNav();
   setupLenis();
 

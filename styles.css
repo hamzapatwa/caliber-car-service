@@ -53,43 +53,6 @@ ul      { list-style: none; }
 
 
 /* ================================================================
-   CUSTOM CURSOR — subtle gold; disabled on touch / coarse devices
-================================================================ */
-.cursor-dot,
-.cursor-ring {
-  position:       fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index:        9999;
-  border-radius:  50%;
-  transform:      translate(-50%, -50%);
-  mix-blend-mode: difference;
-}
-.cursor-dot {
-  width:  4px; height: 4px;
-  background: var(--gold);
-  transition: opacity .3s;
-}
-.cursor-ring {
-  width:  28px; height: 28px;
-  border: 1px solid rgba(184, 150, 62, 0.45);
-  transition: width .3s ease, height .3s ease, border-color .3s ease, opacity .3s;
-}
-body.cursor-hover .cursor-ring {
-  width:  48px; height: 48px;
-  border-color: var(--gold);
-}
-@media (hover: none), (pointer: coarse) {
-  body            { cursor: auto; }
-  .cursor-dot,
-  .cursor-ring   { display: none; }
-}
-@media (hover: hover) and (pointer: fine) {
-  body                { cursor: none; }
-  a, button, .fleet-image-wrap, .service-row { cursor: none; }
-}
-
-/* ================================================================
    NAVIGATION — sticky, mobile menu
 ================================================================ */
 .nav {
