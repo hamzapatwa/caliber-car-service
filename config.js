@@ -64,7 +64,7 @@ const CONFIG = {
   phoneHref: 'tel:+15165952391',
   email:     'reservations@calibercarservice.com',
   emailHref: 'mailto:reservations@calibercarservice.com',
-  bookHref:  '#cta',
+  bookHref:  'https://customer.moovs.app/caliber-car-service/request/new',
 
   /* ----------------------------------------------------------
      HERO
@@ -77,7 +77,7 @@ const CONFIG = {
       line3: 'SERVICE',
     },
     sub:      'Chauffeured airport transfers, corporate accounts, and as-directed service across New York, New Jersey, and Connecticut. One call. One car. On time.',
-    ctaPrimary:   { label: 'Reserve a Ride',   href: '#cta' },
+    ctaPrimary:   { label: 'Reserve a Ride',   href: 'https://customer.moovs.app/caliber-car-service/request/new' },
     ctaSecondary: { label: 'See the Fleet',    href: '#fleet' },
     image: {
       src: 'vistiq.png',
@@ -120,6 +120,7 @@ const CONFIG = {
     {
       num:  '01',
       name: 'Airport Transfers',
+      href: 'jfk/',
       desc: 'JFK · LGA · EWR · HPN with live flight tracking and complimentary meet-and-greet on request.',
     },
     {
@@ -280,6 +281,11 @@ const CONFIG = {
       { label: 'Services', href: '#services' },
       { label: 'Fleet',    href: '#fleet'    },
       { label: 'Book',     href: '#cta'      },
+    ],
+    airports: [
+      { label: 'JFK Airport',      href: 'jfk/' },
+      { label: 'LaGuardia (LGA)',  href: 'lga/' },
+      { label: 'Newark (EWR)',     href: 'ewr/' },
     ],
   },
 

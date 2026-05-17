@@ -24,6 +24,18 @@ const IMG_FALLBACK_ATTR =
   ` onerror="this.onerror=null;this.src='${FALLBACK_DATA_URI}';this.classList.add('is-fallback');"`;
 
 /* ----------------------------------------------------------------
+   Phone icon — gold handset SVG, inline wherever phone# appears
+---------------------------------------------------------------- */
+const PHONE_ICON =
+  `<svg class="phone-icon" width="13" height="13" viewBox="0 0 24 24" ` +
+  `fill="#B8963E" aria-hidden="true">` +
+  `<path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 ` +
+  `1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 ` +
+  `1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 ` +
+  `2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>` +
+  `</svg>`;
+
+/* ----------------------------------------------------------------
    HTML helper for the brand wordmark
 ---------------------------------------------------------------- */
 function brandWordmark() {
@@ -42,19 +54,37 @@ function renderNav() {
     .map((n) => `<li><a href="${n.href}">${n.label}</a></li>`)
     .join('');
 
+  const airportItems = CONFIG.footer.airports
+    .map((a) => `<li><a href="${a.href}">${a.label}</a></li>`)
+    .join('');
+
+  const drawerAirports = CONFIG.footer.airports
+    .map((a) => `<a href="${a.href}">${a.label}</a>`)
+    .join('');
+
   return `
     <nav class="nav" id="nav" aria-label="Primary">
       <a href="#hero" class="nav-logo">${brandWordmark()}</a>
       <div class="nav-right">
-        <ul class="nav-links">${links}</ul>
-        <a href="${CONFIG.bookHref}" class="nav-cta">Book Now</a>
+        <ul class="nav-links">
+          ${links}
+          <li class="nav-dropdown" id="navAirports">
+            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false" id="navAirportsBtn">
+              Airports <span class="nav-dropdown-chevron">▾</span>
+            </button>
+            <ul class="nav-dropdown-menu">${airportItems}</ul>
+          </li>
+        </ul>
+        <a href="${CONFIG.phoneHref}" class="nav-phone">${PHONE_ICON}${CONFIG.phone}</a>
+        <a href="${CONFIG.bookHref}" class="nav-cta" target="_blank" rel="noopener">Book Now</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
       <aside class="nav-drawer" id="navDrawer" aria-label="Mobile menu">
         ${CONFIG.nav.map((n) => `<a href="${n.href}">${n.label}</a>`).join('')}
-        <a href="${CONFIG.bookHref}" class="nav-cta">Book Now</a>
+        ${drawerAirports}
+        <a href="${CONFIG.bookHref}" class="nav-cta" target="_blank" rel="noopener">Book Now</a>
       </aside>
     </nav>`;
 }
@@ -83,13 +113,13 @@ function renderHero() {
         </h1>
         <p class="hero-sub">${sub}</p>
         <div class="hero-ctas">
-          <a href="${ctaPrimary.href}" class="btn btn-gold">
+          <a href="${ctaPrimary.href}" class="btn btn-gold" target="_blank" rel="noopener">
             ${ctaPrimary.label}
             <span class="btn-arrow">→</span>
           </a>
-          <a href="${ctaSecondary.href}" class="btn btn-outline">
-            ${ctaSecondary.label}
-            <span class="btn-arrow">↓</span>
+          <a href="${CONFIG.phoneHref}" class="btn btn-outline">
+            ${PHONE_ICON}${CONFIG.phone}
+            <span class="btn-arrow">↗</span>
           </a>
         </div>
         <div class="hero-scroll" aria-hidden="true">
@@ -133,7 +163,7 @@ function renderMarquee() {
 function renderServices() {
   const rows = CONFIG.services
     .map((s) => `
-      <a class="service-row" href="${CONFIG.bookHref}" aria-label="${s.name}">
+      <a class="service-row" href="${s.href || CONFIG.bookHref}" aria-label="${s.name}">
         <span class="service-num">${s.num}</span>
         <h3 class="service-name">${s.name}</h3>
         <p class="service-desc">${s.desc}</p>
@@ -185,7 +215,7 @@ function renderFleet() {
             </div>
           </div>
           <div class="fleet-features">${features}</div>
-          <a href="${CONFIG.bookHref}" class="btn btn-outline fleet-cta">
+          <a href="${CONFIG.bookHref}" class="btn btn-outline fleet-cta" target="_blank" rel="noopener">
             Reserve ${v.category}
             <span class="btn-arrow">→</span>
           </a>
@@ -274,10 +304,10 @@ function renderCTA() {
         <div class="cta-contact cta-contact--single">
           <a href="${CONFIG.phoneHref}" class="cta-contact-item">
             <span class="cta-contact-label">Dispatch — 24/7</span>
-            <span class="cta-contact-value">${CONFIG.phone}</span>
+            <span class="cta-contact-value">${PHONE_ICON}${CONFIG.phone}</span>
           </a>
         </div>
-        <a href="${CONFIG.phoneHref}" class="btn btn-gold">
+        <a href="${CONFIG.bookHref}" class="btn btn-gold" target="_blank" rel="noopener">
           ${c.primary.label}
           <span class="btn-arrow">→</span>
         </a>
@@ -305,7 +335,7 @@ function renderFooter() {
         <div class="footer-col">
           <span class="footer-col-title">Contact</span>
           <div class="footer-list">
-            <a href="${CONFIG.phoneHref}">${CONFIG.phone}</a>
+            <a href="${CONFIG.phoneHref}">${PHONE_ICON}${CONFIG.phone}</a>
             <span>Long Island, New York</span>
             <span>Available 24/7</span>
           </div>
@@ -314,7 +344,13 @@ function renderFooter() {
           <span class="footer-col-title">Explore</span>
           <div class="footer-list">
             ${CONFIG.nav.map((n) => `<a href="${n.href}">${n.label}</a>`).join('')}
-            <a href="${CONFIG.bookHref}">Book Now</a>
+            <a href="${CONFIG.bookHref}" target="_blank" rel="noopener">Book Now</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">Airports</span>
+          <div class="footer-list">
+            ${CONFIG.footer.airports.map((a) => `<a href="${a.href}">${a.label}</a>`).join('')}
           </div>
         </div>
       </div>
@@ -389,6 +425,19 @@ function setupNav() {
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   });
+
+  // Airports dropdown — click toggle (keyboard / touch)
+  const airportBtn = document.getElementById('navAirportsBtn');
+  const airportDd  = document.getElementById('navAirports');
+  if (airportBtn && airportDd) {
+    airportBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = airportDd.classList.toggle('open');
+      airportBtn.setAttribute('aria-expanded', open);
+    });
+    document.addEventListener('click', () => airportDd.classList.remove('open'));
+    airportDd.addEventListener('click', (e) => e.stopPropagation());
+  }
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
