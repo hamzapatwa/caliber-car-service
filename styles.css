@@ -1288,10 +1288,13 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 @media (max-width: 720px) {
   /* Tighter nav padding on mobile so the burger has more room */
   .nav        { padding: 14px var(--shell-pad-x); }
+<<<<<<< HEAD
   /* Hide the sticky "Book Now" pill — it's already in the drawer */
   .nav .nav-cta { display: none; }
   /* Collapse the right-side gap so only the burger remains */
   .nav-right  { gap: 0; }
+=======
+>>>>>>> origin/main
   .nav-toggle { display: inline-flex; width: 44px; height: 44px; }
   .nav-links  { display: none; }
 
