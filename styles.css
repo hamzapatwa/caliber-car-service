@@ -53,6 +53,28 @@ ul      { list-style: none; }
 
 
 /* ================================================================
+   MOBILE NAV OVERLAY
+   Injected as a direct <body> child by setupNav() so that
+   backdrop-filter on nav.scrolled never traps its position:fixed.
+================================================================ */
+.nav-overlay {
+  position:        fixed;
+  inset:           0;
+  z-index:         450;   /* above page content, below nav (500) */
+  background:      rgba(8, 8, 8, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity:         0;
+  pointer-events:  none;
+  transition:      opacity .35s ease;
+  will-change:     opacity;
+}
+body.nav-open .nav-overlay {
+  opacity:        1;
+  pointer-events: auto;
+}
+
+/* ================================================================
    NAVIGATION — sticky, mobile menu
 ================================================================ */
 .nav {
@@ -96,14 +118,20 @@ ul      { list-style: none; }
   color:          var(--white);
   white-space:    nowrap;
 }
-.nav-logo .logo-pipe {
-  color:       var(--gold);
-  font-weight: 400;
-  transform:   translateY(-1px);
-}
 .nav-logo .logo-secondary {
   letter-spacing: .18em;
   color:          var(--white);
+}
+
+/* Inline crosshair-C brand mark — sits between CALIBER and CAR SERVICE.
+   Scales with surrounding type via em sizing so nav (22px) and footer
+   (28px) both get a properly-proportioned mark. */
+.brand-mark {
+  width:        1.45em;
+  height:       1.45em;
+  flex-shrink:  0;
+  display:      inline-block;
+  overflow:     visible;
 }
 
 .nav-right     { display: flex; align-items: center; gap: clamp(20px, 3vw, 40px); }
@@ -359,6 +387,30 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 }
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 
+/* Google review trust pill — sits directly under the hero CTAs.
+   Lightweight social proof at the exact decision moment. */
+.hero-trust {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            10px;
+  margin-top:     24px;
+  padding:        7px 4px;
+  font-size:      11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color:          rgba(238, 238, 232, 0.7);
+  font-weight:    500;
+  transition:     color .2s ease;
+  width:          fit-content;
+}
+.hero-trust:hover { color: var(--white); }
+.hero-trust-stars {
+  color:          var(--gold);
+  letter-spacing: .06em;
+  font-size:      13px;
+  line-height:    1;
+}
+
 .hero-image {
   position:     relative;
   overflow:     hidden;
@@ -476,49 +528,42 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 }
 
 /* ================================================================
-   MARQUEE — gold band
+   TRUST STRIP — static gold credential band (replaces marquee)
 ================================================================ */
-.marquee-section {
-  background:     var(--gold);
-  color:          var(--bg);
-  padding:        26px 0;
-  overflow:       hidden;
-  position:       relative;
-  border-top:     1px solid rgba(0,0,0,0.08);
-  border-bottom:  1px solid rgba(0,0,0,0.08);
+.trust-strip {
+  background:    var(--gold);
+  color:         var(--bg);
+  padding:       22px var(--shell-pad-x);
+  border-top:    1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
-.marquee-track {
-  display:     flex;
-  gap:         0;
-  white-space: nowrap;
-  animation:   marquee 32s linear infinite;
-  width:       max-content;
+.trust-strip-inner {
+  max-width:       var(--max-w);
+  margin:          0 auto;
+  display:         flex;
+  flex-wrap:       wrap;
+  justify-content: center;
+  align-items:     center;
+  gap:             14px 32px;
 }
-.marquee-track:hover { animation-play-state: paused; }
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-.marquee-item {
+.trust-strip-item {
   font-family:    var(--font-display);
-  font-size:      clamp(16px, 1.6vw, 22px);
-  letter-spacing: .24em;
+  font-size:      clamp(13px, 1.3vw, 17px);
+  letter-spacing: .28em;
   text-transform: uppercase;
   color:          var(--bg);
-  flex-shrink:    0;
-  padding:        0 28px;
   display:        inline-flex;
   align-items:    center;
-  gap:            28px;
+  gap:            32px;
 }
-.marquee-item::after {
-  content: '';
-  width:   6px;
-  height:  6px;
-  background: var(--bg);
-  display: inline-block;
-  transform: rotate(45deg);
-  margin-left: 28px;
+.trust-strip-item:not(:last-child)::after {
+  content:     '';
+  width:       6px;
+  height:      6px;
+  background:  var(--bg);
+  display:     inline-block;
+  transform:   rotate(45deg);
+  flex-shrink: 0;
 }
 
 /* ================================================================
@@ -560,7 +605,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 }
 
 /* ================================================================
-   SERVICES — editorial ledger
+   SERVICES — 2-per-row card grid
 ================================================================ */
 .services {
   background: var(--surface);
@@ -569,20 +614,26 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 }
 .services-inner { max-width: var(--max-w); margin: 0 auto; }
 .services-head  { margin-bottom: clamp(40px, 5vw, 64px); }
-.services-list  { border-top: 1px solid var(--border); }
 
-.service-row {
-  display:       grid;
-  grid-template-columns: 80px 1fr 1.6fr 60px;
-  align-items:   center;
-  gap:           clamp(24px, 3vw, 48px);
-  padding:       clamp(28px, 3.5vw, 40px) 0;
-  border-bottom: 1px solid var(--border);
-  position:      relative;
-  transition:    background .3s ease;
-  overflow:      hidden;
+.services-grid {
+  display:    grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:        clamp(16px, 2vw, 24px);
 }
-.service-row::before {
+
+.service-card {
+  position:       relative;
+  display:        flex;
+  flex-direction: column;
+  gap:            16px;
+  padding:        clamp(28px, 3vw, 40px);
+  background:     var(--bg);
+  border:         1px solid var(--border);
+  border-radius:  2px;
+  overflow:       hidden;
+  transition:     border-color .3s ease, transform .3s ease, background .3s ease;
+}
+.service-card::before {
   content:    '';
   position:   absolute;
   left:       0;
@@ -594,44 +645,58 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
   transform-origin: top;
   transition: transform .35s ease;
 }
-.service-row:hover { background: rgba(184, 150, 62, 0.03); }
-.service-row:hover::before { transform: scaleY(1); }
+.service-card:hover {
+  border-color: rgba(184, 150, 62, 0.45);
+  transform:    translateY(-2px);
+  background:   rgba(184, 150, 62, 0.03);
+}
+.service-card:hover::before { transform: scaleY(1); }
 
 .service-num {
   font-family:    var(--font-display);
-  font-size:      clamp(20px, 1.6vw, 24px);
-  letter-spacing: .14em;
-  color:          var(--muted);
+  font-size:      clamp(16px, 1.3vw, 20px);
+  letter-spacing: .28em;
+  color:          var(--gold);
   font-variant-numeric: tabular-nums;
-  transition:     color .25s ease;
+  display:        inline-flex;
+  align-items:    center;
+  gap:            12px;
 }
-.service-row:hover .service-num { color: var(--gold); }
+.service-num::after {
+  content:    '';
+  width:      24px;
+  height:     1px;
+  background: var(--gold);
+  display:    inline-block;
+  opacity:    .6;
+}
 
 .service-name {
   font-family:    var(--font-display);
-  font-size:      clamp(28px, 3.4vw, 48px);
+  font-size:      clamp(26px, 2.4vw, 36px);
   line-height:    1;
   letter-spacing: .005em;
   color:          var(--white);
-  transition:     transform .35s ease, color .25s ease;
+  transition:     color .25s ease;
 }
-.service-row:hover .service-name { transform: translateX(8px); }
+.service-card:hover .service-name { color: var(--gold); }
 
 .service-desc {
   font-size:   clamp(13px, 1vw, 15px);
   line-height: 1.65;
-  color:       rgba(238, 238, 232, 0.58);
-  max-width:   560px;
+  color:       rgba(238, 238, 232, 0.6);
+  flex:        1;
 }
 .service-arrow {
-  font-family: var(--font-display);
-  font-size:   24px;
-  color:       var(--muted);
-  text-align:  right;
-  transition:  color .25s ease, transform .35s ease;
+  font-family:    var(--font-display);
+  font-size:      22px;
+  color:          var(--muted);
+  align-self:     flex-end;
+  margin-top:     8px;
+  transition:     color .25s ease, transform .35s ease;
 }
-.service-row:hover .service-arrow {
-  color: var(--gold);
+.service-card:hover .service-arrow {
+  color:     var(--gold);
   transform: translateX(6px);
 }
 
@@ -833,16 +898,14 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 }
 .coverage-inner { max-width: var(--max-w); margin: 0 auto; }
 .coverage-head  {
-  display:        grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap:            clamp(40px, 6vw, 80px);
-  align-items:    end;
-  margin-bottom:  clamp(60px, 7vw, 96px);
+  margin-bottom: clamp(60px, 7vw, 96px);
 }
 .coverage-intro {
   font-size:   clamp(15px, 1.15vw, 17px);
   line-height: 1.7;
   color:       rgba(238, 238, 232, 0.62);
+  max-width:   600px;
+  margin-top:  clamp(16px, 1.8vw, 24px);
 }
 .coverage-grid {
   display:    grid;
@@ -1033,8 +1096,15 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
   color:          var(--white);
   line-height:    1.1;
   transition:     color .2s;
+  word-break:     break-word;
 }
-.cta-contact-item a:hover .cta-contact-value { color: var(--gold); }
+.cta-contact-value--email {
+  font-family:    var(--font-body);
+  font-size:      clamp(14px, 1.4vw, 18px);
+  letter-spacing: .02em;
+  font-weight:    500;
+}
+.cta-contact-item:hover .cta-contact-value { color: var(--gold); }
 
 /* ================================================================
    BUTTONS
@@ -1092,7 +1162,6 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
   gap:            12px;
   margin-bottom:  16px;
 }
-.footer-brand .logo-pipe { color: var(--gold); }
 .footer-tagline {
   font-size:   13px;
   line-height: 1.6;
@@ -1169,16 +1238,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
     border-bottom: 1px solid var(--border);
   }
 
-  .service-row {
-    grid-template-columns: 60px 1fr 60px;
-    gap:                   24px;
-  }
-  .service-desc {
-    grid-column: 2 / 3;
-    margin-top:  8px;
-    max-width:   none;
-  }
-  .service-name { grid-column: 2 / 3; }
+  .services-grid { gap: 14px; }
 
   .fleet-spread {
     grid-template-columns: 1fr;
@@ -1187,10 +1247,32 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
   .fleet-spread.reverse .fleet-image-wrap { order: 1; }
   .fleet-spread.reverse .fleet-info       { order: 2; }
 
-  .coverage-head { grid-template-columns: 1fr; gap: 24px; }
   .coverage-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
 
-  .reviews-grid  { grid-template-columns: 1fr; }
+  /* Reviews: horizontal scroll-snap on tablet/mobile instead of
+     stacked single column. Native swipe, no JS. */
+  .reviews-grid {
+    display:           flex;
+    grid-template-columns: none;
+    overflow-x:        auto;
+    scroll-snap-type:  x mandatory;
+    scroll-padding-left: var(--shell-pad-x);
+    gap:               16px;
+    padding-bottom:    16px;
+    margin:            0 calc(var(--shell-pad-x) * -1);
+    padding-left:      var(--shell-pad-x);
+    padding-right:     var(--shell-pad-x);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width:   thin;
+    scrollbar-color:   var(--gold) transparent;
+  }
+  .reviews-grid::-webkit-scrollbar        { height: 4px; }
+  .reviews-grid::-webkit-scrollbar-track  { background: transparent; }
+  .reviews-grid::-webkit-scrollbar-thumb  { background: rgba(184, 150, 62, 0.4); border-radius: 4px; }
+  .review-card {
+    flex:              0 0 min(78vw, 360px);
+    scroll-snap-align: start;
+  }
 
   .cta-contact   { grid-template-columns: 1fr; gap: 20px; }
 
@@ -1223,6 +1305,27 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
     z-index:         400;
   }
   body.nav-open .nav-drawer { transform: translateX(0); }
+
+  .nav-drawer-close {
+    position:       absolute;
+    top:            24px;
+    right:          24px;
+    width:          40px; height: 40px;
+    display:        flex;
+    align-items:    center;
+    justify-content: center;
+    font-size:      20px;
+    color:          var(--muted);
+    border:         1px solid var(--border);
+    border-radius:  2px;
+    background:     none;
+    cursor:         pointer;
+    transition:     color .2s, border-color .2s;
+    font-family:    var(--font-body);
+    line-height:    1;
+  }
+  .nav-drawer-close:hover { color: var(--white); border-color: var(--gold); }
+
   .nav-drawer a {
     font-family:    var(--font-display);
     font-size:      28px;
@@ -1241,14 +1344,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
     font-size:     14px;
     font-family:   var(--font-display);
   }
-  body.nav-open::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: rgba(8, 8, 8, 0.7);
-    backdrop-filter: blur(4px);
-    z-index: 350;
-  }
+  /* placeholder — .nav-overlay is defined globally below */
 
   .hero-content     { padding: 120px var(--shell-pad-x) 56px; }
   .hero-name        { margin-bottom: 28px; }
@@ -1259,21 +1355,20 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 
   .stats-grid       { grid-template-columns: 1fr 1fr; }
 
-  .service-row {
-    grid-template-columns: 40px 1fr;
-    gap:                   16px;
-    padding:               24px 0;
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap:                   12px;
+  }
+  .service-card {
+    padding: 24px;
+    gap:     12px;
   }
   .service-arrow { display: none; }
-  .service-desc  { grid-column: 1 / -1; }
-  .service-name  { grid-column: 2 / -1; }
 
   .fleet-features { grid-template-columns: 1fr; }
   .fleet-metrics  { grid-template-columns: 1fr 1fr; width: 100%; }
 
   .coverage-grid  { grid-template-columns: 1fr 1fr; gap: 32px; }
-
-  .reviews-grid   { grid-template-columns: 1fr; }
 
   .cta-heading    { margin-bottom: 24px; }
   .cta-sub        { margin-bottom: 40px; }
@@ -1303,7 +1398,6 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .marquee-track { animation: none; }
 }
 a:focus-visible, button:focus-visible {
   outline: 2px solid var(--gold);

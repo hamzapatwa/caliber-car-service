@@ -36,12 +36,29 @@ const PHONE_ICON =
   `</svg>`;
 
 /* ----------------------------------------------------------------
+   Crosshair-C brand mark — inline SVG with strokes thickened
+   from the standalone caliber_mark.svg so it stays legible
+   at nav/footer scale (~22-30px display).
+---------------------------------------------------------------- */
+const BRAND_MARK_SVG =
+  `<svg class="brand-mark" viewBox="0 0 200 200" aria-hidden="true">` +
+    `<line x1="15" y1="100" x2="185" y2="100" stroke="#B8963E" stroke-width="2.5"/>` +
+    `<line x1="100" y1="15" x2="100" y2="185" stroke="#B8963E" stroke-width="2.5"/>` +
+    `<line x1="15" y1="93" x2="15" y2="107" stroke="#B8963E" stroke-width="4"/>` +
+    `<line x1="185" y1="93" x2="185" y2="107" stroke="#B8963E" stroke-width="4"/>` +
+    `<line x1="93" y1="15" x2="107" y2="15" stroke="#B8963E" stroke-width="4"/>` +
+    `<line x1="93" y1="185" x2="107" y2="185" stroke="#B8963E" stroke-width="4"/>` +
+    `<path d="M 132.8 77.1 A 40 40 0 1 0 132.8 122.9" fill="none" stroke="#B8963E" stroke-width="5" stroke-linecap="butt"/>` +
+    `<circle cx="100" cy="100" r="4" fill="#B8963E"/>` +
+  `</svg>`;
+
+/* ----------------------------------------------------------------
    HTML helper for the brand wordmark
 ---------------------------------------------------------------- */
 function brandWordmark() {
   const { primary, secondary } = CONFIG.brand;
   return `<span class="logo-primary">${primary}</span>` +
-         `<span class="logo-pipe">|</span>` +
+         BRAND_MARK_SVG +
          `<span class="logo-secondary">${secondary}</span>`;
 }
 
@@ -82,6 +99,7 @@ function renderNav() {
         </button>
       </div>
       <aside class="nav-drawer" id="navDrawer" aria-label="Mobile menu">
+        <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">&#x2715;</button>
         ${CONFIG.nav.map((n) => `<a href="${n.href}">${n.label}</a>`).join('')}
         ${drawerAirports}
         <a href="${CONFIG.bookHref}" class="nav-cta" target="_blank" rel="noopener">Book Now</a>
@@ -119,9 +137,13 @@ function renderHero() {
           </a>
           <a href="${CONFIG.phoneHref}" class="btn btn-outline">
             ${PHONE_ICON}${CONFIG.phone}
-            <span class="btn-arrow">↗</span>
+            <span class="btn-arrow">&#x2197;&#xFE0E;</span>
           </a>
         </div>
+        <a href="https://www.google.com/maps" class="hero-trust" target="_blank" rel="noopener" aria-label="500+ five-star Google reviews">
+          <span class="hero-trust-stars" aria-hidden="true">★★★★★</span>
+          <span class="hero-trust-text">500+ Five-Star Google Reviews</span>
+        </a>
         <div class="hero-scroll" aria-hidden="true">
           <span>Scroll</span>
           <span class="hero-scroll-line"></span>
@@ -151,24 +173,29 @@ function renderStats() {
     </section>`;
 }
 
-function renderMarquee() {
-  const doubled = [...CONFIG.marquee, ...CONFIG.marquee];
-  const items   = doubled.map((t) => `<span class="marquee-item">${t}</span>`).join('');
+function renderTrustStrip() {
+  const items = CONFIG.trustStrip
+    .map((t) => `<span class="trust-strip-item">${t}</span>`)
+    .join('');
   return `
-    <div class="marquee-section" aria-hidden="true">
-      <div class="marquee-track">${items}</div>
+    <div class="trust-strip" aria-label="Credentials">
+      <div class="trust-strip-inner">${items}</div>
     </div>`;
 }
 
 function renderServices() {
-  const rows = CONFIG.services
-    .map((s) => `
-      <a class="service-row" href="${s.href || CONFIG.bookHref}" aria-label="${s.name}">
+  const cards = CONFIG.services
+    .map((s) => {
+      const external = !s.href; // bookHref is external Moovs link
+      const attrs = external ? ' target="_blank" rel="noopener"' : '';
+      return `
+      <a class="service-card" href="${s.href || CONFIG.bookHref}" aria-label="${s.name}"${attrs}>
         <span class="service-num">${s.num}</span>
         <h3 class="service-name">${s.name}</h3>
         <p class="service-desc">${s.desc}</p>
         <span class="service-arrow" aria-hidden="true">→</span>
-      </a>`)
+      </a>`;
+    })
     .join('');
 
   return `
@@ -179,7 +206,7 @@ function renderServices() {
           <h2 class="section-title">Service<span class="gold">.</span></h2>
           <p class="section-lede">Six ways we put you on the road — every one of them on time, on point, and on your terms.</p>
         </div>
-        <div class="services-list">${rows}</div>
+        <div class="services-grid">${cards}</div>
       </div>
     </section>`;
 }
@@ -248,10 +275,8 @@ function renderCoverage() {
     <section class="coverage" id="coverage">
       <div class="coverage-inner">
         <div class="coverage-head">
-          <div>
-            <span class="section-eyebrow">Where We Drive</span>
-            <h2 class="section-title">Tri-state, <span class="gold">door to door.</span></h2>
-          </div>
+          <span class="section-eyebrow">Where We Drive</span>
+          <h2 class="section-title">Tri-state, <span class="gold">door to door.</span></h2>
           <p class="coverage-intro">${CONFIG.coverage.intro}</p>
         </div>
         <div class="coverage-grid">${groups}</div>
@@ -286,7 +311,7 @@ function renderReviews() {
         <div class="reviews-cta">
           <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="btn btn-outline">
             View all 500+ Google Reviews
-            <span class="btn-arrow">↗</span>
+            <span class="btn-arrow">&#x2197;&#xFE0E;</span>
           </a>
         </div>
       </div>
@@ -301,10 +326,14 @@ function renderCTA() {
         <span class="section-eyebrow cta-eyebrow">${c.eyebrow}</span>
         <h2 class="cta-heading">${c.headline.replace('YOUR RIDE.', '<span class="gold">YOUR RIDE.</span>')}</h2>
         <p class="cta-sub">${c.sub}</p>
-        <div class="cta-contact cta-contact--single">
+        <div class="cta-contact">
           <a href="${CONFIG.phoneHref}" class="cta-contact-item">
             <span class="cta-contact-label">Dispatch — 24/7</span>
             <span class="cta-contact-value">${PHONE_ICON}${CONFIG.phone}</span>
+          </a>
+          <a href="${CONFIG.emailHref}" class="cta-contact-item">
+            <span class="cta-contact-label">Corporate Accounts</span>
+            <span class="cta-contact-value cta-contact-value--email">${CONFIG.email}</span>
           </a>
         </div>
         <a href="${CONFIG.bookHref}" class="btn btn-gold" target="_blank" rel="noopener">
@@ -373,7 +402,7 @@ function render() {
     renderNav(),
     renderHero(),
     renderStats(),
-    renderMarquee(),
+    renderTrustStrip(),
     renderServices(),
     renderFleet(),
     renderCoverage(),
@@ -417,13 +446,41 @@ function setupLenis() {
    MOBILE NAV TOGGLE
 ---------------------------------------------------------------- */
 function setupNav() {
-  const toggle = document.getElementById('navToggle');
+  const toggle   = document.getElementById('navToggle');
+  const drawer   = document.getElementById('navDrawer');
+  const closeBtn = document.getElementById('navDrawerClose');
   if (!toggle) return;
+
+  // Inject overlay as direct child of <body> so position:fixed covers the full
+  // viewport even when nav has backdrop-filter (which would break fixed inside nav).
+  const overlay = document.createElement('div');
+  overlay.className = 'nav-overlay';
+  document.body.appendChild(overlay);
+
+  function openDrawer() {
+    document.body.classList.add('nav-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close menu');
+  }
+  function closeDrawer() {
+    document.body.classList.remove('nav-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+  }
+
   toggle.addEventListener('click', () => {
-    const open = !document.body.classList.contains('nav-open');
-    document.body.classList.toggle('nav-open', open);
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.contains('nav-open') ? closeDrawer() : openDrawer();
+  });
+
+  // × button inside drawer
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+
+  // Real overlay div — direct click handler, no pseudo-element ambiguity
+  if (overlay) overlay.addEventListener('click', closeDrawer);
+
+  // Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDrawer();
   });
 
   // Airports dropdown — click toggle (keyboard / touch)
@@ -438,13 +495,6 @@ function setupNav() {
     document.addEventListener('click', () => airportDd.classList.remove('open'));
     airportDd.addEventListener('click', (e) => e.stopPropagation());
   }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
-      document.body.classList.remove('nav-open');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-  });
 }
 
 /* ----------------------------------------------------------------
@@ -483,7 +533,7 @@ function playHeroIntro() {
     duration: 0.7,
   }, 0.05);
 
-  tl.from(['.hero-sub', '.hero-ctas'], {
+  tl.from(['.hero-sub', '.hero-ctas', '.hero-trust'], {
     opacity:  0,
     y:        24,
     duration: 0.7,
@@ -564,9 +614,9 @@ function initScrollAnimations() {
     });
   });
 
-  /* SERVICES rows */
-  gsap.from('.service-row', {
-    scrollTrigger: { trigger: '.services-list', start: 'top 80%' },
+  /* SERVICES cards */
+  gsap.from('.service-card', {
+    scrollTrigger: { trigger: '.services-grid', start: 'top 80%' },
     opacity:  0,
     y:        36,
     duration: 0.7,

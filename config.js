@@ -70,15 +70,15 @@ const CONFIG = {
      HERO
   ---------------------------------------------------------- */
   hero: {
-    badge:    'Family Owned & Operated Since 2004 · Long Island · Tri-State · 24/7',
+    badge:    'Family Owned &amp; Operated Since 2004',
     headline: {
       line1: 'EXECUTIVE',
       line2: 'BLACK CAR',
       line3: 'SERVICE',
     },
     sub:      'Chauffeured airport transfers, corporate accounts, and as-directed service across New York, New Jersey, and Connecticut. One call. One car. On time.',
-    ctaPrimary:   { label: 'Reserve a Ride',   href: 'https://customer.moovs.app/caliber-car-service/request/new' },
-    ctaSecondary: { label: 'See the Fleet',    href: '#fleet' },
+    ctaPrimary:   { label: 'Book Airport Transfer', href: 'https://customer.moovs.app/caliber-car-service/request/new' },
+    ctaSecondary: { label: 'See the Fleet',          href: '#fleet' },
     image: {
       src: 'vistiq.png',
       alt: 'Caliber Car Service — Cadillac Vistiq',
@@ -96,21 +96,14 @@ const CONFIG = {
   ],
 
   /* ----------------------------------------------------------
-     MARQUEE — auto-duplicated for the seamless loop
+     TRUST STRIP — static credential band between Stats and
+     Services. Replaces the old marquee.
   ---------------------------------------------------------- */
-  marquee: [
-    'Airport Transfers',
-    'JFK',
-    'Corporate Travel',
-    'Manhattan',
-    'LGA',
-    'Cruise Terminals',
-    'EWR',
-    'Hourly Service',
-    'Long Island',
-    'Events',
-    'HPN',
-    'Westchester',
+  trustStrip: [
+    'TLC Compliant',
+    'Fully Licensed &amp; Insured',
+    'Family Owned Since 2004',
+    '24/7 Dispatch',
   ],
 
   /* ----------------------------------------------------------
@@ -215,11 +208,11 @@ const CONFIG = {
     groups: [
       {
         title: 'Long Island',
-        items: ['Nassau County', 'Suffolk County', 'The Hamptons', 'North Shore'],
+        items: ['Garden City', 'Great Neck', 'Manhasset', 'Syosset', 'Huntington', 'The Hamptons'],
       },
       {
         title: 'NYC Boroughs',
-        items: ['Manhattan', 'Queens', 'Brooklyn', 'The Bronx'],
+        items: ['Manhattan', 'Queens', 'Brooklyn', 'The Bronx', 'Staten Island'],
       },
       {
         title: 'Tri-State',

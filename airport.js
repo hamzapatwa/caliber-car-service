@@ -28,11 +28,28 @@ const AP_FALLBACK_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(AP_FALLB
 const AP_IMG_FB = ` onerror="this.onerror=null;this.src='${AP_FALLBACK_URI}';this.classList.add('is-fallback');"`;
 
 /* ----------------------------------------------------------------
+   Crosshair-C brand mark — same inline SVG as main.js, kept in sync.
+   Strokes are thickened from caliber_mark.svg so the mark stays
+   legible at nav/footer scale.
+---------------------------------------------------------------- */
+const AP_BRAND_MARK_SVG =
+  `<svg class="brand-mark" viewBox="0 0 200 200" aria-hidden="true">` +
+    `<line x1="15" y1="100" x2="185" y2="100" stroke="#B8963E" stroke-width="2.5"/>` +
+    `<line x1="100" y1="15" x2="100" y2="185" stroke="#B8963E" stroke-width="2.5"/>` +
+    `<line x1="15" y1="93" x2="15" y2="107" stroke="#B8963E" stroke-width="4"/>` +
+    `<line x1="185" y1="93" x2="185" y2="107" stroke="#B8963E" stroke-width="4"/>` +
+    `<line x1="93" y1="15" x2="107" y2="15" stroke="#B8963E" stroke-width="4"/>` +
+    `<line x1="93" y1="185" x2="107" y2="185" stroke="#B8963E" stroke-width="4"/>` +
+    `<path d="M 132.8 77.1 A 40 40 0 1 0 132.8 122.9" fill="none" stroke="#B8963E" stroke-width="5" stroke-linecap="butt"/>` +
+    `<circle cx="100" cy="100" r="4" fill="#B8963E"/>` +
+  `</svg>`;
+
+/* ----------------------------------------------------------------
    Brand wordmark helper
 ---------------------------------------------------------------- */
 function apBrandWordmark() {
   return `<span class="logo-primary">CALIBER</span>` +
-         `<span class="logo-pipe">|</span>` +
+         AP_BRAND_MARK_SVG +
          `<span class="logo-secondary">CAR SERVICE</span>`;
 }
 
@@ -82,6 +99,7 @@ function apRenderNav(page) {
         </button>
       </div>
       <aside class="nav-drawer" id="navDrawer" aria-label="Mobile menu">
+        <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">&#x2715;</button>
         ${navItems.map((n) => `<a href="${n.href}">${n.label}</a>`).join('')}
         ${drawerAirports}
         <a href="https://customer.moovs.app/caliber-car-service/request/new" class="nav-cta" target="_blank" rel="noopener">Book Now</a>
@@ -113,7 +131,7 @@ function apRenderHero(page) {
             Reserve Your Ride <span class="btn-arrow">→</span>
           </a>
           <a href="tel:+15165952391" class="btn btn-outline">
-            ${AP_PHONE_ICON}(516) 595-2391 <span class="btn-arrow">↗</span>
+            ${AP_PHONE_ICON}(516) 595-2391 <span class="btn-arrow">&#x2197;&#xFE0E;</span>
           </a>
         </div>
       </div>
@@ -357,33 +375,52 @@ function apSetupLenis() {
    NAV BEHAVIOUR — scroll state + mobile toggle
 ================================================================ */
 function apSetupNav() {
-  const nav    = document.getElementById('nav');
-  const toggle = document.getElementById('navToggle');
-  const drawer = document.getElementById('navDrawer');
+  const nav      = document.getElementById('nav');
+  const toggle   = document.getElementById('navToggle');
+  const drawer   = document.getElementById('navDrawer');
+  const closeBtn = document.getElementById('navDrawerClose');
   if (!nav) return;
 
-  const onScroll = () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  };
+  // Inject overlay as direct child of <body> — must NOT be inside nav,
+  // because backdrop-filter on nav.scrolled breaks position:fixed descendants.
+  const overlay = document.createElement('div');
+  overlay.className = 'nav-overlay';
+  document.body.appendChild(overlay);
+
+  // Scroll state
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 50);
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  if (toggle && drawer) {
-    toggle.addEventListener('click', () => {
-      const open = drawer.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
-    drawer.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => {
-        drawer.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
-    });
+  function openDrawer() {
+    document.body.classList.add('nav-open');
+    toggle?.setAttribute('aria-expanded', 'true');
+    toggle?.setAttribute('aria-label', 'Close menu');
+  }
+  function closeDrawer() {
+    document.body.classList.remove('nav-open');
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', 'Open menu');
   }
 
-  // Airports dropdown — click toggle
+  // Hamburger toggles
+  toggle?.addEventListener('click', () => {
+    document.body.classList.contains('nav-open') ? closeDrawer() : openDrawer();
+  });
+
+  // × button
+  closeBtn?.addEventListener('click', closeDrawer);
+
+  // Real overlay div — direct click, no pseudo-element issues
+  overlay?.addEventListener('click', closeDrawer);
+
+  // Close on link click inside drawer
+  drawer?.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeDrawer));
+
+  // Escape key
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+
+  // Airports dropdown
   const airportBtn = document.getElementById('navAirportsBtn');
   const airportDd  = document.getElementById('navAirports');
   if (airportBtn && airportDd) {
@@ -453,21 +490,33 @@ function apInitAnimations() {
     ease:     'power2.out',
   });
 
-  // Glove
+  // Glove — immediateRender: false prevents GSAP from pre-setting
+  // opacity:0 on mount, which causes elements to stay invisible when
+  // the user scrolls past the trigger faster than ScrollTrigger fires.
   gsap.from('.ap-glove-text > *', {
-    scrollTrigger: { trigger: '.ap-glove', start: 'top 78%' },
-    opacity:  0,
-    x:        -24,
-    duration: 0.75,
-    stagger:  0.1,
-    ease:     'power2.out',
+    scrollTrigger: {
+      trigger: '.ap-glove',
+      start:   'top 95%',
+      once:    true,
+    },
+    opacity:         0,
+    x:               -24,
+    duration:        0.75,
+    stagger:         0.1,
+    ease:            'power2.out',
+    immediateRender: false,
   });
   gsap.from('.ap-glove-img-wrap', {
-    scrollTrigger: { trigger: '.ap-glove', start: 'top 78%' },
-    opacity:  0,
-    x:        24,
-    duration: 0.75,
-    ease:     'power2.out',
+    scrollTrigger: {
+      trigger: '.ap-glove',
+      start:   'top 95%',
+      once:    true,
+    },
+    opacity:         0,
+    x:               24,
+    duration:        0.75,
+    ease:            'power2.out',
+    immediateRender: false,
   });
 
   // FAQ
@@ -480,8 +529,8 @@ function apInitAnimations() {
     ease:     'power2.out',
   });
 
-  // Section heads
-  document.querySelectorAll('.section-eyebrow, .section-title, .section-lede, .ap-glove-headline, .ap-glove-body').forEach((el) => {
+  // Section heads — exclude glove children already animated above
+  document.querySelectorAll('.section-eyebrow, .section-title, .section-lede').forEach((el) => {
     gsap.from(el, {
       scrollTrigger: { trigger: el, start: 'top 88%' },
       opacity:  0,
