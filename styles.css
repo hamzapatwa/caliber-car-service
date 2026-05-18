@@ -1287,16 +1287,13 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 
 @media (max-width: 720px) {
   /* Tighter nav padding on mobile so the burger has more room */
-  .nav        { padding: 14px var(--shell-pad-x); }
-<<<<<<< HEAD
-  /* Hide the sticky "Book Now" pill — it's already in the drawer */
-  .nav .nav-cta { display: none; }
-  /* Collapse the right-side gap so only the burger remains */
-  .nav-right  { gap: 0; }
-=======
->>>>>>> origin/main
-  .nav-toggle { display: inline-flex; width: 44px; height: 44px; }
-  .nav-links  { display: none; }
+  .nav              { padding: 14px var(--shell-pad-x); }
+  /* Hide Book Now from the sticky bar only — drawer's Book Now stays */
+  .nav-right .nav-cta { display: none; }
+  /* No gap needed when only the burger is left in nav-right */
+  .nav-right        { gap: 0; }
+  .nav-toggle       { display: inline-flex; width: 44px; height: 44px; }
+  .nav-links        { display: none; }
 
   /* Trust strip wraps to multiple rows on mobile — hide it.
      Credentials are also in the footer so nothing is lost. */
