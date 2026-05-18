@@ -1286,8 +1286,18 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 }
 
 @media (max-width: 720px) {
-  .nav-links              { display: none; }
-  .nav-toggle             { display: inline-flex; }
+  /* Tighter nav padding on mobile so the burger has more room */
+  .nav        { padding: 14px var(--shell-pad-x); }
+  /* Hide the sticky "Book Now" pill — it's already in the drawer */
+  .nav .nav-cta { display: none; }
+  /* Collapse the right-side gap so only the burger remains */
+  .nav-right  { gap: 0; }
+  .nav-toggle { display: inline-flex; width: 44px; height: 44px; }
+  .nav-links  { display: none; }
+
+  /* Trust strip wraps to multiple rows on mobile — hide it.
+     Credentials are also in the footer so nothing is lost. */
+  .trust-strip { display: none; }
 
   /* Mobile drawer */
   .nav-drawer {
@@ -1365,8 +1375,14 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
   }
   .service-arrow { display: none; }
 
-  .fleet-features { grid-template-columns: 1fr; }
-  .fleet-metrics  { grid-template-columns: 1fr 1fr; width: 100%; }
+  /* Fleet — tighter on mobile so one vehicle fits in a single scroll */
+  .fleet-spread   { padding: 36px var(--shell-pad-x); }
+  .fleet-info     { gap: 10px; }
+  .fleet-name     { font-size: clamp(28px, 9vw, 42px); }
+  .fleet-desc     { font-size: 13px; }
+  .fleet-metrics  { grid-template-columns: 1fr 1fr; width: 100%; padding: 14px 0; }
+  .fleet-metric-num   { font-size: clamp(26px, 7vw, 36px); }
+  .fleet-features { grid-template-columns: 1fr; gap: 8px; }
 
   .coverage-grid  { grid-template-columns: 1fr 1fr; gap: 32px; }
 
@@ -1379,9 +1395,14 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 }
 
 @media (max-width: 480px) {
-  .stats-grid    { grid-template-columns: 1fr 1fr; }
-  .coverage-grid { grid-template-columns: 1fr; gap: 28px; }
-  .hero-name     { font-size: clamp(56px, 18vw, 96px); }
+  .stats-grid           { grid-template-columns: 1fr 1fr; }
+  .hero-name            { font-size: clamp(56px, 18vw, 96px); }
+
+  /* Keep 2-column layout in coverage — scale text down so both
+     columns fit comfortably at small viewport widths */
+  .coverage-grid        { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .coverage-group-title { font-size: 12px; letter-spacing: .18em; margin-bottom: 12px; }
+  .coverage-group li    { font-size: clamp(15px, 4.5vw, 22px); }
 }
 
 /* Hide drawer wrapper on desktop so it doesn't intercept clicks */
