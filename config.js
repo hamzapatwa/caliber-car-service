@@ -81,7 +81,7 @@ const CONFIG = {
       line3: 'SERVICE',
     },
     sub:      'Chauffeured airport transfers, corporate accounts, and as-directed service across New York, New Jersey, and Connecticut. One call. One car. On time.',
-    ctaPrimary:   { label: 'Book Airport Transfer', href: 'https://customer.moovs.app/caliber-car-service/request/new' },
+    ctaPrimary:   { label: 'Book Now', href: 'https://customer.moovs.app/caliber-car-service/request/new' },
     ctaSecondary: { label: 'See the Fleet',          href: '#fleet' },
     image: {
       src: 'vistiq.png',
