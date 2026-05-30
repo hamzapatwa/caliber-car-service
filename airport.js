@@ -1,6 +1,6 @@
 /* ================================================================
    CALIBER CAR SERVICE — airport.js
-   Standalone renderer for /jfk, /lga, /ewr landing pages.
+   Standalone renderer for /jfk, /lga, /ewr, /hpn landing pages.
    Reads window.AIRPORT_PAGE config set inline in each page.
 ================================================================ */
 
@@ -53,6 +53,42 @@ function apBrandWordmark() {
          `<span class="logo-secondary">CAR SERVICE</span>`;
 }
 
+function apAirportLinks() {
+  if (typeof CONFIG !== 'undefined' && CONFIG.footer && CONFIG.footer.airports) {
+    return CONFIG.footer.airports.map((a) => ({
+      label: a.label,
+      href:  '../' + a.href,
+    }));
+  }
+  return [
+    { label: 'JFK Airport',        href: '../jfk/' },
+    { label: 'LaGuardia (LGA)',    href: '../lga/' },
+    { label: 'Newark (EWR)',       href: '../ewr/' },
+    { label: 'White Plains (HPN)', href: '../hpn/' },
+  ];
+}
+
+function apInjectFaqSchema(page) {
+  const prev = document.getElementById('ap-faq-schema');
+  if (prev) prev.remove();
+
+  const schema = {
+    '@context':   'https://schema.org',
+    '@type':      'FAQPage',
+    mainEntity: page.faq.map(({ q, a }) => ({
+      '@type':          'Question',
+      name:             q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
+
+  const el = document.createElement('script');
+  el.type = 'application/ld+json';
+  el.id = 'ap-faq-schema';
+  el.textContent = JSON.stringify(schema);
+  document.head.appendChild(el);
+}
+
 /* ================================================================
    RENDER FUNCTIONS
 ================================================================ */
@@ -64,11 +100,7 @@ function apRenderNav(page) {
     { label: 'Coverage',  href: '../#coverage'  },
     { label: 'Reviews',   href: '../#reviews'   },
   ];
-  const airports = [
-    { label: 'JFK Airport',     href: '../jfk/' },
-    { label: 'LaGuardia (LGA)', href: '../lga/' },
-    { label: 'Newark (EWR)',    href: '../ewr/' },
-  ];
+  const airports = apAirportLinks();
   const links = navItems
     .map((n) => `<li><a href="${n.href}">${n.label}</a></li>`)
     .join('');
@@ -280,6 +312,10 @@ function apRenderCTA(page) {
 }
 
 function apRenderFooter() {
+  const airportLinks = apAirportLinks()
+    .map((a) => `<a href="${a.href}">${a.label}</a>`)
+    .join('');
+
   return `
     <footer class="footer" role="contentinfo">
       <div class="footer-inner footer-inner--four">
@@ -314,9 +350,7 @@ function apRenderFooter() {
         <div class="footer-col">
           <span class="footer-col-title">Airports</span>
           <div class="footer-list">
-            <a href="../jfk/">JFK Airport</a>
-            <a href="../lga/">LaGuardia (LGA)</a>
-            <a href="../ewr/">Newark (EWR)</a>
+            ${airportLinks}
             <a href="../#services">All Services</a>
           </div>
         </div>
@@ -341,6 +375,8 @@ function apRender() {
   document.title = page.seo.title;
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) metaDesc.setAttribute('content', page.seo.description);
+
+  apInjectFaqSchema(page);
 
   document.getElementById('ap-app').innerHTML = [
     apRenderNav(page),

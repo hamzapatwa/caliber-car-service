@@ -32,11 +32,15 @@ const CONFIG = {
   },
 
   /* ----------------------------------------------------------
-     SEO
+     SEO — keep in sync with seo.js (SITE_SEO)
   ---------------------------------------------------------- */
   seo: {
     title:       'Caliber Car Service — Executive Black Car · Long Island & Tri-State',
     description: 'Chauffeured airport transfers, corporate accounts, and as-directed luxury transport across Long Island, NYC, New Jersey, and Connecticut. Available 24/7.',
+    url:         'https://calibercarservice.com/',
+    ogImage:     'https://calibercarservice.com/og-image.png',
+    googleReviewsUrl:
+      'https://www.google.com/maps/search/?api=1&query=Caliber+Car+Service+Long+Island+NY',
   },
 
   /* ----------------------------------------------------------
@@ -276,9 +280,10 @@ const CONFIG = {
       { label: 'Book',     href: '#cta'      },
     ],
     airports: [
-      { label: 'JFK Airport',      href: 'jfk/' },
-      { label: 'LaGuardia (LGA)',  href: 'lga/' },
-      { label: 'Newark (EWR)',     href: 'ewr/' },
+      { label: 'JFK Airport',           href: 'jfk/' },
+      { label: 'LaGuardia (LGA)',       href: 'lga/' },
+      { label: 'Newark (EWR)',          href: 'ewr/' },
+      { label: 'White Plains (HPN)',    href: 'hpn/' },
     ],
   },
 

@@ -140,7 +140,7 @@ function renderHero() {
             <span class="btn-arrow">&#x2197;&#xFE0E;</span>
           </a>
         </div>
-        <a href="https://www.google.com/maps" class="hero-trust" target="_blank" rel="noopener" aria-label="500+ five-star Google reviews">
+        <a href="${CONFIG.seo.googleReviewsUrl}" class="hero-trust" target="_blank" rel="noopener" aria-label="500+ five-star Google reviews">
           <span class="hero-trust-stars" aria-hidden="true">★★★★★</span>
           <span class="hero-trust-text">500+ Five-Star Google Reviews</span>
         </a>
@@ -309,7 +309,7 @@ function renderReviews() {
         </div>
         <div class="reviews-grid">${cards}</div>
         <div class="reviews-cta">
-          <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="btn btn-outline">
+          <a href="${CONFIG.seo.googleReviewsUrl}" target="_blank" rel="noopener" class="btn btn-outline">
             View all 500+ Google Reviews
             <span class="btn-arrow">&#x2197;&#xFE0E;</span>
           </a>
