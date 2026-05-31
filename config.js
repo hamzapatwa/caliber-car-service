@@ -66,8 +66,8 @@ const CONFIG = {
   ---------------------------------------------------------- */
   phone:     '(516) 595-2391',
   phoneHref: 'tel:+15165952391',
-  email:     'reservations@calibercarservice.com',
-  emailHref: 'mailto:reservations@calibercarservice.com',
+  email:     'info@calibercarservice.com',
+  emailHref: 'mailto:info@calibercarservice.com',
   bookHref:  'https://customer.moovs.app/caliber-car-service/request/new',
 
   /* ----------------------------------------------------------
@@ -80,7 +80,7 @@ const CONFIG = {
       line2: 'BLACK CAR',
       line3: 'SERVICE',
     },
-    sub:      'Chauffeured airport transfers, corporate accounts, and as-directed service across New York, New Jersey, and Connecticut. One call. One car. On time.',
+    sub:      'Chauffeured airport transfers, corporate accounts, and as-directed service across New York, New Jersey, and Connecticut. One call. Your ride. On time.',
     ctaPrimary:   { label: 'Book Now', href: 'https://customer.moovs.app/caliber-car-service/request/new' },
     ctaSecondary: { label: 'See the Fleet',          href: '#fleet' },
     image: {
