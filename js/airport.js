@@ -27,6 +27,8 @@ const AP_FALLBACK_SVG =
 const AP_FALLBACK_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(AP_FALLBACK_SVG);
 const AP_IMG_FB = ` onerror="this.onerror=null;this.src='${AP_FALLBACK_URI}';this.classList.add('is-fallback');"`;
 
+const MOOVS_BOOK_ATTRS = ' target="_blank" rel="noopener" onclick="return gtag_report_conversion(this.href)"';
+
 /* ----------------------------------------------------------------
    Crosshair-C brand mark — same inline SVG as main.js, kept in sync.
    Strokes are thickened from caliber_mark.svg so the mark stays
@@ -125,7 +127,7 @@ function apRenderNav(page) {
           </li>
         </ul>
         <a href="tel:+15165952391" class="nav-phone">${AP_PHONE_ICON}(516) 595-2391</a>
-        <a href="https://customer.moovs.app/caliber-car-service/request/new" class="nav-cta" target="_blank" rel="noopener">Book Now</a>
+        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ATTRS}>Book Now</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -134,7 +136,7 @@ function apRenderNav(page) {
         <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">&#x2715;</button>
         ${navItems.map((n) => `<a href="${n.href}">${n.label}</a>`).join('')}
         ${drawerAirports}
-        <a href="https://customer.moovs.app/caliber-car-service/request/new" class="nav-cta" target="_blank" rel="noopener">Book Now</a>
+        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ATTRS}>Book Now</a>
       </aside>
     </nav>`;
 }
@@ -159,7 +161,7 @@ function apRenderHero(page) {
         </h1>
         <p class="ap-hero-sub">${hero.sub}</p>
         <div class="ap-hero-ctas">
-          <a href="https://customer.moovs.app/caliber-car-service/request/new" class="btn btn-gold" target="_blank" rel="noopener">
+          <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ATTRS}>
             Reserve Your Ride <span class="btn-arrow">→</span>
           </a>
           <a href="tel:+15165952391" class="btn btn-outline">
@@ -252,7 +254,7 @@ function apRenderGlove(page) {
           <span class="section-eyebrow">White Glove Service</span>
           <h2 class="ap-glove-headline">${glove.headline}</h2>
           <p class="ap-glove-body">${glove.body}</p>
-          <a href="https://customer.moovs.app/caliber-car-service/request/new" class="btn btn-gold" target="_blank" rel="noopener">
+          <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ATTRS}>
             Book Online <span class="btn-arrow">→</span>
           </a>
         </div>
@@ -304,7 +306,7 @@ function apRenderCTA(page) {
             <span class="cta-contact-value">${AP_PHONE_ICON}(516) 595-2391</span>
           </a>
         </div>
-        <a href="https://customer.moovs.app/caliber-car-service/request/new" class="btn btn-gold" target="_blank" rel="noopener">
+        <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ATTRS}>
           Book Online <span class="btn-arrow">→</span>
         </a>
       </div>
