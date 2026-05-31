@@ -27,7 +27,7 @@ const AP_FALLBACK_SVG =
 const AP_FALLBACK_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(AP_FALLBACK_SVG);
 const AP_IMG_FB = ` onerror="this.onerror=null;this.src='${AP_FALLBACK_URI}';this.classList.add('is-fallback');"`;
 
-const MOOVS_BOOK_ATTRS = ' target="_blank" rel="noopener" onclick="return gtag_report_conversion(this.href)"';
+const MOOVS_BOOK_ATTRS = ' target="_blank" rel="noopener" onclick="gtag_report_conversion()"';
 
 /* ----------------------------------------------------------------
    Crosshair-C brand mark — same inline SVG as main.js, kept in sync.
