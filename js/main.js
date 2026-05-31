@@ -35,7 +35,7 @@ const PHONE_ICON =
   `2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>` +
   `</svg>`;
 
-const MOOVS_BOOK_ATTRS = ' target="_blank" rel="noopener" onclick="gtag_report_conversion()"';
+const MOOVS_BOOK_ONCLICK = (url) => moovsBookOnclick(url);
 
 /* ----------------------------------------------------------------
    Crosshair-C brand mark — inline SVG with strokes thickened
@@ -95,7 +95,7 @@ function renderNav() {
           </li>
         </ul>
         <a href="${CONFIG.phoneHref}" class="nav-phone">${PHONE_ICON}${CONFIG.phone}</a>
-        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ATTRS}>Book Now</a>
+        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>Book Now</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -104,7 +104,7 @@ function renderNav() {
         <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">&#x2715;</button>
         ${CONFIG.nav.map((n) => `<a href="${n.href}">${n.label}</a>`).join('')}
         ${drawerAirports}
-        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ATTRS}>Book Now</a>
+        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>Book Now</a>
       </aside>
     </nav>`;
 }
@@ -133,7 +133,7 @@ function renderHero() {
         </h1>
         <p class="hero-sub">${sub}</p>
         <div class="hero-ctas">
-          <a href="${ctaPrimary.href}" class="btn btn-gold"${MOOVS_BOOK_ATTRS}>
+          <a href="${ctaPrimary.href}" class="btn btn-gold"${MOOVS_BOOK_ONCLICK(ctaPrimary.href)}>
             ${ctaPrimary.label}
             <span class="btn-arrow">→</span>
           </a>
@@ -188,7 +188,7 @@ function renderTrustStrip() {
 function renderServices() {
   const cards = CONFIG.services
     .map((s) => {
-      const attrs = external ? MOOVS_BOOK_ATTRS : '';
+      const attrs = external ? MOOVS_BOOK_ONCLICK(CONFIG.bookHref) : '';
       return `
       <a class="service-card" href="${s.href || CONFIG.bookHref}" aria-label="${s.name}"${attrs}>
         <span class="service-num">${s.num}</span>
@@ -243,7 +243,7 @@ function renderFleet() {
             </div>
           </div>
           <div class="fleet-features">${features}</div>
-          <a href="${CONFIG.bookHref}" class="btn btn-outline fleet-cta"${MOOVS_BOOK_ATTRS}>
+          <a href="${CONFIG.bookHref}" class="btn btn-outline fleet-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
             Reserve ${v.category}
             <span class="btn-arrow">→</span>
           </a>
@@ -337,7 +337,7 @@ function renderCTA() {
             <span class="cta-contact-value cta-contact-value--email">${CONFIG.email}</span>
           </a>
         </div>
-        <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ATTRS}>
+        <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
           ${c.primary.label}
           <span class="btn-arrow">→</span>
         </a>
@@ -374,7 +374,7 @@ function renderFooter() {
           <span class="footer-col-title">Explore</span>
           <div class="footer-list">
             ${CONFIG.nav.map((n) => `<a href="${n.href}">${n.label}</a>`).join('')}
-            <a href="${CONFIG.bookHref}"${MOOVS_BOOK_ATTRS}>Book Now</a>
+            <a href="${CONFIG.bookHref}"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>Book Now</a>
           </div>
         </div>
         <div class="footer-col">

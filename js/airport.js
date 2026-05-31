@@ -27,7 +27,7 @@ const AP_FALLBACK_SVG =
 const AP_FALLBACK_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(AP_FALLBACK_SVG);
 const AP_IMG_FB = ` onerror="this.onerror=null;this.src='${AP_FALLBACK_URI}';this.classList.add('is-fallback');"`;
 
-const MOOVS_BOOK_ATTRS = ' target="_blank" rel="noopener" onclick="gtag_report_conversion()"';
+const MOOVS_BOOK_ONCLICK = (url) => moovsBookOnclick(url);
 
 /* ----------------------------------------------------------------
    Crosshair-C brand mark — same inline SVG as main.js, kept in sync.
@@ -127,7 +127,7 @@ function apRenderNav(page) {
           </li>
         </ul>
         <a href="tel:+15165952391" class="nav-phone">${AP_PHONE_ICON}(516) 595-2391</a>
-        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ATTRS}>Book Now</a>
+        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>Book Now</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -136,7 +136,7 @@ function apRenderNav(page) {
         <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">&#x2715;</button>
         ${navItems.map((n) => `<a href="${n.href}">${n.label}</a>`).join('')}
         ${drawerAirports}
-        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ATTRS}>Book Now</a>
+        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>Book Now</a>
       </aside>
     </nav>`;
 }
@@ -161,7 +161,7 @@ function apRenderHero(page) {
         </h1>
         <p class="ap-hero-sub">${hero.sub}</p>
         <div class="ap-hero-ctas">
-          <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ATTRS}>
+          <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
             Reserve Your Ride <span class="btn-arrow">→</span>
           </a>
           <a href="tel:+15165952391" class="btn btn-outline">
@@ -254,7 +254,7 @@ function apRenderGlove(page) {
           <span class="section-eyebrow">White Glove Service</span>
           <h2 class="ap-glove-headline">${glove.headline}</h2>
           <p class="ap-glove-body">${glove.body}</p>
-          <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ATTRS}>
+          <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
             Book Online <span class="btn-arrow">→</span>
           </a>
         </div>
@@ -306,7 +306,7 @@ function apRenderCTA(page) {
             <span class="cta-contact-value">${AP_PHONE_ICON}(516) 595-2391</span>
           </a>
         </div>
-        <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ATTRS}>
+        <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
           Book Online <span class="btn-arrow">→</span>
         </a>
       </div>
