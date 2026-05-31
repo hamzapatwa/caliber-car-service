@@ -8,7 +8,7 @@ function gtag_report_conversion(url) {
     }
   };
   gtag('event', 'conversion', {
-    'send_to': 'AW-18199416292/ORAWCNjK6LYCEOSb1OZD',
+    'send_to': 'AW-18199416292/0RAwCNjk6LYcEOSblOZD',
     'event_callback': callback
   });
   return false;
