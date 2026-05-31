@@ -1,14 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="#080808"/>
   <defs>
-    <style>
-      @font-face {
-        font-family: 'DM Sans';
-        src: url('../fonts/dm-sans-latin-400-normal.woff') format('woff');
-        font-weight: 400;
-        font-style: normal;
-      }
-    </style>
     <radialGradient id="glow" cx="50%" cy="40%" r="48%">
       <stop offset="0%" stop-color="#B8963E" stop-opacity="0.16"/>
       <stop offset="55%" stop-color="#B8963E" stop-opacity="0.04"/>
@@ -29,7 +21,7 @@
       <circle cx="100" cy="100" r="3" fill="#B8963E"/>
     </g>
 
-    <text y="88" text-anchor="middle" font-family="'DM Sans', Arial, Helvetica, sans-serif" font-size="78" font-weight="400" fill="#EEEEE8" letter-spacing="22">CALIBER</text>
+    <text y="88" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="400" fill="#EEEEE8" letter-spacing="22">CALIBER</text>
     <line x1="-210" y1="108" x2="210" y2="108" stroke="#B8963E" stroke-width="1.5" opacity="0.9"/>
     <text y="142" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#B8963E" letter-spacing="14">CAR SERVICE</text>
     <text y="182" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#55554C" letter-spacing="2.5">Executive Black Car &#183; Long Island &amp; Tri-State</text>

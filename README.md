@@ -31,12 +31,10 @@ Plain HTML, CSS, and JavaScript. No framework. No build step.
 │   ├── config.js           # Single source of truth — copy, links, theme
 │   ├── main.js             # Renders homepage from CONFIG
 │   └── airport.js          # Renders airport pages
-├── design/                 # Print / dev assets (not linked from main nav)
+├── design/                 # Print + OG source (not linked from main nav)
 │   ├── businesscard.html
-│   ├── caliber_crosshair_c_preview.html
 │   ├── og-image.svg
 │   └── qr.png
-├── fonts/                  # Local fonts for OG image build
 └── jfk/  lga/  ewr/  hpn/  # Airport landing pages
 ```
 
