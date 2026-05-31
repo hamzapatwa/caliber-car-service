@@ -32,7 +32,7 @@ const CONFIG = {
   },
 
   /* ----------------------------------------------------------
-     SEO — keep in sync with seo.js (SITE_SEO)
+     SEO — og-image.png at site root; run npm run build:og after SVG edits
   ---------------------------------------------------------- */
   seo: {
     title:       'Caliber Car Service — Executive Black Car · Long Island & Tri-State',
@@ -84,7 +84,7 @@ const CONFIG = {
     ctaPrimary:   { label: 'Book Now', href: 'https://customer.moovs.app/caliber-car-service/request/new' },
     ctaSecondary: { label: 'See the Fleet',          href: '#fleet' },
     image: {
-      src: 'vistiq.png',
+      src: 'assets/images/vistiq.png',
       alt: 'Caliber Car Service — Cadillac Vistiq',
     },
   },
@@ -166,7 +166,7 @@ const CONFIG = {
         'Phone chargers & Wi-Fi',
         'Complimentary water',
       ],
-      image: { src: 'ct4.jpg', alt: 'Executive Sedan — Cadillac CT4' },
+      image: { src: 'assets/images/ct4.jpg', alt: 'Executive Sedan — Cadillac CT4' },
     },
     {
       num:         '02',
@@ -183,7 +183,7 @@ const CONFIG = {
         'Onboard refreshments',
         'Privacy-tint glass',
       ],
-      image: { src: 'vistiq.png', alt: 'Premium SUV — Cadillac Vistiq' },
+      image: { src: 'assets/images/vistiq.png', alt: 'Premium SUV — Cadillac Vistiq' },
     },
     {
       num:         '03',
@@ -200,7 +200,7 @@ const CONFIG = {
         'Overhead lighting',
         'Generous luggage hold',
       ],
-      image: { src: 'sprinter.jpg', alt: 'Executive Van — Mercedes Sprinter' },
+      image: { src: 'assets/images/sprinter.jpg', alt: 'Executive Van — Mercedes Sprinter' },
     },
   ],
 

@@ -5,6 +5,11 @@
       "has": [{ "type": "host", "value": "www.calibercarservice.com" }],
       "destination": "https://calibercarservice.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/businesscard.html",
+      "destination": "/design/businesscard.html",
+      "permanent": true
     }
   ],
   "headers": [

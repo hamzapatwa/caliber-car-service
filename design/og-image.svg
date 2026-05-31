@@ -4,7 +4,7 @@
     <style>
       @font-face {
         font-family: 'DM Sans';
-        src: url('fonts/dm-sans-latin-400-normal.woff') format('woff');
+        src: url('../fonts/dm-sans-latin-400-normal.woff') format('woff');
         font-weight: 400;
         font-style: normal;
       }

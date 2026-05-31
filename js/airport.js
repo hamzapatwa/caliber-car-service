@@ -143,7 +143,7 @@ function apRenderHero(page) {
   const { hero } = page;
   return `
     <section class="ap-hero" id="ap-hero">
-      <div class="ap-hero-bg" id="apHeroBg" style="background-image:url('../planepluscar.jpg')"></div>
+      <div class="ap-hero-bg" id="apHeroBg" style="background-image:url('../assets/images/planepluscar.jpg')"></div>
       <div class="ap-hero-content">
         <p class="ap-breadcrumb">
           <a href="../">Home</a>
@@ -258,7 +258,7 @@ function apRenderGlove(page) {
         </div>
         <div class="ap-glove-img-wrap">
           <img
-            src="../whiteglove.webp"
+            src="../assets/images/whiteglove.webp"
             alt="Caliber Car Service — white glove chauffeur service"
             class="ap-glove-img"
             loading="lazy"

@@ -8,23 +8,39 @@ Plain HTML, CSS, and JavaScript. No framework. No build step.
 
 ## Stack
 
-- **HTML / CSS / JS** — four files, no dependencies installed locally.
+- **HTML / CSS / JS** — static site, no dependencies installed locally.
 - **GSAP 3 + ScrollTrigger** (cdnjs) — scroll choreography, hero intro, count-ups.
 - **Lenis** (jsDelivr) — buttery-smooth scroll, wired into the GSAP ticker.
 - **Bebas Neue + DM Sans** via [@fontsource](https://fontsource.org/) on jsDelivr.
 
 ---
 
-## File map
+## Project layout
 
-| File         | Responsibility                                                       |
-| ------------ | -------------------------------------------------------------------- |
-| `index.html` | Thin shell. Loads fonts/scripts, mounts `#app`.                      |
-| `config.js`  | **Single source of truth.** All copy, links, colors, fleet, services. |
-| `styles.css` | All layout & design tokens (CSS variables driven by `config.js`).    |
-| `main.js`    | Renders the page from `CONFIG`; runs every animation.                |
+```
+├── index.html              # Main site entry
+├── og-image.png            # Social preview (built from design/og-image.svg)
+├── robots.txt  sitemap.xml vercel.json
+├── assets/
+│   ├── brand/              # Logo mark (favicon, SVG source)
+│   └── images/             # Fleet & airport photos
+├── css/
+│   ├── styles.css          # Main site styles
+│   └── airport.css         # Airport landing pages
+├── js/
+│   ├── config.js           # Single source of truth — copy, links, theme
+│   ├── main.js             # Renders homepage from CONFIG
+│   └── airport.js          # Renders airport pages
+├── design/                 # Print / dev assets (not linked from main nav)
+│   ├── businesscard.html
+│   ├── caliber_crosshair_c_preview.html
+│   ├── og-image.svg
+│   └── qr.png
+├── fonts/                  # Local fonts for OG image build
+└── jfk/  lga/  ewr/  hpn/  # Airport landing pages
+```
 
-To rebrand or change content, edit **`config.js`** only.
+To rebrand or change content, edit **`js/config.js`** only.
 
 ---
 
@@ -33,10 +49,16 @@ To rebrand or change content, edit **`config.js`** only.
 ```bash
 npm run dev
 # or
-python3 -m http.server 3000
+python3 -m http.server 3001
 ```
 
-Then open `http://localhost:3000`.
+Then open `http://localhost:3001` (port 3000 is often used by Docker on macOS).
+
+Regenerate the Open Graph PNG after editing `design/og-image.svg`:
+
+```bash
+npm run build:og
+```
 
 ---
 
@@ -56,14 +78,14 @@ Then open `http://localhost:3000`.
 
 ## Before launch
 
-- Replace the two Edmunds-hosted reference images in `config.js` (`IMG_HERO`, `IMG_DETAIL`) with your own files. All `<img>` tags already have a stylized SVG fallback via `onerror`.
+- Replace the two Edmunds-hosted reference images in `js/config.js` (`IMG_HERO`, `IMG_DETAIL`) with your own files under `assets/images/`. All `<img>` tags already have a stylized SVG fallback via `onerror`.
 - Update `CONFIG.phone`, `CONFIG.email`, and `CONFIG.bookHref` (currently a placeholder `tel:` number and the same-page anchor).
 - Update SEO title/description in `CONFIG.seo`.
 - Swap reviewer names/locations if needed in `CONFIG.reviews`.
 
 ---
 
-## Design tokens (edit in `config.js → theme`)
+## Design tokens (edit in `js/config.js → theme`)
 
 | Token       | Value     | Usage                                  |
 | ----------- | --------- | -------------------------------------- |
