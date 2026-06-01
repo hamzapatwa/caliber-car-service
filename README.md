@@ -26,9 +26,12 @@ Plain HTML, CSS, and JavaScript. No framework. No build step.
 │   └── images/             # Fleet & airport photos
 ├── css/
 │   ├── styles.css          # Main site styles
-│   └── airport.css         # Airport landing pages
+│   ├── airport.css         # Airport landing pages
+│   └── consent.css         # Cookie consent banner
 ├── js/
 │   ├── config.js           # Single source of truth — copy, links, theme
+│   ├── consent.js          # Consent Mode v2 — gates Google tags
+│   ├── conversion.js       # Google Ads click conversion (Moovs)
 │   ├── main.js             # Renders homepage from CONFIG
 │   └── airport.js          # Renders airport pages
 ├── design/                 # Print + OG source (not linked from main nav)

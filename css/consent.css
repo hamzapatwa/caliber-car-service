@@ -1,0 +1,223 @@
+/* Cookie consent banner — matches Caliber site tokens */
+
+.ccs-consent {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 10000;
+  padding: 0 16px 16px;
+  pointer-events: none;
+  animation: ccs-consent-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ccs-consent--hide {
+  animation: ccs-consent-out 0.4s ease forwards;
+}
+
+.ccs-consent__panel {
+  pointer-events: auto;
+  max-width: 720px;
+  margin: 0 auto;
+  background: #0E0E0C;
+  border: 1px solid #1A1A14;
+  border-radius: 12px;
+  box-shadow:
+    0 -8px 40px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(184, 150, 62, 0.08);
+  overflow: hidden;
+}
+
+.ccs-consent__accent {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #B8963E 20%, #B8963E 80%, transparent);
+}
+
+.ccs-consent__body {
+  padding: 22px 24px 0;
+}
+
+.ccs-consent__eyebrow {
+  margin: 0 0 6px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #B8963E;
+}
+
+.ccs-consent__title {
+  margin: 0 0 10px;
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: #EEEEE8;
+}
+
+.ccs-consent__text {
+  margin: 0 0 14px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #55554C;
+  max-width: 52ch;
+}
+
+.ccs-consent__benefits {
+  margin: 0 0 4px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.ccs-consent__benefits li {
+  position: relative;
+  padding-left: 16px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 12px;
+  color: #EEEEE8;
+  opacity: 0.85;
+}
+
+.ccs-consent__benefits li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #B8963E;
+}
+
+.ccs-consent__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 24px 22px;
+}
+
+.ccs-consent__accept {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px 24px;
+  border: none;
+  border-radius: 6px;
+  background: #B8963E;
+  color: #080808;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 20px rgba(184, 150, 62, 0.35);
+}
+
+.ccs-consent__accept:hover {
+  background: #c9a44a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(184, 150, 62, 0.45);
+}
+
+.ccs-consent__accept:active {
+  transform: translateY(0);
+}
+
+.ccs-consent__accept-arrow {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.ccs-consent__accept:hover .ccs-consent__accept-arrow {
+  transform: translateX(3px);
+}
+
+.ccs-consent__decline {
+  align-self: center;
+  padding: 6px 4px;
+  border: none;
+  background: none;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 12px;
+  color: #55554C;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.ccs-consent__decline:hover {
+  color: #EEEEE8;
+}
+
+html.ccs-consent-open {
+  scroll-padding-bottom: 220px;
+}
+
+@keyframes ccs-consent-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ccs-consent-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+@media (min-width: 640px) {
+  .ccs-consent__panel {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 0 20px;
+  }
+
+  .ccs-consent__accent {
+    grid-column: 1 / -1;
+  }
+
+  .ccs-consent__body {
+    padding: 24px 0 24px 28px;
+  }
+
+  .ccs-consent__actions {
+    padding: 24px 28px 24px 0;
+    min-width: 220px;
+    justify-content: center;
+  }
+
+  .ccs-consent__accept {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ccs-consent,
+  .ccs-consent--hide {
+    animation: none;
+  }
+
+  .ccs-consent__accept:hover {
+    transform: none;
+  }
+}
