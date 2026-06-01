@@ -640,24 +640,25 @@ function lpSetupNav(lenis) {
   onScroll();
 
   let scrollLockY = 0;
-  let blockPageTouch = null;
+  let overlayTouchBlock = null;
 
   function openDrawer() {
     scrollLockY = window.scrollY || document.documentElement.scrollTop;
+    document.documentElement.classList.add('nav-open');
     document.body.classList.add('nav-open');
     document.body.style.top = `-${scrollLockY}px`;
     toggle?.setAttribute('aria-expanded', 'true');
     toggle?.setAttribute('aria-label', 'Close menu');
     if (lenis && typeof lenis.stop === 'function') lenis.stop();
 
-    blockPageTouch = (e) => {
-      if (drawer && (drawer === e.target || drawer.contains(e.target))) return;
-      e.preventDefault();
-    };
-    document.addEventListener('touchmove', blockPageTouch, { passive: false });
+    if (overlay) {
+      overlayTouchBlock = (e) => e.preventDefault();
+      overlay.addEventListener('touchmove', overlayTouchBlock, { passive: false });
+    }
   }
 
   function closeDrawer() {
+    document.documentElement.classList.remove('nav-open');
     document.body.classList.remove('nav-open');
     document.body.style.top = '';
     toggle?.setAttribute('aria-expanded', 'false');
@@ -665,9 +666,9 @@ function lpSetupNav(lenis) {
     window.scrollTo(0, scrollLockY);
     if (lenis && typeof lenis.start === 'function') lenis.start();
 
-    if (blockPageTouch) {
-      document.removeEventListener('touchmove', blockPageTouch);
-      blockPageTouch = null;
+    if (overlay && overlayTouchBlock) {
+      overlay.removeEventListener('touchmove', overlayTouchBlock);
+      overlayTouchBlock = null;
     }
   }
 

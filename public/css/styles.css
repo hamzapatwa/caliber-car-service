@@ -72,12 +72,25 @@ body.nav-open .nav-overlay {
   opacity:        1;
   pointer-events: auto;
 }
+html.nav-open,
 body.nav-open {
   overflow: hidden;
+}
+body.nav-open {
   position: fixed;
   width: 100%;
   left: 0;
   right: 0;
+}
+/* Page content cannot capture scroll/touch while menu is open */
+body.nav-open #app,
+body.nav-open #lp-app {
+  pointer-events: none;
+}
+body.nav-open .nav,
+body.nav-open .nav-drawer,
+body.nav-open .nav-overlay {
+  pointer-events: auto;
 }
 
 /* ================================================================
