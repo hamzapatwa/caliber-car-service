@@ -85,6 +85,25 @@ function lpGetPage() {
   return window.LANDING_PAGE || window.AIRPORT_PAGE;
 }
 
+/** Canonical display names for airport codes (UI only — SEO may still use JFK). */
+const LP_AIRPORT_LABELS = {
+  JFK: { name: 'John F. Kennedy', full: 'John F. Kennedy International Airport' },
+};
+
+function lpPageDisplayName(page) {
+  return page.fullName || page.name;
+}
+
+function lpStrategyCardName(card) {
+  const info = LP_AIRPORT_LABELS[card.code];
+  if (info && (!card.name || card.name === card.code || card.name === 'JFK')) return info.name;
+  return card.name;
+}
+
+function lpStrategyLinkName(card) {
+  return card.fullName || lpStrategyCardName(card);
+}
+
 function lpBrandWordmark() {
   return `<span class="logo-primary">CALIBER</span>` +
          LP_BRAND_MARK_SVG +
@@ -175,7 +194,7 @@ function lpDefaultBreadcrumb(page) {
   } else if (page.type !== 'about' && page.type !== 'hub') {
     crumbs.push({ label: typeLabels[page.type] || 'Services', href: 'areas/' });
   }
-  crumbs.push({ label: page.name });
+  crumbs.push({ label: lpPageDisplayName(page) });
   return crumbs;
 }
 
@@ -360,15 +379,16 @@ function lpRenderAirportStrategy(page) {
   const cards = strategy.cards.map((c) => {
     const highlight = c.highlight ? ' ap-strategy-card--highlight' : '';
     const link = c.href
-      ? `<a href="${lpRel(c.href)}" class="ap-strategy-card-link">View ${c.name} service <span aria-hidden="true">→</span></a>`
+      ? `<a href="${lpRel(c.href)}" class="ap-strategy-card-link">View ${lpStrategyLinkName(c)} service <span aria-hidden="true">→</span></a>`
       : '';
+    const cardName = lpStrategyCardName(c);
     return `
       <article class="ap-strategy-card${highlight}">
         <div class="ap-strategy-card-top">
           <span class="ap-strategy-code">${c.code}</span>
           <span class="ap-strategy-badge">${c.badge}</span>
         </div>
-        <h3 class="ap-strategy-card-name">${c.name}</h3>
+        <h3 class="ap-strategy-card-name">${cardName}</h3>
         <p class="ap-strategy-card-body">${c.body}</p>
         ${link}
       </article>`;
@@ -465,7 +485,7 @@ function lpRenderFAQ(page) {
         <summary>${q.q}</summary>
         <p class="ap-faq-answer">${q.a}</p>
       </details>`).join('');
-  const title = page.faqTitle || `${page.name} FAQs`;
+  const title = page.faqTitle || `${lpPageDisplayName(page)} FAQs`;
   return `
     <section class="ap-faq" id="ap-faq">
       <div class="ap-faq-inner">
@@ -492,7 +512,7 @@ function lpRenderRelated(page) {
 
 function lpRenderCTA(page) {
   const cta = page.cta || {};
-  const headline = cta.headline || `Book your<br>${page.name} ride`;
+  const headline = cta.headline || `Book your<br>${lpPageDisplayName(page)} ride`;
   const sub = cta.sub || 'One call, one driver, on time — every time. Available 24 hours a day, 7 days a week.';
   return `
     <section class="cta" id="cta">

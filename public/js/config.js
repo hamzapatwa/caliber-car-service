@@ -113,7 +113,7 @@ const CONFIG = {
       num:  '01',
       name: 'Airport Transfers',
       href: '/jfk/',
-      desc: 'JFK · LGA · EWR · HPN with live flight tracking and complimentary meet-and-greet on request.',
+      desc: 'John F. Kennedy (JFK) · LGA · EWR · HPN with live flight tracking and complimentary meet-and-greet on request.',
     },
     {
       num:  '02',
@@ -237,7 +237,7 @@ const CONFIG = {
       },
       {
         title: 'Airports',
-        items: ['JFK', 'LaGuardia (LGA)', 'Newark (EWR)', 'White Plains (HPN)'],
+        items: ['John F. Kennedy (JFK)', 'LaGuardia (LGA)', 'Newark (EWR)', 'White Plains (HPN)'],
       },
     ],
   },
@@ -293,7 +293,7 @@ const CONFIG = {
       { label: 'Book',     href: '#cta'      },
     ],
     airports: [
-      { label: 'JFK Airport',           href: '/jfk/' },
+      { label: 'John F. Kennedy International Airport', href: '/jfk/' },
       { label: 'LaGuardia (LGA)',       href: '/lga/' },
       { label: 'Newark (EWR)',          href: '/ewr/' },
       { label: 'White Plains (HPN)',    href: '/hpn/' },
