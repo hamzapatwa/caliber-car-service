@@ -7,9 +7,10 @@
     "dev":        "python3 -m http.server 3001 --directory public",
     "start":      "python3 -m http.server 3001 --directory public",
     "build:og":   "python3 -m venv .venv-og 2>/dev/null; .venv-og/bin/pip install -q cairosvg pillow && .venv-og/bin/python scripts/build_og.py",
+    "build:favicon": "python3 -m venv .venv-og 2>/dev/null; .venv-og/bin/pip install -q cairosvg pillow && .venv-og/bin/python scripts/build_favicon.py",
     "build:wallpapers": "python3 -m venv .venv-og 2>/dev/null; .venv-og/bin/pip install -q cairosvg pillow numpy pypng && .venv-og/bin/python scripts/build_wallpapers.py",
     "build:images":   "python3 -m venv .venv-img 2>/dev/null; .venv-img/bin/pip install -q pillow && .venv-img/bin/python scripts/optimize_images.py",
     "build:landings": "python3 scripts/generate_landing_pages.py",
-    "build":          "npm run build:og && npm run build:images && npm run build:landings"
+    "build":          "npm run build:og && npm run build:favicon && npm run build:images && npm run build:landings"
   }
 }

@@ -18,6 +18,7 @@ VERCEL_JSON = ROOT / "vercel.json"
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from favicon_html import FAVICON_HEAD  # noqa: E402
 from site_routes import category_for_slug, page_dir  # noqa: E402
 
 SITEMAP_PRIORITIES = {
@@ -198,7 +199,7 @@ def render_page(slug: str, seo: dict, landing: dict, schema: str) -> str:
   <script src="/js/consent.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/svg+xml" href="/assets/brand/caliber_mark.svg" />
+{FAVICON_HEAD}
   <title>{_esc(title)}</title>
   <meta name="description" content="{_esc(desc)}" />
   <link rel="canonical" href="{canonical}" />
