@@ -80,27 +80,83 @@ body.nav-open .nav-overlay {
   position:        fixed;
   inset:           0 0 auto 0;
   z-index:         530;
-  padding:         24px var(--shell-pad-x);
+  padding:         24px var(--shell-pad-x) clamp(20px, 4vw, 36px);
   display:         flex;
   align-items:     center;
   justify-content: space-between;
   gap:             24px;
-  background:      rgba(8, 8, 8, 0.42);
+  background:      transparent;
+  border-bottom:   none;
+  transition:      padding .35s ease;
+}
+/* Glass lives on ::before so we can mask the blur/tint to zero — no hard bottom edge */
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0 -1px clamp(-56px, -8vw, -32px) -1px;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 8, 8, 0.42) 0%,
+    rgba(8, 8, 8, 0.2) 42%,
+    rgba(8, 8, 8, 0.06) 72%,
+    rgba(8, 8, 8, 0) 100%
+  );
   backdrop-filter: blur(16px) saturate(1.08);
   -webkit-backdrop-filter: blur(16px) saturate(1.08);
-  transition:      padding .35s ease, background .35s ease, border-color .35s ease;
-  border-bottom:   1px solid rgba(26, 26, 20, 0.55);
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 38%,
+    rgba(0, 0, 0, 0.55) 62%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 38%,
+    rgba(0, 0, 0, 0.55) 62%,
+    transparent 100%
+  );
+  pointer-events: none;
+  transition: background .35s ease, inset .35s ease;
 }
 .nav.scrolled {
-  padding:                14px var(--shell-pad-x);
-  background:             rgba(8, 8, 8, 0.58);
-  backdrop-filter:        blur(16px) saturate(1.08);
-  -webkit-backdrop-filter: blur(16px) saturate(1.08);
-  border-bottom-color:    var(--border);
+  padding: 14px var(--shell-pad-x) clamp(16px, 3vw, 28px);
 }
-body.nav-open .nav {
-  background:             rgba(8, 8, 8, 0.52);
-  border-bottom-color:    var(--border);
+.nav.scrolled::before {
+  inset: 0 -1px clamp(-40px, -6vw, -24px) -1px;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 8, 8, 0.52) 0%,
+    rgba(8, 8, 8, 0.28) 50%,
+    rgba(8, 8, 8, 0.08) 78%,
+    rgba(8, 8, 8, 0) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 48%,
+    rgba(0, 0, 0, 0.45) 72%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 48%,
+    rgba(0, 0, 0, 0.45) 72%,
+    transparent 100%
+  );
+}
+body.nav-open .nav::before {
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 8, 8, 0.5) 0%,
+    rgba(8, 8, 8, 0.35) 100%
+  );
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 /* Mobile drawer — fixed panel (moved to <body> in setupNav to avoid backdrop bugs) */
