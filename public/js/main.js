@@ -467,6 +467,29 @@ function navScrollDrawer(drawer, deltaY) {
   drawer.scrollTop = Math.max(0, Math.min(max, drawer.scrollTop + deltaY));
 }
 
+/** iOS + fixed body break overflow scroll — drive drawer touch manually */
+function navBindDrawerTouchScroll(drawer) {
+  if (!drawer || drawer.dataset.touchScroll === '1') return;
+  drawer.dataset.touchScroll = '1';
+
+  let startY = 0;
+  let startScroll = 0;
+
+  drawer.addEventListener('touchstart', (e) => {
+    if (!document.body.classList.contains('nav-open') || e.touches.length !== 1) return;
+    startY = e.touches[0].clientY;
+    startScroll = drawer.scrollTop;
+  }, { passive: true });
+
+  drawer.addEventListener('touchmove', (e) => {
+    if (!document.body.classList.contains('nav-open') || e.touches.length !== 1) return;
+    const max = Math.max(0, drawer.scrollHeight - drawer.clientHeight);
+    const next = Math.max(0, Math.min(max, startScroll + (startY - e.touches[0].clientY)));
+    drawer.scrollTop = next;
+    e.preventDefault();
+  }, { passive: false });
+}
+
 /* ----------------------------------------------------------------
    MOBILE NAV TOGGLE
 ---------------------------------------------------------------- */
@@ -489,22 +512,24 @@ function setupNav(lenis) {
   }
 
   let scrollLockY = 0;
-  let overlayTouchBlock = null;
+  let menuTouchLock = null;
   let menuWheelHandler = null;
+
+  navBindDrawerTouchScroll(drawer);
 
   function openDrawer() {
     scrollLockY = window.scrollY || document.documentElement.scrollTop;
     document.documentElement.classList.add('nav-open');
     document.body.classList.add('nav-open');
-    document.body.style.top = `-${scrollLockY}px`;
     toggle.setAttribute('aria-expanded', 'true');
     toggle.setAttribute('aria-label', 'Close menu');
     if (lenis && typeof lenis.stop === 'function') lenis.stop();
 
-    if (overlay) {
-      overlayTouchBlock = (e) => e.preventDefault();
-      overlay.addEventListener('touchmove', overlayTouchBlock, { passive: false });
-    }
+    menuTouchLock = (e) => {
+      if (drawer && e.target.closest && e.target.closest('#navDrawer')) return;
+      e.preventDefault();
+    };
+    document.addEventListener('touchmove', menuTouchLock, { passive: false, capture: true });
 
     menuWheelHandler = (e) => {
       if (!document.body.classList.contains('nav-open')) return;
@@ -522,15 +547,14 @@ function setupNav(lenis) {
   function closeDrawer() {
     document.documentElement.classList.remove('nav-open');
     document.body.classList.remove('nav-open');
-    document.body.style.top = '';
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-label', 'Open menu');
     window.scrollTo(0, scrollLockY);
     if (lenis && typeof lenis.start === 'function') lenis.start();
 
-    if (overlay && overlayTouchBlock) {
-      overlay.removeEventListener('touchmove', overlayTouchBlock);
-      overlayTouchBlock = null;
+    if (menuTouchLock) {
+      document.removeEventListener('touchmove', menuTouchLock, { capture: true });
+      menuTouchLock = null;
     }
     if (menuWheelHandler) {
       document.removeEventListener('wheel', menuWheelHandler, { capture: true });
