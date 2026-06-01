@@ -1,6 +1,6 @@
 /* ================================================================
    CALIBER CAR SERVICE — consent.js
-   Opt-in: Google tags load only after user accepts.
+   Opt-out: Google tags on by default; blocked after user declines.
 ================================================================ */
 
 (function () {
@@ -70,11 +70,15 @@
     document.documentElement.classList.remove('ccs-consent-open');
   }
 
-  function onAccept() {
+  function onDismiss() {
     saveStored(true);
     gtag('consent', 'update', CONSENT_GRANTED);
     loadGoogleTags();
     removeBanner();
+  }
+
+  function onAccept() {
+    onDismiss();
   }
 
   function onDecline() {
@@ -96,13 +100,16 @@
     root.setAttribute('aria-labelledby', 'ccs-consent-title');
     root.innerHTML =
       '<div class="ccs-consent__panel">' +
+        '<button type="button" class="ccs-consent__close" id="ccs-consent-close" aria-label="Close">' +
+          '<span aria-hidden="true">&#x2715;</span>' +
+        '</button>' +
         '<div class="ccs-consent__accent" aria-hidden="true"></div>' +
         '<div class="ccs-consent__body">' +
           '<p class="ccs-consent__eyebrow">Privacy &amp; Experience</p>' +
           '<h2 class="ccs-consent__title" id="ccs-consent-title">Help us get you there faster</h2>' +
           '<p class="ccs-consent__text">' +
             'We use cookies to measure bookings, improve our site, and show relevant offers. ' +
-            'Choose Accept to enable analytics and ads, or Essential only to continue without them.' +
+            'By continuing, you agree to this — or choose Essential cookies only below.' +
           '</p>' +
           '<ul class="ccs-consent__benefits" aria-label="What cookies enable">' +
             '<li>Faster, smoother booking experience</li>' +
@@ -122,20 +129,26 @@
       '</div>';
 
     document.body.appendChild(root);
+    document.getElementById('ccs-consent-close').addEventListener('click', onDismiss);
     document.getElementById('ccs-consent-accept').addEventListener('click', onAccept);
     document.getElementById('ccs-consent-decline').addEventListener('click', onDecline);
+    document.addEventListener('keydown', function onEscape(e) {
+      if (e.key !== 'Escape' || !document.getElementById('ccs-consent')) return;
+      document.removeEventListener('keydown', onEscape);
+      onDismiss();
+    });
   }
 
   function init() {
     var stored = getStored();
-    var granted = stored && stored.granted === true;
+    var declined = stored && stored.granted === false;
 
     gtag('consent', 'default', Object.assign(
       { functionality_storage: 'granted', security_storage: 'granted' },
-      granted ? CONSENT_GRANTED : CONSENT_DENIED
+      declined ? CONSENT_DENIED : CONSENT_GRANTED
     ));
 
-    if (granted) {
+    if (!declined) {
       loadGoogleTags();
     }
 
