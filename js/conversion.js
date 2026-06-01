@@ -13,7 +13,3 @@ function gtag_report_conversion(url) {
   });
   return false;
 }
-
-function moovsBookOnclick(url) {
-  return ` onclick="return gtag_report_conversion('${url}')"`;
-}

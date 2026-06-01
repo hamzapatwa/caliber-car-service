@@ -27,7 +27,8 @@ const AP_FALLBACK_SVG =
 const AP_FALLBACK_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(AP_FALLBACK_SVG);
 const AP_IMG_FB = ` onerror="this.onerror=null;this.src='${AP_FALLBACK_URI}';this.classList.add('is-fallback');"`;
 
-const MOOVS_BOOK_ONCLICK = (url) => moovsBookOnclick(url);
+const MOOVS_BOOK_ONCLICK = (url) =>
+  ` onclick="if(typeof gtag_report_conversion==='function'){return gtag_report_conversion('${url}');}window.open('${url}','_blank','noopener,noreferrer');return false;"`;
 
 /* ----------------------------------------------------------------
    Crosshair-C brand mark — same inline SVG as main.js, kept in sync.

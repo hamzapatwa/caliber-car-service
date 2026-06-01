@@ -71,9 +71,7 @@
 
   function removeBanner() {
     var el = document.getElementById('ccs-consent');
-    if (!el) return;
-    el.classList.add('ccs-consent--hide');
-    setTimeout(function () { el.remove(); }, 450);
+    if (el) el.remove();
     document.documentElement.classList.remove('ccs-consent-open');
   }
 
@@ -143,11 +141,7 @@
 
     if (stored && stored.granted === false) return;
 
-    if (document.body) {
-      showBanner();
-    } else {
-      document.addEventListener('DOMContentLoaded', showBanner);
-    }
+    document.addEventListener('DOMContentLoaded', showBanner);
   }
 
   init();

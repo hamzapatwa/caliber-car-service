@@ -35,7 +35,8 @@ const PHONE_ICON =
   `2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>` +
   `</svg>`;
 
-const MOOVS_BOOK_ONCLICK = (url) => moovsBookOnclick(url);
+const MOOVS_BOOK_ONCLICK = (url) =>
+  ` onclick="if(typeof gtag_report_conversion==='function'){return gtag_report_conversion('${url}');}window.open('${url}','_blank','noopener,noreferrer');return false;"`;
 
 /* ----------------------------------------------------------------
    Crosshair-C brand mark — inline SVG with strokes thickened
