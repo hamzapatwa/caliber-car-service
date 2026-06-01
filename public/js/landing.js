@@ -242,11 +242,13 @@ function lpRenderNav() {
       </div>
       <aside class="nav-drawer" id="navDrawer" aria-label="Mobile menu">
         <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">&#x2715;</button>
-        ${navItems.map((n) => `<a href="${n.href}">${n.label}</a>`).join('')}
-        ${ap.drawer}
-        ${sv.drawer}
-        ${ar.drawer}
-        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>Book Now</a>
+        <div class="nav-drawer-scroll">
+          ${navItems.map((n) => `<a href="${n.href}">${n.label}</a>`).join('')}
+          ${ap.drawer}
+          ${sv.drawer}
+          ${ar.drawer}
+          <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>Book Now</a>
+        </div>
       </aside>
     </nav>`;
 }
@@ -623,31 +625,14 @@ function lpNavPointerOverDrawer(drawer, clientX, clientY) {
   return clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom;
 }
 
-function lpNavScrollDrawer(drawer, deltaY) {
-  const max = drawer.scrollHeight - drawer.clientHeight;
-  drawer.scrollTop = Math.max(0, Math.min(max, drawer.scrollTop + deltaY));
+function lpNavDrawerScroller(drawer) {
+  return drawer?.querySelector('.nav-drawer-scroll') || drawer;
 }
 
-function lpNavBindDrawerTouchScroll(drawer) {
-  if (!drawer || drawer.dataset.touchScroll === '1') return;
-  drawer.dataset.touchScroll = '1';
-
-  let startY = 0;
-  let startScroll = 0;
-
-  drawer.addEventListener('touchstart', (e) => {
-    if (!document.body.classList.contains('nav-open') || e.touches.length !== 1) return;
-    startY = e.touches[0].clientY;
-    startScroll = drawer.scrollTop;
-  }, { passive: true });
-
-  drawer.addEventListener('touchmove', (e) => {
-    if (!document.body.classList.contains('nav-open') || e.touches.length !== 1) return;
-    const max = Math.max(0, drawer.scrollHeight - drawer.clientHeight);
-    const next = Math.max(0, Math.min(max, startScroll + (startY - e.touches[0].clientY)));
-    drawer.scrollTop = next;
-    e.preventDefault();
-  }, { passive: false });
+function lpNavScrollDrawer(scroller, deltaY) {
+  if (!scroller) return;
+  const max = scroller.scrollHeight - scroller.clientHeight;
+  scroller.scrollTop = Math.max(0, Math.min(max, scroller.scrollTop + deltaY));
 }
 
 function lpSetupNav(lenis) {
@@ -676,8 +661,6 @@ function lpSetupNav(lenis) {
   let menuTouchLock = null;
   let menuWheelHandler = null;
 
-  lpNavBindDrawerTouchScroll(drawer);
-
   function openDrawer() {
     scrollLockY = window.scrollY || document.documentElement.scrollTop;
     document.documentElement.classList.add('nav-open');
@@ -687,7 +670,8 @@ function lpSetupNav(lenis) {
     if (lenis && typeof lenis.stop === 'function') lenis.stop();
 
     menuTouchLock = (e) => {
-      if (drawer && e.target.closest && e.target.closest('#navDrawer')) return;
+      const t = e.touches[0];
+      if (t && drawer && lpNavPointerOverDrawer(drawer, t.clientX, t.clientY)) return;
       e.preventDefault();
     };
     document.addEventListener('touchmove', menuTouchLock, { passive: false, capture: true });
@@ -697,7 +681,7 @@ function lpSetupNav(lenis) {
       if (drawer && lpNavPointerOverDrawer(drawer, e.clientX, e.clientY)) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        lpNavScrollDrawer(drawer, e.deltaY);
+        lpNavScrollDrawer(lpNavDrawerScroller(drawer), e.deltaY);
         return;
       }
       e.preventDefault();
@@ -728,7 +712,7 @@ function lpSetupNav(lenis) {
   });
   closeBtn?.addEventListener('click', closeDrawer);
   overlay?.addEventListener('click', closeDrawer);
-  drawer?.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeDrawer));
+  drawer?.querySelectorAll('.nav-drawer-scroll a').forEach((a) => a.addEventListener('click', closeDrawer));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
 
   document.querySelectorAll('.nav-dropdown').forEach((dd) => {
