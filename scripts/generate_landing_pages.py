@@ -153,6 +153,7 @@ def render_page(slug: str, seo: dict, landing: dict, schema: str) -> str:
 </head>
 <body>
   <main id="lp-app"></main>
+  <script src="/js/nav.js"></script>
   <script src="/js/nav-drawer-touch.js"></script>
   <script src="/js/landing.js"></script>
 </body>

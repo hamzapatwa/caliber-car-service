@@ -213,10 +213,10 @@ body.nav-open .nav-drawer {
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   touch-action:    pan-y;
-  padding:         100px 32px 48px;
+  padding:         88px 24px 40px;
   display:         flex;
   flex-direction:  column;
-  gap:             4px;
+  gap:             0;
 }
 .nav-drawer-close {
   position:       absolute;
@@ -240,24 +240,146 @@ body.nav-open .nav-drawer {
   line-height:    1;
 }
 .nav-drawer-close:hover { color: var(--white); border-color: var(--gold); }
-.nav-drawer-scroll a {
+
+/* Drawer — actions */
+.nav-drawer-actions {
+  display:        flex;
+  flex-direction: column;
+  gap:            12px;
+  margin-bottom:  28px;
+  padding-bottom: 24px;
+  border-bottom:  1px solid var(--border);
+}
+.nav-drawer-book {
+  width:          100%;
+  justify-content: center;
+  font-size:      13px;
+  letter-spacing: .14em;
+}
+.nav-drawer-phone {
+  display:         flex;
+  flex-direction:  column;
+  gap:             4px;
+  padding:         14px 16px;
+  border:          1px solid var(--border);
+  border-radius:   2px;
+  transition:      border-color .2s, color .2s;
+}
+.nav-drawer-phone:hover { border-color: var(--gold); color: var(--gold); }
+.nav-drawer-phone-label {
+  font-size:      9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-weight:    600;
+  color:          var(--muted);
+}
+.nav-drawer-phone-num {
   font-family:    var(--font-display);
-  font-size:      28px;
-  letter-spacing: .12em;
+  font-size:      20px;
+  letter-spacing: .06em;
   color:          var(--white);
-  padding:        14px 0;
-  border-bottom:  1px solid rgba(26, 26, 20, 0.5);
+}
+
+/* Drawer — homepage quick links */
+.nav-drawer-quick {
+  display:        flex;
+  flex-direction: column;
+  gap:            0;
+  margin-bottom:  20px;
+  padding-bottom: 20px;
+  border-bottom:  1px solid var(--border);
+}
+.nav-drawer-label {
+  font-size:      9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight:    600;
+  color:          var(--gold);
+  margin-bottom:  10px;
+}
+.nav-drawer-quick a {
+  font-family:    var(--font-display);
+  font-size:      18px;
+  letter-spacing: .08em;
+  color:          var(--white);
+  padding:        10px 0;
   transition:     color .2s, padding-left .2s;
 }
-.nav-drawer-scroll a:hover { color: var(--gold); padding-left: 6px; }
-.nav-drawer-scroll .nav-cta {
-  margin-top:    24px;
-  text-align:    center;
-  border-bottom: none;
-  padding:       16px 24px;
-  font-size:     14px;
-  font-family:   var(--font-display);
+.nav-drawer-quick a:hover { color: var(--gold); padding-left: 4px; }
+
+/* Drawer — grouped sections (always visible) */
+.nav-drawer-sections {
+  display:        flex;
+  flex-direction: column;
+  gap:            0;
+  margin-bottom:  16px;
 }
+.nav-drawer-section {
+  padding-bottom: 20px;
+  margin-bottom:  20px;
+  border-bottom:  1px solid var(--border);
+}
+.nav-drawer-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.nav-drawer-section-title {
+  font-size:      9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight:    600;
+  color:          var(--gold);
+  margin:         0 0 10px;
+}
+.nav-drawer-section-links {
+  display:        flex;
+  flex-direction: column;
+  gap:            0;
+}
+.nav-drawer-section-links a {
+  font-family:    var(--font-body);
+  font-size:      15px;
+  font-weight:    400;
+  letter-spacing: .01em;
+  color:          rgba(238, 238, 232, .82);
+  padding:        9px 0 9px 12px;
+  border-left:    2px solid transparent;
+  transition:     color .2s, border-color .2s, padding-left .2s;
+}
+.nav-drawer-section-links a:hover {
+  color:        var(--gold);
+  border-color: var(--gold);
+  padding-left: 16px;
+}
+.nav-drawer-section-more {
+  margin-top:     6px;
+  padding-top:    12px !important;
+  font-size:      11px !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase !important;
+  font-weight:    600 !important;
+  color:          var(--gold) !important;
+  border-left:    none !important;
+}
+
+/* Drawer — utility links */
+.nav-drawer-utility {
+  display:        flex;
+  flex-direction: column;
+  gap:            0;
+  padding-top:    8px;
+  margin-top:     auto;
+}
+.nav-drawer-utility a {
+  font-size:      12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight:    500;
+  color:          var(--muted);
+  padding:        12px 0;
+  transition:     color .2s;
+}
+.nav-drawer-utility a:hover { color: var(--white); }
 
 .nav-logo {
   font-family:    var(--font-display);

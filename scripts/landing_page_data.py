@@ -4,8 +4,8 @@ import json
 
 SITE = "https://calibercarservice.com"
 
-# Display names — use full spelling in UI; keep "JFK" in SEO titles and meta where helpful.
-JFK_NAME = "John F. Kennedy"
+# List labels (parallel to "LaGuardia (LGA)") and full name for strategy ledes.
+JFK_LABEL = "John F. Kennedy (JFK)"
 JFK_FULL = "John F. Kennedy International Airport"
 
 
@@ -108,7 +108,7 @@ ALL_PAGES["corporate"] = base(
     ],
     related=[
         {"label": "Hourly Chauffeur", "href": "hourly/"},
-        {"label": JFK_FULL, "href": "jfk/"},
+        {"label": JFK_LABEL, "href": "jfk/"},
         {"label": "Manhattan Runs", "href": "manhattan/"},
     ],
     airportStrategy=airport_strategy(
@@ -116,7 +116,7 @@ ALL_PAGES["corporate"] = base(
         "Corporate travelers on Long Island rarely use just one hub. Share airline and terminal at booking — we route and price each trip flat, with account billing on the back end.",
         [
             strategy_card("LGA", "LaGuardia", "Nassau & NYC domestic", "Closest major airport for many Nassau offices and Manhattan-adjacent departures — ideal for East Coast domestic schedules.", "lga/"),
-            strategy_card("JFK", JFK_NAME, "International hub", "Six terminals, global carriers, and meet-and-greet on request — the default for international and many premium domestic routes.", "jfk/", True),
+            strategy_card("JFK", JFK_FULL, "International hub", "Six terminals, global carriers, and meet-and-greet on request — the default for international and many premium domestic routes.", "jfk/", True),
             strategy_card("EWR", "Newark", "United & westbound", "Strong for United-heavy itineraries and some transatlantic schedules — toll-inclusive quotes from LI and NYC.", "ewr/"),
             strategy_card("HPN", "White Plains", "Northern routes", "Compact terminal, shorter lines — worth comparing when carriers and drive time align for northern Nassau or CT-border travelers.", "hpn/"),
         ],
@@ -155,7 +155,7 @@ ALL_PAGES["hourly"] = base(
         "Airports on hourly itineraries",
         "Hourly blocks often end at an airport or start after a red-eye arrival. Tell dispatch your flight details up front so we keep the same chauffeur and vehicle class through the airport leg.",
         [
-            strategy_card("JFK", JFK_NAME, "Multi-terminal", "Best when your day includes international arrivals or departures — 60-minute complimentary wait on arrivals.", "jfk/"),
+            strategy_card("JFK", JFK_FULL, "Multi-terminal", "Best when your day includes international arrivals or departures — 60-minute complimentary wait on arrivals.", "jfk/"),
             strategy_card("LGA", "LaGuardia", "Quick domestic", "Fits same-day loops between Nassau, Manhattan, and LGA without switching vendors.", "lga/", True),
             strategy_card("EWR", "Newark", "Cross-state", "Useful for Newark meetings plus EWR pickup in one as-directed block — tolls quoted upfront.", "ewr/"),
             strategy_card("HPN", "White Plains", "Regional", "Pairs well with Westchester or Connecticut stops before or after a flight.", "hpn/"),
@@ -208,7 +208,7 @@ ALL_PAGES["manhattan"] = borough_page(
         "Your neighborhood determines the fastest hub — not airline marketing alone.",
         [
             strategy_card("LGA", "LaGuardia", "East Side & Midtown", "Short hop for many domestic departures — ideal after evenings in Manhattan.", "lga/", True),
-            strategy_card("JFK", JFK_NAME, "International", "Six terminals, global carriers — meet-and-greet available.", "jfk/"),
+            strategy_card("JFK", JFK_FULL, "International", "Six terminals, global carriers — meet-and-greet available.", "jfk/"),
             strategy_card("EWR", "Newark", "United & westbound", "Competitive for United itineraries — toll-inclusive from Manhattan.", "ewr/"),
         ],
     ),
@@ -244,12 +244,12 @@ ALL_PAGES["brooklyn"] = borough_page(
         "Which airport from Brooklyn",
         "Brooklyn sits between JFK and Manhattan — the right hub depends on your carrier and neighborhood.",
         [
-            strategy_card("JFK", JFK_NAME, "Closest major hub", "Best for most international and many domestic flights — short hop from much of Brooklyn.", "jfk/", True),
+            strategy_card("JFK", JFK_FULL, "Closest major hub", "Best for most international and many domestic flights — short hop from much of Brooklyn.", "jfk/", True),
             strategy_card("LGA", "LaGuardia", "Domestic option", "Competitive for East Coast schedules — especially from northern Brooklyn.", "lga/"),
             strategy_card("EWR", "Newark", "Cross-harbor", "United and some westbound fares — toll-inclusive flat rates.", "ewr/"),
         ],
     ),
-    [{"label": "New York City", "href": "nyc/"}, {"label": JFK_FULL, "href": "jfk/"}, {"label": "Cruise Terminals", "href": "cruise/"}, {"label": "Queens", "href": "queens/"}],
+    [{"label": "New York City", "href": "nyc/"}, {"label": JFK_LABEL, "href": "jfk/"}, {"label": "Cruise Terminals", "href": "cruise/"}, {"label": "Queens", "href": "queens/"}],
 )
 
 ALL_PAGES["queens"] = borough_page(
@@ -281,11 +281,11 @@ ALL_PAGES["queens"] = borough_page(
         "Most Queens addresses have a clear best hub — we tell you which saves time, not just miles.",
         [
             strategy_card("LGA", "LaGuardia", "Western Queens", "Often fastest from Astoria, LIC, and northern Queens — domestic schedules.", "lga/", True),
-            strategy_card("JFK", JFK_NAME, "International", "Default for global travel — all six terminals, 60-minute wait on arrivals.", "jfk/"),
+            strategy_card("JFK", JFK_FULL, "International", "Default for global travel — all six terminals, 60-minute wait on arrivals.", "jfk/"),
             strategy_card("EWR", "Newark", "Alternate", "When fare or carrier fits — toll-inclusive from Queens.", "ewr/"),
         ],
     ),
-    [{"label": "New York City", "href": "nyc/"}, {"label": JFK_FULL, "href": "jfk/"}, {"label": "LaGuardia", "href": "lga/"}, {"label": "Great Neck", "href": "great-neck/"}],
+    [{"label": "New York City", "href": "nyc/"}, {"label": JFK_LABEL, "href": "jfk/"}, {"label": "LaGuardia", "href": "lga/"}, {"label": "Great Neck", "href": "great-neck/"}],
 )
 
 ALL_PAGES["bronx"] = borough_page(
@@ -317,7 +317,7 @@ ALL_PAGES["bronx"] = borough_page(
         "Northern NYC geography opens LGA, JFK, and sometimes HPN — we pick based on carrier and traffic.",
         [
             strategy_card("LGA", "LaGuardia", "Often closest", "Strong for domestic departures from western and central Bronx.", "lga/", True),
-            strategy_card("JFK", JFK_NAME, "International", "Required for most overseas itineraries — full terminal coverage.", "jfk/"),
+            strategy_card("JFK", JFK_FULL, "International", "Required for most overseas itineraries — full terminal coverage.", "jfk/"),
             strategy_card("HPN", "White Plains", "Northern Bronx", "Worth comparing for select JetBlue and American when schedule fits.", "hpn/"),
         ],
     ),
@@ -353,7 +353,7 @@ ALL_PAGES["staten-island"] = borough_page(
         "EWR is often closest — but JFK and LGA still win on many fares and carriers.",
         [
             strategy_card("EWR", "Newark", "Often closest", "United hub and many NJ departures — toll-inclusive flat rates.", "ewr/", True),
-            strategy_card("JFK", JFK_NAME, "International", "When EWR does not have your route — cross-bridge timing built in.", "jfk/"),
+            strategy_card("JFK", JFK_FULL, "International", "When EWR does not have your route — cross-bridge timing built in.", "jfk/"),
             strategy_card("LGA", "LaGuardia", "Domestic alt.", "Competitive for some East Coast schedules.", "lga/"),
         ],
     ),
@@ -391,7 +391,7 @@ ALL_PAGES["events"] = base(
         "Airports for wedding guests",
         "Out-of-town guests rarely know which NYC airport is closest to your venue. Share their flight info when booking — we coordinate multiple airport pickups with the same dispatch team.",
         [
-            strategy_card("JFK", JFK_NAME, "Out-of-town guests", "Most international and many domestic guests land here — meet-and-greet keeps arrivals calm before the venue.", "jfk/", True),
+            strategy_card("JFK", JFK_FULL, "Out-of-town guests", "Most international and many domestic guests land here — meet-and-greet keeps arrivals calm before the venue.", "jfk/", True),
             strategy_card("LGA", "LaGuardia", "East Coast", "Closer for many domestic guests heading to Nassau venues — less ground time after landing.", "lga/"),
             strategy_card("EWR", "Newark", "Alternate hub", "Some guests book United into Newark — flat-rate quotes include cross-state tolls.", "ewr/"),
         ],
@@ -478,7 +478,7 @@ ALL_PAGES["nyc"] = {
             {
                 "title": "Airports",
                 "links": [
-                    {"label": JFK_FULL, "href": "jfk/"},
+                    {"label": JFK_LABEL, "href": "jfk/"},
                     {"label": "LaGuardia (LGA)", "href": "lga/"},
                     {"label": "Newark (EWR)", "href": "ewr/"},
                 ],
@@ -498,7 +498,7 @@ ALL_PAGES["nyc"] = {
         ],
         "related": [
             {"label": "Service Areas", "href": "areas/"},
-            {"label": JFK_FULL, "href": "jfk/"},
+            {"label": JFK_LABEL, "href": "jfk/"},
             {"label": "About Caliber", "href": "about/"},
         ],
     },
@@ -531,13 +531,13 @@ ALL_PAGES["hamptons"] = base(
         "Which airport from the Hamptons",
         "Summer Fridays change every estimate. We quote with seasonal buffer — and tell you honestly when JFK is worth the drive versus a closer option.",
         [
-            strategy_card("JFK", JFK_NAME, "International & major domestic", "Still the primary hub for most Hamptons international travel — plan 90–120+ minutes ground time in peak season.", "jfk/", True),
+            strategy_card("JFK", JFK_FULL, "International & major domestic", "Still the primary hub for most Hamptons international travel — plan 90–120+ minutes ground time in peak season.", "jfk/", True),
             strategy_card("LGA", "LaGuardia", "Some domestic", "Works for select East Coast itineraries when schedule and traffic align — we compare when you book.", "lga/"),
             strategy_card("HPN", "White Plains", "Northern East End", "Can save time for eastern Suffolk and north-fork pickups on certain JetBlue and American routes.", "hpn/"),
         ],
     ),
     related=[
-        {"label": JFK_FULL, "href": "jfk/"},
+        {"label": JFK_LABEL, "href": "jfk/"},
         {"label": "Events & Weddings", "href": "events/"},
         {"label": "Huntington", "href": "huntington/"},
     ],
@@ -569,7 +569,7 @@ ALL_PAGES["north-shore"] = base(
         "Gold Coast geography favors LaGuardia for time — but international schedules still pull toward JFK. Share your airline; we pick the airport that saves ground time, not just miles.",
         [
             strategy_card("LGA", "LaGuardia", "Often closest", "Default for many Nassau domestic departures — shortest loops from Great Neck, Manhasset, and Garden City.", "lga/", True),
-            strategy_card("JFK", JFK_NAME, "International", "Six terminals, global carriers — meet-and-greet and 60-minute wait on arrivals.", "jfk/"),
+            strategy_card("JFK", JFK_FULL, "International", "Six terminals, global carriers — meet-and-greet and 60-minute wait on arrivals.", "jfk/"),
             strategy_card("HPN", "White Plains", "Northern Nassau", "Strong when your carrier flies from HPN — less congestion than the NYC hubs.", "hpn/"),
         ],
     ),
@@ -607,7 +607,7 @@ ALL_PAGES["westchester-ct"] = base(
         "HPN is the local hub — but JFK and LGA still win on many fares. We compare schedule, carrier, and drive time when you book — not just habit.",
         [
             strategy_card("HPN", "White Plains", "Regional default", "Compact terminal, shorter security — ideal for JetBlue, American, and select domestic when your carrier flies here.", "hpn/", True),
-            strategy_card("JFK", JFK_NAME, "International", "When HPN does not have your route or you need global connections — full meet-and-greet service.", "jfk/"),
+            strategy_card("JFK", JFK_FULL, "International", "When HPN does not have your route or you need global connections — full meet-and-greet service.", "jfk/"),
             strategy_card("LGA", "LaGuardia", "NYC domestic", "Competitive for Manhattan-adjacent Connecticut commuters on East Coast schedules.", "lga/"),
         ],
     ),
@@ -700,7 +700,7 @@ ALL_PAGES["areas"] = {
             {
                 "title": "Airports",
                 "links": [
-                    {"label": JFK_FULL, "href": "jfk/"},
+                    {"label": JFK_LABEL, "href": "jfk/"},
                     {"label": "LaGuardia (LGA)", "href": "lga/"},
                     {"label": "Newark (EWR)", "href": "ewr/"},
                     {"label": "White Plains (HPN)", "href": "hpn/"},
@@ -789,7 +789,7 @@ ALL_PAGES["garden-city"] = town_page(
         "Central Nassau puts you within reach of every major hub. We recommend based on airline, terminal, and traffic — not habit.",
         [
             strategy_card("LGA", "LaGuardia", "Domestic favorite", "Often the shortest drive for East Coast departures — we confirm terminal and pickup window at booking.", "lga/", True),
-            strategy_card("JFK", JFK_NAME, "International", "Default for overseas travel and many premium domestic carriers — 60-minute wait on arrivals.", "jfk/"),
+            strategy_card("JFK", JFK_FULL, "International", "Default for overseas travel and many premium domestic carriers — 60-minute wait on arrivals.", "jfk/"),
             strategy_card("HPN", "White Plains", "Select carriers", "Worth comparing for northern-route JetBlue and American when schedule fits.", "hpn/"),
         ],
     ),
@@ -798,7 +798,7 @@ ALL_PAGES["garden-city"] = town_page(
         {"q": "Can I book a recurring Manhattan commute?", "a": "Yes — corporate and personal accounts support standing reservations. Call dispatch to set billing and preferred pickup times."},
         {"q": "Is meet-and-greet available at JFK?", "a": "Yes, on request — chauffeur inside arrivals with name sign. Included complimentary wait times follow airport policy (60 min JFK)."},
     ],
-    [{"label": "North Shore", "href": "north-shore/"}, {"label": JFK_FULL, "href": "jfk/"}, {"label": "LaGuardia", "href": "lga/"}],
+    [{"label": "North Shore", "href": "north-shore/"}, {"label": JFK_LABEL, "href": "jfk/"}, {"label": "LaGuardia", "href": "lga/"}],
 )
 
 ALL_PAGES["great-neck"] = town_page(
@@ -816,7 +816,7 @@ ALL_PAGES["great-neck"] = town_page(
         "The peninsula is among the closest Nassau communities to LaGuardia — but international schedules still point to JFK.",
         [
             strategy_card("LGA", "LaGuardia", "Closest major hub", "Typically 20–35 minutes — ideal for time-sensitive domestic itineraries.", "lga/", True),
-            strategy_card("JFK", JFK_NAME, "International", "Full terminal knowledge for global carriers — meet-and-greet in arrivals on request.", "jfk/"),
+            strategy_card("JFK", JFK_FULL, "International", "Full terminal knowledge for global carriers — meet-and-greet in arrivals on request.", "jfk/"),
             strategy_card("EWR", "Newark", "Alternate", "Some travelers prefer United into Newark — toll-inclusive flat rates.", "ewr/"),
         ],
     ),
@@ -844,7 +844,7 @@ ALL_PAGES["manhasset"] = town_page(
         [
             strategy_card("LGA", "LaGuardia", "Domestic default", "Most NYC domestic flights — reliable loops from Manhasset and Plandome.", "lga/", True),
             strategy_card("HPN", "White Plains", "Less congestion", "Strong for select JetBlue and American when your flight departs from Westchester.", "hpn/"),
-            strategy_card("JFK", JFK_NAME, "International", "When your schedule requires JFK — we build Van Wyck and LIE buffer into pickup time.", "jfk/"),
+            strategy_card("JFK", JFK_FULL, "International", "When your schedule requires JFK — we build Van Wyck and LIE buffer into pickup time.", "jfk/"),
         ],
     ),
     [
@@ -869,7 +869,7 @@ ALL_PAGES["huntington"] = town_page(
         "Which airport from Huntington",
         "Western Suffolk adds drive time to every hub — we quote honestly and recommend earlier pickups than Nassau clients need.",
         [
-            strategy_card("JFK", JFK_NAME, "International", "Primary hub for most overseas and major domestic routes — plan 50–75+ minutes ground time.", "jfk/", True),
+            strategy_card("JFK", JFK_FULL, "International", "Primary hub for most overseas and major domestic routes — plan 50–75+ minutes ground time.", "jfk/", True),
             strategy_card("LGA", "LaGuardia", "Domestic option", "Competitive on some East Coast schedules — we factor LIE traffic at booking.", "lga/"),
             strategy_card("HPN", "White Plains", "Northern Suffolk", "Occasionally best when carrier and eastern Suffolk pickup align.", "hpn/"),
         ],
@@ -879,7 +879,7 @@ ALL_PAGES["huntington"] = town_page(
         {"q": "Is Huntington farther from airports than Nassau?", "a": "Yes — drive times run longer. We quote realistically and recommend earlier pickups than western Nassau clients need."},
         {"q": "Do you run to the Hamptons from Huntington?", "a": "Yes — East End and event transfers are available. Book peak summer weekends early."},
     ],
-    [{"label": "Hamptons", "href": "hamptons/"}, {"label": JFK_FULL, "href": "jfk/"}, {"label": "Manhattan", "href": "manhattan/"}],
+    [{"label": "Hamptons", "href": "hamptons/"}, {"label": JFK_LABEL, "href": "jfk/"}, {"label": "Manhattan", "href": "manhattan/"}],
 )
 
 ALL_PAGES["syosset"] = town_page(
@@ -897,7 +897,7 @@ ALL_PAGES["syosset"] = town_page(
         "Central Nassau with fast LIE access — corporate and residential pickups share the same dispatch desk.",
         [
             strategy_card("LGA", "LaGuardia", "Corporate domestic", "Popular for Melville-adjacent offices and Syosset homes — 30–45 minute typical drive.", "lga/", True),
-            strategy_card("JFK", JFK_NAME, "International", "International executives and roadshow guests — meet-and-greet available.", "jfk/"),
+            strategy_card("JFK", JFK_FULL, "International", "International executives and roadshow guests — meet-and-greet available.", "jfk/"),
             strategy_card("EWR", "Newark", "United hub", "Alternative for United-heavy corporate travel — toll-inclusive quotes.", "ewr/"),
         ],
     ),
@@ -924,7 +924,7 @@ ALL_PAGES["rockville-centre"] = town_page(
         "South Shore Nassau sits between JFK and LGA — we pick based on airline and real drive time, not habit.",
         [
             strategy_card("LGA", "LaGuardia", "Many domestic routes", "Competitive drive time for East Coast schedules — terminal confirmed at booking.", "lga/", True),
-            strategy_card("JFK", JFK_NAME, "International", "Default for overseas travel — meet-and-greet and 60-minute wait on arrivals.", "jfk/"),
+            strategy_card("JFK", JFK_FULL, "International", "Default for overseas travel — meet-and-greet and 60-minute wait on arrivals.", "jfk/"),
             strategy_card("EWR", "Newark", "Alternate", "Some United and westbound fares — toll-inclusive quotes.", "ewr/"),
         ],
     ),
@@ -951,7 +951,7 @@ ALL_PAGES["melville"] = town_page(
         "Central Nassau offices and homes — LGA wins on time for many domestic flights; JFK for international.",
         [
             strategy_card("LGA", "LaGuardia", "Corporate domestic", "Shortest major-airport drive for many Melville pickups.", "lga/", True),
-            strategy_card("JFK", JFK_NAME, "International", "Executive international travel — priority dispatch for accounts.", "jfk/"),
+            strategy_card("JFK", JFK_FULL, "International", "Executive international travel — priority dispatch for accounts.", "jfk/"),
             strategy_card("HPN", "White Plains", "Select carriers", "Occasionally best for northern-route schedules — we compare at booking.", "hpn/"),
         ],
     ),

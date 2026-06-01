@@ -71,17 +71,13 @@ function brandWordmark() {
 
 function navDropdown(id, label, items) {
   const menu = items.map((a) => `<li><a href="${a.href}">${a.label}</a></li>`).join('');
-  const drawer = items.map((a) => `<a href="${a.href}">${a.label}</a>`).join('');
-  return {
-    desktop: `
+  return `
           <li class="nav-dropdown" id="${id}">
             <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false" data-dd="${id}">
               ${label} <span class="nav-dropdown-chevron">▾</span>
             </button>
             <ul class="nav-dropdown-menu">${menu}</ul>
-          </li>`,
-    drawer,
-  };
+          </li>`;
 }
 
 function renderNav() {
@@ -91,7 +87,7 @@ function renderNav() {
 
   const ap = navDropdown('navAirports', 'Airports', CONFIG.footer.airports);
   const sv = navDropdown('navServices', 'Services', CONFIG.footer.services);
-  const ar = navDropdown('navAreas', 'Areas', CONFIG.footer.areas);
+  const ar = navDropdown('navAreas', 'Areas', navDesktopAreaLinks());
 
   return `
     <nav class="nav" id="nav" aria-label="Primary">
@@ -99,9 +95,9 @@ function renderNav() {
       <div class="nav-right">
         <ul class="nav-links">
           ${links}
-          ${ap.desktop}
-          ${sv.desktop}
-          ${ar.desktop}
+          ${ap}
+          ${sv}
+          ${ar}
         </ul>
         <a href="${CONFIG.phoneHref}" class="nav-phone">${PHONE_ICON}${CONFIG.phone}</a>
         <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>Book Now</a>
@@ -112,11 +108,7 @@ function renderNav() {
       <aside class="nav-drawer" id="navDrawer" aria-label="Mobile menu">
         <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">&#x2715;</button>
         <div class="nav-drawer-scroll">
-          ${CONFIG.nav.map((n) => `<a href="${n.href}">${n.label}</a>`).join('')}
-          ${ap.drawer}
-          ${sv.drawer}
-          ${ar.drawer}
-          <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>Book Now</a>
+          ${buildNavDrawerHTML({ homeAnchors: CONFIG.nav })}
         </div>
       </aside>
     </nav>`;
@@ -591,6 +583,8 @@ function setupNav(lenis) {
   document.querySelectorAll('.nav-dropdown').forEach((dd) => {
     dd.addEventListener('click', (e) => e.stopPropagation());
   });
+
+  bindNavDrawerCloseOnClick(drawer, closeDrawer);
 }
 
 /* ----------------------------------------------------------------

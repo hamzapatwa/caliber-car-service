@@ -57,6 +57,46 @@ const CONFIG = {
   ],
 
   /* ----------------------------------------------------------
+     NAV MENU — curated for drawer & desktop (footer keeps full lists)
+  ---------------------------------------------------------- */
+  navMenu: {
+    drawerSections: [
+      { title: 'Airports', itemsKey: 'airports' },
+      { title: 'Services', itemsKey: 'services' },
+      { title: 'NYC Boroughs', itemsKey: 'nyc' },
+      {
+        title: 'Long Island & Regions',
+        itemsKey: 'longIsland',
+        footer: { label: 'All towns & areas', href: '/areas/' },
+      },
+    ],
+    nyc: [
+      { label: 'NYC Overview',    href: '/nyc/' },
+      { label: 'Manhattan',       href: '/manhattan/' },
+      { label: 'Brooklyn',        href: '/brooklyn/' },
+      { label: 'Queens',          href: '/queens/' },
+      { label: 'The Bronx',       href: '/bronx/' },
+      { label: 'Staten Island',   href: '/staten-island/' },
+    ],
+    longIsland: [
+      { label: 'Hamptons & East End', href: '/hamptons/' },
+      { label: 'North Shore LI',  href: '/north-shore/' },
+      { label: 'Westchester & CT',    href: '/westchester-ct/' },
+      { label: 'Garden City',     href: '/garden-city/' },
+      { label: 'Great Neck',      href: '/great-neck/' },
+      { label: 'Manhasset',       href: '/manhasset/' },
+      { label: 'Huntington',      href: '/huntington/' },
+      { label: 'Syosset',         href: '/syosset/' },
+    ],
+    viewAll: { label: 'All service areas', href: '/areas/' },
+    utility: [
+      { label: 'Home',              href: '/', homeOnly: true },
+      { label: 'All service areas', href: '/areas/' },
+      { label: 'About Caliber',     href: '/about/' },
+    ],
+  },
+
+  /* ----------------------------------------------------------
      CONTACT
   ---------------------------------------------------------- */
   phone:     '(516) 595-2391',
@@ -113,7 +153,7 @@ const CONFIG = {
       num:  '01',
       name: 'Airport Transfers',
       href: '/jfk/',
-      desc: 'John F. Kennedy (JFK) · LGA · EWR · HPN with live flight tracking and complimentary meet-and-greet on request.',
+      desc: 'JFK · LGA · EWR · HPN with live flight tracking and complimentary meet-and-greet on request.',
     },
     {
       num:  '02',
@@ -215,7 +255,15 @@ const CONFIG = {
     groups: [
       {
         title: 'Long Island',
-        items: ['Garden City', 'Great Neck', 'Manhasset', 'Syosset', 'Huntington', 'The Hamptons'],
+        href:  '/areas/',
+        items: [
+          { label: 'Garden City', href: '/garden-city/' },
+          { label: 'Great Neck', href: '/great-neck/' },
+          { label: 'Manhasset', href: '/manhasset/' },
+          { label: 'Syosset', href: '/syosset/' },
+          { label: 'Huntington', href: '/huntington/' },
+          { label: 'The Hamptons', href: '/hamptons/' },
+        ],
       },
       {
         title: 'New York City',
@@ -230,6 +278,7 @@ const CONFIG = {
       },
       {
         title: 'Beyond Long Island',
+        href:  '/areas/',
         items: [
           { label: 'Westchester & Connecticut', href: '/westchester-ct/' },
           { label: 'All NYC Boroughs', href: '/nyc/' },
@@ -237,7 +286,13 @@ const CONFIG = {
       },
       {
         title: 'Airports',
-        items: ['John F. Kennedy (JFK)', 'LaGuardia (LGA)', 'Newark (EWR)', 'White Plains (HPN)'],
+        href:  '/areas/',
+        items: [
+          { label: 'John F. Kennedy (JFK)', href: '/jfk/' },
+          { label: 'LaGuardia (LGA)', href: '/lga/' },
+          { label: 'Newark (EWR)', href: '/ewr/' },
+          { label: 'White Plains (HPN)', href: '/hpn/' },
+        ],
       },
     ],
   },
@@ -293,7 +348,7 @@ const CONFIG = {
       { label: 'Book',     href: '#cta'      },
     ],
     airports: [
-      { label: 'John F. Kennedy International Airport', href: '/jfk/' },
+      { label: 'John F. Kennedy (JFK)', href: '/jfk/' },
       { label: 'LaGuardia (LGA)',       href: '/lga/' },
       { label: 'Newark (EWR)',          href: '/ewr/' },
       { label: 'White Plains (HPN)',    href: '/hpn/' },
