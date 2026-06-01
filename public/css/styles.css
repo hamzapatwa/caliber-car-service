@@ -479,7 +479,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 .hero-scroll {
   position:  absolute;
   bottom:    clamp(24px, 4vw, 36px);
-  left:      0;
+  left:      var(--shell-pad-x);
   z-index:   3;
   display:   flex;
   align-items: center;
@@ -826,13 +826,6 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
   height:  1px;
   background: var(--muted);
   display: inline-block;
-}
-.fleet-category {
-  font-family:    var(--font-display);
-  font-size:      11px;
-  letter-spacing: .35em;
-  text-transform: uppercase;
-  color:          var(--gold);
 }
 .fleet-name {
   font-family:    var(--font-display);
@@ -1411,7 +1404,12 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
   .fleet-desc     { font-size: 13px; }
   .fleet-metrics  { grid-template-columns: 1fr 1fr; width: 100%; padding: 14px 0; }
   .fleet-metric-num   { font-size: clamp(26px, 7vw, 36px); }
-  .fleet-features { grid-template-columns: 1fr; gap: 8px; }
+  .fleet-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 12px;
+  }
+  .fleet-feature { font-size: 12px; padding-left: 14px; }
+  .fleet-feature::before { width: 8px; }
 
   .coverage-grid  { grid-template-columns: 1fr 1fr; gap: 32px; }
 

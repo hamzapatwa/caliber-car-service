@@ -240,7 +240,6 @@ function renderFleet() {
         </div>
         <div class="fleet-info">
           <span class="fleet-num">${v.num} of ${String(CONFIG.fleet.length).padStart(2, '0')}</span>
-          <span class="fleet-category">${v.category} Class</span>
           <h3 class="fleet-name">${v.name}</h3>
           <p class="fleet-models">${v.models}</p>
           <p class="fleet-desc">${v.description}</p>
