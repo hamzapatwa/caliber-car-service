@@ -2,13 +2,13 @@
 
 A production-ready static marketing site for **Caliber Car Service** — a luxury black-car service based on Long Island, NY, serving the tri-state area.
 
-Plain HTML, CSS, and JavaScript. No framework. No build step.
+Plain HTML, CSS, and JavaScript. No framework. Minimal build scripts for landing pages and assets.
 
 ---
 
 ## Stack
 
-- **HTML / CSS / JS** — static site, no dependencies installed locally.
+- **HTML / CSS / JS** — static site, no runtime dependencies.
 - **GSAP 3 + ScrollTrigger** (cdnjs) — scroll choreography, hero intro, count-ups.
 - **Lenis** (jsDelivr) — buttery-smooth scroll, wired into the GSAP ticker.
 - **Bebas Neue + DM Sans** via [@fontsource](https://fontsource.org/) on jsDelivr.
@@ -18,30 +18,34 @@ Plain HTML, CSS, and JavaScript. No framework. No build step.
 ## Project layout
 
 ```
-├── index.html              # Main site entry
-├── og-image.png            # Social preview (built from design/og-image.svg)
-├── robots.txt  sitemap.xml vercel.json
-├── assets/
-│   ├── brand/              # Logo mark (favicon, SVG source)
-│   └── images/             # Fleet & airport photos
-├── css/
-│   ├── styles.css          # Main site styles
-│   ├── airport.css         # Airport landing pages
-│   └── consent.css         # Cookie consent banner
-├── js/
-│   ├── config.js           # Single source of truth — copy, links, theme
-│   ├── consent.js          # Consent Mode v2 — opt-out (tags on until decline)
-│   ├── conversion.js       # Google Ads click conversion (Moovs)
-│   ├── main.js             # Renders homepage from CONFIG
-│   └── airport.js          # Renders airport pages
-├── design/                 # Print + OG source (not linked from main nav)
-│   ├── businesscard.html
+├── public/                 # Deployable site (Vercel output directory)
+│   ├── index.html          # Homepage
+│   ├── robots.txt  sitemap.xml  og-image.png
+│   ├── assets/  css/  js/  design/
+│   └── pages/              # Landing pages by category
+│       ├── airports/       # jfk, lga, ewr, hpn
+│       ├── services/       # corporate, hourly, events, cruise
+│       ├── boroughs/       # manhattan, brooklyn, queens, …
+│       ├── towns/          # garden-city, great-neck, …
+│       ├── hubs/           # nyc, areas
+│       ├── regions/        # hamptons, north-shore, westchester-ct
+│       └── about/
+├── scripts/
+│   ├── landing_page_data.py
+│   ├── generate_landing_pages.py  # also syncs vercel.json rewrites
+│   ├── site_routes.py             # slug → category mapping
+│   ├── dev_server.py              # local dev with URL rewrites
+│   └── build_wallpapers.py
+├── design/                 # Source art (SVG, previews — not all deployed)
 │   ├── og-image.svg
-│   └── qr.png
-└── jfk/  lga/  ewr/  hpn/  # Airport landing pages
+│   ├── wallpapers/
+│   └── …
+├── package.json
+└── vercel.json
 ```
 
-To rebrand or change content, edit **`js/config.js`** only.
+**Content:** edit `public/js/config.js` for site-wide copy and links.  
+**Landing pages:** edit `scripts/landing_page_data.py`, then `npm run build:landings`.
 
 ---
 
@@ -49,11 +53,9 @@ To rebrand or change content, edit **`js/config.js`** only.
 
 ```bash
 npm run dev
-# or
-python3 -m http.server 3001
 ```
 
-Then open `http://localhost:3001` (port 3000 is often used by Docker on macOS).
+Then open `http://localhost:3001`. Landing pages live under `public/pages/…` and are also linked at `public/{slug}/` (symlinks) so URLs like `/jfk/` work with any static server.
 
 Regenerate the Open Graph PNG after editing `design/og-image.svg`:
 
@@ -61,9 +63,15 @@ Regenerate the Open Graph PNG after editing `design/og-image.svg`:
 npm run build:og
 ```
 
+Regenerate landing page HTML shells:
+
+```bash
+npm run build:landings
+```
+
 ---
 
-## Sections
+## Sections (homepage)
 
 1. **Hero** — cinematic 2-column intro with clip-reveal headline and a slide-in vehicle photo.
 2. **Stats** — four numbers that count up from zero as they enter the viewport.
@@ -79,14 +87,13 @@ npm run build:og
 
 ## Before launch
 
-- Replace the two Edmunds-hosted reference images in `js/config.js` (`IMG_HERO`, `IMG_DETAIL`) with your own files under `assets/images/`. All `<img>` tags already have a stylized SVG fallback via `onerror`.
-- Update `CONFIG.phone`, `CONFIG.email`, and `CONFIG.bookHref` (currently a placeholder `tel:` number and the same-page anchor).
+- Replace placeholder phone/email/book links in `public/js/config.js`.
 - Update SEO title/description in `CONFIG.seo`.
 - Swap reviewer names/locations if needed in `CONFIG.reviews`.
 
 ---
 
-## Design tokens (edit in `js/config.js → theme`)
+## Design tokens (edit in `public/js/config.js → theme`)
 
 | Token       | Value     | Usage                                  |
 | ----------- | --------- | -------------------------------------- |

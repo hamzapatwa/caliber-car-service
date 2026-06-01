@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160">
+  <defs>
+    <radialGradient id="vignette" cx="1920" cy="1080" r="2100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#161412"/>
+      <stop offset="38%" stop-color="#0b0b0a"/>
+      <stop offset="100%" stop-color="#040404"/>
+    </radialGradient>
+    <radialGradient id="goldGlow" cx="1920" cy="1080" r="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#B8963E" stop-opacity="0.13"/>
+      <stop offset="50%" stop-color="#B8963E" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#B8963E" stop-opacity="0"/>
+    </radialGradient>
+    <g id="caliber-mark">
+      <line x1="15" y1="100" x2="185" y2="100" stroke="#B8963E" stroke-width="0.75"/>
+      <line x1="100" y1="15" x2="100" y2="185" stroke="#B8963E" stroke-width="0.75"/>
+      <line x1="15" y1="93" x2="15" y2="107" stroke="#B8963E" stroke-width="1.5"/>
+      <line x1="185" y1="93" x2="185" y2="107" stroke="#B8963E" stroke-width="1.5"/>
+      <line x1="93" y1="15" x2="107" y2="15" stroke="#B8963E" stroke-width="1.5"/>
+      <line x1="93" y1="185" x2="107" y2="185" stroke="#B8963E" stroke-width="1.5"/>
+      <path d="M 132.8 77.1 A 40 40 0 1 0 132.8 122.9" fill="none" stroke="#B8963E" stroke-width="2.5" stroke-linecap="butt"/>
+      <circle cx="100" cy="100" r="2.5" fill="#B8963E"/>
+    </g>
+  </defs>
+  <rect width="3840" height="2160" fill="#080808"/>
+  <rect width="3840" height="2160" fill="url(#vignette)"/>
+  <rect width="3840" height="2160" fill="url(#goldGlow)"/>
+  <use href="#caliber-mark" transform="translate(1920 1080) scale(3.55) translate(-100 -100)"/>
+</svg>

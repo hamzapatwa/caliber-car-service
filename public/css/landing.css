@@ -1,0 +1,662 @@
+/*
+ * ============================================================
+ *  CALIBER CAR SERVICE — LANDING PAGES
+ *  Extends styles.css. Airport, service, area, town pages.
+ * ============================================================
+ */
+
+/* ================================================================
+   AIRPORT HERO — full-bleed image, centered content
+================================================================ */
+.ap-hero {
+  position:    relative;
+  min-height:  100svh;
+  display:     flex;
+  align-items: center;
+  justify-content: center;
+  overflow:    hidden;
+  padding:     clamp(120px, 14vw, 180px) var(--shell-pad-x) clamp(80px, 10vw, 120px);
+  text-align:  center;
+}
+
+.ap-hero-bg {
+  position:          absolute;
+  inset:             0;
+  background-size:   cover;
+  background-position: center 45%;
+  background-repeat: no-repeat;
+  transform:         scale(1.04);
+  will-change:       transform;
+  transition:        transform 12s ease;
+  filter:            saturate(0.85) contrast(1.05);
+}
+
+.ap-hero-bg.zoomed { transform: scale(1); }
+
+.ap-hero-bg::after {
+  content:    '';
+  position:   absolute;
+  inset:      0;
+  background: linear-gradient(
+    180deg,
+    rgba(8,8,8,0.28) 0%,
+    rgba(8,8,8,0.48) 40%,
+    rgba(8,8,8,0.82) 85%,
+    #080808 100%
+  );
+}
+
+.ap-hero-content {
+  position:   relative;
+  z-index:    1;
+  max-width:  900px;
+  margin:     0 auto;
+}
+
+.ap-breadcrumb {
+  font-size:      10px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color:          var(--muted);
+  margin-bottom:  20px;
+}
+.ap-breadcrumb a           { color: var(--muted); transition: color .2s; }
+.ap-breadcrumb a:hover     { color: var(--gold); }
+.ap-breadcrumb .sep        { margin: 0 8px; opacity: .4; }
+
+.ap-hero-eyebrow {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            8px;
+  font-size:      10px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  font-weight:    500;
+  color:          var(--gold);
+  border:         1px solid rgba(184,150,62,.35);
+  padding:        6px 14px;
+  border-radius:  100px;
+  margin-bottom:  32px;
+}
+
+.ap-hero-headline {
+  font-family:    var(--font-display);
+  font-size:      clamp(76px, 14vw, 200px);
+  line-height:    .86;
+  letter-spacing: -.01em;
+  margin-bottom:  28px;
+}
+.ap-hero-headline .ap-gold  { color: var(--gold); }
+.ap-hero-headline .ap-ghost {
+  color:               transparent;
+  -webkit-text-stroke: 1.5px rgba(238,238,232,.5);
+  paint-order:         stroke fill;
+}
+
+.ap-hero-sub {
+  font-size:      clamp(14px, 1.15vw, 17px);
+  line-height:    1.7;
+  color:          rgba(238,238,232,.68);
+  max-width:      620px;
+  margin:         0 auto 44px;
+}
+
+.ap-hero-ctas {
+  display:        flex;
+  gap:            12px;
+  justify-content: center;
+  flex-wrap:      wrap;
+}
+
+/* ================================================================
+   TRUST BAR — 4-col stats strip
+================================================================ */
+.ap-trust {
+  background:     var(--bg);
+  border-top:     1px solid var(--border);
+  border-bottom:  1px solid var(--border);
+  padding:        clamp(28px, 3.5vw, 44px) var(--shell-pad-x);
+}
+.ap-trust-grid {
+  display:               grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width:             var(--max-w);
+  margin:                0 auto;
+  gap:                   1px;
+  background:            var(--border);
+  border:                1px solid var(--border);
+}
+.ap-trust-item {
+  background:     var(--bg);
+  padding:        clamp(20px, 2.5vw, 32px) clamp(16px, 2vw, 28px);
+  text-align:     center;
+}
+.ap-trust-value {
+  font-family:    var(--font-display);
+  font-size:      clamp(36px, 5vw, 60px);
+  line-height:    1;
+  color:          var(--gold);
+  letter-spacing: -.01em;
+  margin-bottom:  6px;
+  display:        block;
+}
+.ap-trust-label {
+  font-size:      11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color:          var(--muted);
+  font-weight:    500;
+}
+
+/* ================================================================
+   FEATURES — 3×2 card grid
+================================================================ */
+.ap-features {
+  padding:    var(--section-pad-y) var(--shell-pad-x);
+  background: var(--surface);
+}
+.ap-features-inner {
+  max-width: var(--max-w);
+  margin:    0 auto;
+}
+.ap-features-head {
+  margin-bottom: clamp(48px, 6vw, 72px);
+}
+.ap-features-grid {
+  display:               grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:                   1px;
+  background:            var(--border);
+  border:                1px solid var(--border);
+}
+.ap-feature-card {
+  background:     var(--surface);
+  padding:        clamp(28px, 3.5vw, 44px);
+  display:        flex;
+  flex-direction: column;
+  gap:            14px;
+  transition:     background .25s;
+}
+.ap-feature-card:hover { background: rgba(184,150,62,.045); }
+.ap-feature-num {
+  font-family:    var(--font-display);
+  font-size:      13px;
+  letter-spacing: .2em;
+  color:          var(--gold);
+}
+.ap-feature-title {
+  font-family: var(--font-display);
+  font-size:   clamp(18px, 2vw, 24px);
+  line-height: 1.1;
+  letter-spacing: .01em;
+}
+.ap-feature-desc {
+  font-size:   clamp(13px, .95vw, 15px);
+  line-height: 1.65;
+  color:       rgba(238,238,232,.62);
+  flex:        1;
+}
+
+/* ================================================================
+   HOW IT WORKS — numbered 3-step row
+================================================================ */
+.ap-steps {
+  padding:    var(--section-pad-y) var(--shell-pad-x);
+  background: var(--bg);
+}
+.ap-steps-inner {
+  max-width: var(--max-w);
+  margin:    0 auto;
+}
+.ap-steps-head {
+  margin-bottom: clamp(48px, 6vw, 72px);
+}
+.ap-steps-grid {
+  display:               grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:                   clamp(24px, 4vw, 48px);
+  position:              relative;
+}
+.ap-step {
+  position: relative;
+}
+.ap-step-num {
+  font-family:    var(--font-display);
+  font-size:      clamp(52px, 7vw, 88px);
+  line-height:    1;
+  color:          rgba(184,150,62,.55);
+  letter-spacing: -.02em;
+  margin-bottom:  20px;
+  display:        block;
+}
+.ap-step-title {
+  font-family: var(--font-display);
+  font-size:   clamp(20px, 2.2vw, 28px);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.ap-step-desc {
+  font-size:   clamp(13px, .95vw, 15px);
+  line-height: 1.65;
+  color:       rgba(238,238,232,.6);
+}
+
+/* ================================================================
+   WHITE GLOVE SECTION — editorial image split
+================================================================ */
+.ap-glove {
+  padding:    var(--section-pad-y) var(--shell-pad-x);
+  background: var(--surface);
+  overflow:   hidden;
+}
+.ap-glove-inner {
+  max-width:             var(--max-w);
+  margin:                0 auto;
+  display:               grid;
+  grid-template-columns: 1fr 1fr;
+  gap:                   clamp(48px, 7vw, 96px);
+  align-items:           center;
+}
+.ap-glove-text {}
+.ap-glove-headline {
+  font-family:    var(--font-display);
+  font-size:      clamp(44px, 6vw, 88px);
+  line-height:    .9;
+  letter-spacing: -.01em;
+  margin-bottom:  clamp(20px, 2.5vw, 32px);
+}
+.ap-glove-headline .gold { color: var(--gold); }
+.ap-glove-body {
+  font-size:      clamp(14px, 1.05vw, 17px);
+  line-height:    1.7;
+  color:          rgba(238,238,232,.7);
+  margin-bottom:  clamp(24px, 3vw, 40px);
+  max-width:      480px;
+}
+.ap-glove-img-wrap {
+  position:      relative;
+  aspect-ratio:  4/3;
+  overflow:      hidden;
+}
+.ap-glove-img-wrap::before {
+  content:    '';
+  position:   absolute;
+  inset:      0;
+  border:     1px solid var(--border);
+  z-index:    1;
+  pointer-events: none;
+}
+.ap-glove-img {
+  width:        100%;
+  height:       100%;
+  object-fit:   cover;
+  object-position: center;
+  transition:   transform .6s ease;
+  display:      block;
+}
+.ap-glove-img-wrap:hover .ap-glove-img { transform: scale(1.03); }
+
+/* ================================================================
+   FAQ — native details/summary accordion
+================================================================ */
+.ap-faq {
+  padding:    var(--section-pad-y) var(--shell-pad-x);
+  background: var(--bg);
+}
+.ap-faq-inner {
+  max-width: 800px;
+  margin:    0 auto;
+}
+.ap-faq-head {
+  margin-bottom: clamp(40px, 5vw, 64px);
+  text-align:    center;
+}
+.ap-faq-list {
+  display: flex;
+  flex-direction: column;
+}
+.ap-faq-item {
+  border-top: 1px solid var(--border);
+}
+.ap-faq-item:last-child { border-bottom: 1px solid var(--border); }
+.ap-faq-item summary {
+  list-style:     none;
+  cursor:         pointer;
+  display:        flex;
+  justify-content: space-between;
+  align-items:    center;
+  gap:            20px;
+  padding:        clamp(18px, 2.2vw, 26px) 0;
+  font-family:    var(--font-display);
+  font-size:      clamp(16px, 1.6vw, 22px);
+  letter-spacing: .01em;
+  color:          var(--white);
+  transition:     color .2s;
+  user-select:    none;
+  -webkit-user-select: none;
+}
+.ap-faq-item summary::-webkit-details-marker { display: none; }
+.ap-faq-item summary::after {
+  content:       '+';
+  font-family:   var(--font-body);
+  font-size:     22px;
+  font-weight:   300;
+  color:         var(--gold);
+  flex-shrink:   0;
+  transition:    transform .25s, color .2s;
+  line-height:   1;
+}
+.ap-faq-item[open] summary       { color: var(--gold); }
+.ap-faq-item[open] summary::after {
+  content:   '−';
+  transform: rotate(180deg);
+}
+.ap-faq-answer {
+  font-size:      clamp(13px, .95vw, 15px);
+  line-height:    1.72;
+  color:          rgba(238,238,232,.62);
+  padding-bottom: clamp(16px, 2vw, 24px);
+  max-width:      680px;
+}
+
+/* ================================================================
+   RESPONSIVE — airport pages
+================================================================ */
+@media (max-width: 1100px) {
+  .ap-features-grid { grid-template-columns: repeat(2, 1fr); }
+  .ap-glove-inner   { grid-template-columns: 1fr; }
+  .ap-glove-img-wrap { aspect-ratio: 16/9; }
+}
+
+@media (max-width: 720px) {
+  .ap-trust-grid    { grid-template-columns: repeat(2, 1fr); }
+  .ap-features-grid { grid-template-columns: 1fr; }
+  .ap-steps-grid    { grid-template-columns: 1fr; gap: clamp(36px, 6vw, 48px); }
+  .ap-steps-grid::before { display: none; }
+}
+
+@media (max-width: 480px) {
+  .ap-trust-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ================================================================
+   ROUTE CARDS — town pages
+================================================================ */
+.ap-routes {
+  padding:    var(--section-pad-y) var(--shell-pad-x);
+  background: var(--bg);
+}
+.ap-routes-inner {
+  max-width: var(--max-w);
+  margin:    0 auto;
+}
+.ap-routes-head {
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+.ap-routes-grid {
+  display:               grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:                   1px;
+  background:            var(--border);
+  border:                1px solid var(--border);
+}
+.ap-route-card {
+  background:     var(--bg);
+  padding:        clamp(24px, 3vw, 36px);
+  display:        flex;
+  flex-direction: column;
+  gap:            10px;
+}
+.ap-route-label {
+  font-size:      10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color:          var(--gold);
+  font-weight:    500;
+}
+.ap-route-dest {
+  font-family: var(--font-display);
+  font-size:   clamp(22px, 2.5vw, 32px);
+  line-height: 1.05;
+}
+.ap-route-time {
+  font-size:   clamp(14px, 1vw, 16px);
+  color:       var(--white);
+  font-weight: 500;
+}
+.ap-route-note {
+  font-size:   clamp(13px, .9vw, 14px);
+  line-height: 1.6;
+  color:       rgba(238,238,232,.58);
+  flex:        1;
+}
+
+/* ================================================================
+   AIRPORT STRATEGY — card grid (all geo/service landings)
+================================================================ */
+.ap-strategy {
+  padding:    var(--section-pad-y) var(--shell-pad-x);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+.ap-strategy-inner {
+  max-width: var(--max-w);
+  margin:    0 auto;
+}
+.ap-strategy-head {
+  margin-bottom: clamp(40px, 5vw, 64px);
+  max-width:     720px;
+}
+.ap-strategy-lede {
+  font-size:   clamp(14px, 1.05vw, 17px);
+  line-height: 1.72;
+  color:       rgba(238,238,232,.65);
+  margin-top:  16px;
+}
+.ap-strategy-grid {
+  display:               grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:                   1px;
+  background:            var(--border);
+  border:                1px solid var(--border);
+}
+.ap-strategy-card {
+  background:     var(--surface);
+  padding:        clamp(28px, 3.2vw, 40px);
+  display:        flex;
+  flex-direction: column;
+  gap:            14px;
+  min-height:     100%;
+  transition:     background .25s;
+  position:       relative;
+}
+.ap-strategy-card:hover {
+  background: rgba(184,150,62,.04);
+}
+.ap-strategy-card--highlight {
+  background: rgba(184,150,62,.06);
+}
+.ap-strategy-card--highlight::before {
+  content:    '';
+  position:   absolute;
+  top:        0;
+  left:       0;
+  right:      0;
+  height:     2px;
+  background: var(--gold);
+}
+.ap-strategy-card-top {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  gap:             12px;
+}
+.ap-strategy-code {
+  font-family:    var(--font-display);
+  font-size:      clamp(36px, 4.5vw, 52px);
+  line-height:    1;
+  letter-spacing: -.02em;
+  color:          var(--gold);
+}
+.ap-strategy-badge {
+  font-size:      9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-weight:    600;
+  color:          rgba(238,238,232,.55);
+  border:         1px solid var(--border);
+  padding:        5px 10px;
+  border-radius:  100px;
+  white-space:    nowrap;
+}
+.ap-strategy-card--highlight .ap-strategy-badge {
+  border-color: rgba(184,150,62,.45);
+  color:        var(--gold);
+}
+.ap-strategy-card-name {
+  font-family: var(--font-display);
+  font-size:   clamp(18px, 2vw, 24px);
+  line-height: 1.1;
+  letter-spacing: .02em;
+}
+.ap-strategy-card-body {
+  font-size:   clamp(13px, .95vw, 15px);
+  line-height: 1.68;
+  color:       rgba(238,238,232,.62);
+  flex:        1;
+}
+.ap-strategy-card-link {
+  font-size:      10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight:    500;
+  color:          var(--gold);
+  margin-top:     auto;
+  padding-top:    8px;
+  transition:     opacity .2s;
+}
+.ap-strategy-card-link:hover { opacity: .75; }
+.ap-strategy-card-link span {
+  display: inline-block;
+  transition: transform .2s;
+}
+.ap-strategy-card-link:hover span { transform: translateX(3px); }
+
+@media (max-width: 720px) {
+  .ap-strategy-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================================================
+   RELATED LINKS
+================================================================ */
+.ap-related {
+  padding:    clamp(48px, 6vw, 72px) var(--shell-pad-x);
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+.ap-related-inner {
+  max-width: var(--max-w);
+  margin:    0 auto;
+  text-align: center;
+}
+.ap-related-title {
+  font-size:      10px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color:          var(--muted);
+  margin-bottom:  20px;
+}
+.ap-related-links {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:         10px;
+  justify-content: center;
+}
+.ap-related-links a {
+  font-size:      11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding:        10px 18px;
+  border:         1px solid var(--border);
+  color:          rgba(238,238,232,.72);
+  transition:     border-color .2s, color .2s;
+}
+.ap-related-links a:hover {
+  border-color: var(--gold);
+  color:        var(--gold);
+}
+
+/* ================================================================
+   AREAS HUB — link directory
+================================================================ */
+.ap-hub {
+  padding:    var(--section-pad-y) var(--shell-pad-x);
+  background: var(--surface);
+}
+.ap-hub-inner {
+  max-width: var(--max-w);
+  margin:    0 auto;
+}
+.ap-hub-group {
+  margin-bottom: clamp(48px, 6vw, 72px);
+}
+.ap-hub-group:last-child { margin-bottom: 0; }
+.ap-hub-group-title {
+  font-family:    var(--font-display);
+  font-size:      clamp(24px, 3vw, 36px);
+  margin-bottom:  20px;
+  padding-bottom: 12px;
+  border-bottom:  1px solid var(--border);
+}
+.ap-hub-links {
+  display:               grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap:                   1px;
+  background:            var(--border);
+  border:                1px solid var(--border);
+}
+.ap-hub-links a {
+  background:     var(--surface);
+  padding:        16px 20px;
+  font-size:      12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color:          rgba(238,238,232,.72);
+  transition:     background .2s, color .2s;
+}
+.ap-hub-links a:hover {
+  background: rgba(184,150,62,.06);
+  color:      var(--gold);
+}
+
+/* ================================================================
+   ABOUT — story blocks
+================================================================ */
+.ap-about-blocks {
+  padding:    var(--section-pad-y) var(--shell-pad-x);
+  background: var(--surface);
+}
+.ap-about-blocks-inner {
+  max-width: var(--max-w);
+  margin:    0 auto;
+  display:   flex;
+  flex-direction: column;
+  gap:       clamp(40px, 5vw, 64px);
+}
+.ap-about-block h3 {
+  font-family: var(--font-display);
+  font-size:   clamp(28px, 3.5vw, 40px);
+  margin-bottom: 12px;
+}
+.ap-about-block p {
+  font-size:   clamp(14px, 1.05vw, 17px);
+  line-height: 1.72;
+  color:       rgba(238,238,232,.68);
+  max-width:   640px;
+}
+
+@media (max-width: 1100px) {
+  .ap-routes-grid { grid-template-columns: 1fr; }
+}
