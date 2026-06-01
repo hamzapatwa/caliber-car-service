@@ -30,7 +30,7 @@ Plain HTML, CSS, and JavaScript. No framework. No build step.
 │   └── consent.css         # Cookie consent banner
 ├── js/
 │   ├── config.js           # Single source of truth — copy, links, theme
-│   ├── consent.js          # Consent Mode v2 — gates Google tags
+│   ├── consent.js          # Consent Mode v2 — opt-out (tags on until decline)
 │   ├── conversion.js       # Google Ads click conversion (Moovs)
 │   ├── main.js             # Renders homepage from CONFIG
 │   └── airport.js          # Renders airport pages

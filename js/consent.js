@@ -1,6 +1,6 @@
 /* ================================================================
    CALIBER CAR SERVICE — consent.js
-   Google Consent Mode v2: blocks Google tags until user accepts.
+   Opt-out: Google tags load by default; blocked only after decline.
 ================================================================ */
 
 (function () {
@@ -17,15 +17,19 @@
   function gtag() { window.dataLayer.push(arguments); }
   window.gtag = gtag;
 
-  gtag('consent', 'default', {
-    ad_storage:             'denied',
-    ad_user_data:           'denied',
-    ad_personalization:     'denied',
-    analytics_storage:      'denied',
-    functionality_storage:  'granted',
-    security_storage:       'granted',
-    wait_for_update:        500,
-  });
+  var CONSENT_GRANTED = {
+    ad_storage:         'granted',
+    ad_user_data:       'granted',
+    ad_personalization: 'granted',
+    analytics_storage:  'granted',
+  };
+
+  var CONSENT_DENIED = {
+    ad_storage:         'denied',
+    ad_user_data:       'denied',
+    ad_personalization: 'denied',
+    analytics_storage:  'denied',
+  };
 
   function getStored() {
     try {
@@ -40,15 +44,6 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ granted: granted, ts: Date.now() }));
     } catch (e) { /* private browsing */ }
-  }
-
-  function grantConsent() {
-    gtag('consent', 'update', {
-      ad_storage:         'granted',
-      ad_user_data:       'granted',
-      ad_personalization: 'granted',
-      analytics_storage:  'granted',
-    });
   }
 
   function loadGoogleTags() {
@@ -77,13 +72,12 @@
 
   function onAccept() {
     saveStored(true);
-    grantConsent();
-    loadGoogleTags();
     removeBanner();
   }
 
   function onDecline() {
     saveStored(false);
+    gtag('consent', 'update', CONSENT_DENIED);
     removeBanner();
   }
 
@@ -106,9 +100,9 @@
           '<h2 class="ccs-consent__title" id="ccs-consent-title">Help us get you there faster</h2>' +
           '<p class="ccs-consent__text">' +
             'We use cookies to measure bookings, improve our site, and show relevant offers. ' +
-            'Accepting takes one tap and helps us keep Caliber running smoothly for you.' +
+            'By continuing, you agree to this — or choose essential cookies only below.' +
           '</p>' +
-          '<ul class="ccs-consent__benefits" aria-label="What accepting enables">' +
+          '<ul class="ccs-consent__benefits" aria-label="What cookies enable">' +
             '<li>Faster, smoother booking experience</li>' +
             '<li>More relevant service recommendations</li>' +
             '<li>Better insight into what our guests need</li>' +
@@ -132,16 +126,20 @@
 
   function init() {
     var stored = getStored();
+    var declined = stored && stored.granted === false;
 
-    if (stored && stored.granted) {
-      grantConsent();
+    gtag('consent', 'default', declined
+      ? Object.assign({ functionality_storage: 'granted', security_storage: 'granted' }, CONSENT_DENIED)
+      : Object.assign({ functionality_storage: 'granted', security_storage: 'granted' }, CONSENT_GRANTED)
+    );
+
+    if (!declined) {
       loadGoogleTags();
-      return;
     }
 
-    if (stored && stored.granted === false) return;
-
-    document.addEventListener('DOMContentLoaded', showBanner);
+    if (!stored) {
+      document.addEventListener('DOMContentLoaded', showBanner);
+    }
   }
 
   init();
