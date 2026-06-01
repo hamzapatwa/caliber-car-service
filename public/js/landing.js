@@ -658,8 +658,10 @@ function lpSetupNav(lenis) {
   onScroll();
 
   let scrollLockY = 0;
-  let menuTouchLock = null;
+  let overlayTouchBlock = null;
   let menuWheelHandler = null;
+
+  bindNavDrawerTouchScroll(drawer);
 
   function openDrawer() {
     scrollLockY = window.scrollY || document.documentElement.scrollTop;
@@ -669,12 +671,10 @@ function lpSetupNav(lenis) {
     toggle?.setAttribute('aria-label', 'Close menu');
     if (lenis && typeof lenis.stop === 'function') lenis.stop();
 
-    menuTouchLock = (e) => {
-      const t = e.touches[0];
-      if (t && drawer && lpNavPointerOverDrawer(drawer, t.clientX, t.clientY)) return;
-      e.preventDefault();
-    };
-    document.addEventListener('touchmove', menuTouchLock, { passive: false, capture: true });
+    if (overlay) {
+      overlayTouchBlock = (e) => e.preventDefault();
+      overlay.addEventListener('touchmove', overlayTouchBlock, { passive: false });
+    }
 
     menuWheelHandler = (e) => {
       if (!document.body.classList.contains('nav-open')) return;
@@ -697,9 +697,9 @@ function lpSetupNav(lenis) {
     window.scrollTo(0, scrollLockY);
     if (lenis && typeof lenis.start === 'function') lenis.start();
 
-    if (menuTouchLock) {
-      document.removeEventListener('touchmove', menuTouchLock, { capture: true });
-      menuTouchLock = null;
+    if (overlay && overlayTouchBlock) {
+      overlay.removeEventListener('touchmove', overlayTouchBlock);
+      overlayTouchBlock = null;
     }
     if (menuWheelHandler) {
       document.removeEventListener('wheel', menuWheelHandler, { capture: true });

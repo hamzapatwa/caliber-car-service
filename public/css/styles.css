@@ -88,6 +88,10 @@ body.nav-open .nav-drawer,
 body.nav-open .nav-overlay {
   pointer-events: auto;
 }
+body.nav-open .nav-drawer,
+body.nav-open .nav-drawer-scroll {
+  touch-action: pan-y;
+}
 
 /* ================================================================
    NAVIGATION — sticky, mobile menu
