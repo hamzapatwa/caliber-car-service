@@ -454,6 +454,20 @@ function setupLenis() {
 }
 
 /* ----------------------------------------------------------------
+   MOBILE NAV — scroll lock helpers (Lenis captures wheel on desktop)
+---------------------------------------------------------------- */
+function navPointerOverDrawer(drawer, clientX, clientY) {
+  if (!drawer) return false;
+  const r = drawer.getBoundingClientRect();
+  return clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom;
+}
+
+function navScrollDrawer(drawer, deltaY) {
+  const max = drawer.scrollHeight - drawer.clientHeight;
+  drawer.scrollTop = Math.max(0, Math.min(max, drawer.scrollTop + deltaY));
+}
+
+/* ----------------------------------------------------------------
    MOBILE NAV TOGGLE
 ---------------------------------------------------------------- */
 function setupNav(lenis) {
@@ -476,6 +490,7 @@ function setupNav(lenis) {
 
   let scrollLockY = 0;
   let overlayTouchBlock = null;
+  let menuWheelHandler = null;
 
   function openDrawer() {
     scrollLockY = window.scrollY || document.documentElement.scrollTop;
@@ -486,11 +501,22 @@ function setupNav(lenis) {
     toggle.setAttribute('aria-label', 'Close menu');
     if (lenis && typeof lenis.stop === 'function') lenis.stop();
 
-    /* Block scroll on the dimmed area only — not on the drawer (document-level block breaks iOS drawer scroll) */
     if (overlay) {
       overlayTouchBlock = (e) => e.preventDefault();
       overlay.addEventListener('touchmove', overlayTouchBlock, { passive: false });
     }
+
+    menuWheelHandler = (e) => {
+      if (!document.body.classList.contains('nav-open')) return;
+      if (drawer && navPointerOverDrawer(drawer, e.clientX, e.clientY)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        navScrollDrawer(drawer, e.deltaY);
+        return;
+      }
+      e.preventDefault();
+    };
+    document.addEventListener('wheel', menuWheelHandler, { passive: false, capture: true });
   }
 
   function closeDrawer() {
@@ -505,6 +531,10 @@ function setupNav(lenis) {
     if (overlay && overlayTouchBlock) {
       overlay.removeEventListener('touchmove', overlayTouchBlock);
       overlayTouchBlock = null;
+    }
+    if (menuWheelHandler) {
+      document.removeEventListener('wheel', menuWheelHandler, { capture: true });
+      menuWheelHandler = null;
     }
   }
 

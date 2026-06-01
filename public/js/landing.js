@@ -617,6 +617,17 @@ function lpSetupLenis() {
   return lenis;
 }
 
+function lpNavPointerOverDrawer(drawer, clientX, clientY) {
+  if (!drawer) return false;
+  const r = drawer.getBoundingClientRect();
+  return clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom;
+}
+
+function lpNavScrollDrawer(drawer, deltaY) {
+  const max = drawer.scrollHeight - drawer.clientHeight;
+  drawer.scrollTop = Math.max(0, Math.min(max, drawer.scrollTop + deltaY));
+}
+
 function lpSetupNav(lenis) {
   const nav = document.getElementById('nav');
   const toggle = document.getElementById('navToggle');
@@ -641,6 +652,7 @@ function lpSetupNav(lenis) {
 
   let scrollLockY = 0;
   let overlayTouchBlock = null;
+  let menuWheelHandler = null;
 
   function openDrawer() {
     scrollLockY = window.scrollY || document.documentElement.scrollTop;
@@ -655,6 +667,18 @@ function lpSetupNav(lenis) {
       overlayTouchBlock = (e) => e.preventDefault();
       overlay.addEventListener('touchmove', overlayTouchBlock, { passive: false });
     }
+
+    menuWheelHandler = (e) => {
+      if (!document.body.classList.contains('nav-open')) return;
+      if (drawer && lpNavPointerOverDrawer(drawer, e.clientX, e.clientY)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        lpNavScrollDrawer(drawer, e.deltaY);
+        return;
+      }
+      e.preventDefault();
+    };
+    document.addEventListener('wheel', menuWheelHandler, { passive: false, capture: true });
   }
 
   function closeDrawer() {
@@ -669,6 +693,10 @@ function lpSetupNav(lenis) {
     if (overlay && overlayTouchBlock) {
       overlay.removeEventListener('touchmove', overlayTouchBlock);
       overlayTouchBlock = null;
+    }
+    if (menuWheelHandler) {
+      document.removeEventListener('wheel', menuWheelHandler, { capture: true });
+      menuWheelHandler = null;
     }
   }
 
