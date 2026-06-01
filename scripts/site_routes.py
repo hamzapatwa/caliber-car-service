@@ -12,18 +12,8 @@ TYPE_TO_CATEGORY = {
     "area": "regions",
 }
 
-# Hand-maintained shells (not in ALL_PAGES yet)
-MANUAL_SLUG_CATEGORIES = {
-    "jfk": "airports",
-    "lga": "airports",
-    "ewr": "airports",
-    "hpn": "airports",
-}
-
 
 def category_for_slug(slug: str, page_type: str | None = None) -> str:
-    if slug in MANUAL_SLUG_CATEGORIES:
-        return MANUAL_SLUG_CATEGORIES[slug]
     if page_type:
         return TYPE_TO_CATEGORY.get(page_type, "other")
     return "other"
@@ -58,11 +48,6 @@ def collect_rewrites(pages: dict) -> list[dict]:
     for slug, data in pages.items():
         landing = data.get("landing", {})
         cat = category_for_slug(slug, landing.get("type"))
-        if slug in seen:
-            continue
-        seen.add(slug)
-        rules.extend(vercel_rewrites(slug, cat))
-    for slug, cat in MANUAL_SLUG_CATEGORIES.items():
         if slug in seen:
             continue
         seen.add(slug)

@@ -19,3 +19,6 @@
 # Misc
 Thumbs.db
 .venv-og/
+.venv-img/
+__pycache__/
+*.pyc

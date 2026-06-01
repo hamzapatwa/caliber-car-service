@@ -4,40 +4,9 @@
    Reads window.LANDING_PAGE (legacy: window.AIRPORT_PAGE).
 ================================================================ */
 
-const LP_PHONE_ICON =
-  `<svg class="phone-icon" width="13" height="13" viewBox="0 0 24 24" ` +
-  `fill="#B8963E" aria-hidden="true">` +
-  `<path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 ` +
-  `1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 ` +
-  `1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 ` +
-  `2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>` +
-  `</svg>`;
-
-const LP_FALLBACK_SVG =
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">' +
-    '<rect width="800" height="600" fill="#0E0E0C"/>' +
-    '<text x="400" y="295" font-family="Bebas Neue,Impact,sans-serif" font-size="84" ' +
-      'letter-spacing="12" fill="#B8963E" text-anchor="middle">CALIBER</text>' +
-    '<text x="400" y="335" font-family="sans-serif" font-size="14" ' +
-      'letter-spacing="6" fill="#55554C" text-anchor="middle">CAR SERVICE</text>' +
-  '</svg>';
-const LP_FALLBACK_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(LP_FALLBACK_SVG);
-const LP_IMG_FB = ` onerror="this.onerror=null;this.src='${LP_FALLBACK_URI}';this.classList.add('is-fallback');"`;
-
-const MOOVS_BOOK_ONCLICK = (url) =>
-  ` onclick="if(typeof gtag_report_conversion==='function'){return gtag_report_conversion('${url}');}window.open('${url}','_blank','noopener,noreferrer');return false;"`;
-
-const LP_BRAND_MARK_SVG =
-  `<svg class="brand-mark" viewBox="0 0 200 200" aria-hidden="true">` +
-    `<line x1="15" y1="100" x2="185" y2="100" stroke="#B8963E" stroke-width="2.5"/>` +
-    `<line x1="100" y1="15" x2="100" y2="185" stroke="#B8963E" stroke-width="2.5"/>` +
-    `<line x1="15" y1="93" x2="15" y2="107" stroke="#B8963E" stroke-width="4"/>` +
-    `<line x1="185" y1="93" x2="185" y2="107" stroke="#B8963E" stroke-width="4"/>` +
-    `<line x1="93" y1="15" x2="107" y2="15" stroke="#B8963E" stroke-width="4"/>` +
-    `<line x1="93" y1="185" x2="107" y2="185" stroke="#B8963E" stroke-width="4"/>` +
-    `<path d="M 132.8 77.1 A 40 40 0 1 0 132.8 122.9" fill="none" stroke="#B8963E" stroke-width="5" stroke-linecap="butt"/>` +
-    `<circle cx="100" cy="100" r="4" fill="#B8963E"/>` +
-  `</svg>`;
+const LP_PHONE_ICON = SITE_PHONE_ICON;
+const LP_IMG_FB = SITE_IMG_FB;
+const LP_BRAND_MARK_SVG = SITE_BRAND_MARK_SVG;
 
 const LP_DEFAULT_STEPS_AIRPORT = [
   { num: '01', title: 'BOOK YOUR RIDE', desc: 'Reserve online or call dispatch. Confirm your flight number and pickup address — we handle the rest.' },
@@ -66,7 +35,7 @@ function lpPageImages(page) {
   }
   const defaults = typeof SITE_IMAGES !== 'undefined' && SITE_IMAGES.defaults;
   const typeKey = page.type === 'hub' ? 'hub' : page.type;
-  return (defaults && defaults[typeKey]) || { hero: 'planepluscar.jpg', glove: 'whiteglove.webp' };
+  return (defaults && defaults[typeKey]) || { hero: 'planepluscar.webp', glove: 'whiteglove.webp' };
 }
 
 function lpHeroBg(page) {
@@ -112,6 +81,7 @@ function lpLinkList(items) {
 
 function lpInjectFaqSchema(page) {
   if (!page.faq || !page.faq.length) return;
+  if (headHasJsonLdType('FAQPage')) return;
   const prev = document.getElementById('lp-faq-schema');
   if (prev) prev.remove();
   const schema = {
@@ -131,6 +101,7 @@ function lpInjectFaqSchema(page) {
 }
 
 function lpInjectBreadcrumbSchema(page) {
+  if (headHasJsonLdType('BreadcrumbList')) return;
   const prev = document.getElementById('lp-breadcrumb-schema');
   if (prev) prev.remove();
   const crumbs = page.breadcrumb || lpDefaultBreadcrumb(page);
@@ -257,7 +228,7 @@ function lpRenderHero(page) {
   const eyebrow = hero.eyebrow || 'Long Island · Nassau &amp; Suffolk · 24/7';
   return `
     <section class="ap-hero" id="ap-hero">
-      <div class="ap-hero-bg" id="apHeroBg" style="background-image:url('${bg}')"></div>
+      <div class="ap-hero-bg" id="apHeroBg" style="background-image:url('${bg}')" role="img" aria-label="${lpPageDisplayName(page)} executive car service"></div>
       <div class="ap-hero-content">
         <p class="ap-breadcrumb">${lpBreadcrumbHtml(page)}</p>
         <div class="ap-hero-eyebrow">${eyebrow}</div>
@@ -662,6 +633,7 @@ function lpSetupNav(lenis) {
   let menuWheelHandler = null;
 
   bindNavDrawerTouchScroll(drawer);
+  const focusTrap = bindNavDrawerFocusTrap(drawer, toggle);
 
   function openDrawer() {
     scrollLockY = window.scrollY || document.documentElement.scrollTop;
@@ -669,6 +641,7 @@ function lpSetupNav(lenis) {
     document.body.classList.add('nav-open');
     toggle?.setAttribute('aria-expanded', 'true');
     toggle?.setAttribute('aria-label', 'Close menu');
+    focusTrap.onOpen();
     if (lenis && typeof lenis.stop === 'function') lenis.stop();
 
     if (overlay) {
@@ -694,6 +667,7 @@ function lpSetupNav(lenis) {
     document.body.classList.remove('nav-open');
     toggle?.setAttribute('aria-expanded', 'false');
     toggle?.setAttribute('aria-label', 'Open menu');
+    focusTrap.onClose();
     window.scrollTo(0, scrollLockY);
     if (lenis && typeof lenis.start === 'function') lenis.start();
 

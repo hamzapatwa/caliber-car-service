@@ -18,14 +18,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 def build_rewrite_map() -> dict[str, str]:
     from landing_page_data import ALL_PAGES
-    from site_routes import MANUAL_SLUG_CATEGORIES, category_for_slug, internal_url
+    from site_routes import category_for_slug, internal_url
 
     out: dict[str, str] = {}
     for slug, data in ALL_PAGES.items():
         landing = data.get("landing", {})
         cat = category_for_slug(slug, landing.get("type"))
-        out[f"/{slug}"] = f"{internal_url(slug, cat)}/index.html"
-    for slug, cat in MANUAL_SLUG_CATEGORIES.items():
         out[f"/{slug}"] = f"{internal_url(slug, cat)}/index.html"
     return out
 

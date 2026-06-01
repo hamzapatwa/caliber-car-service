@@ -1,199 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Consent Mode v2 — blocks Google tags until user accepts -->
   <link rel="stylesheet" href="/css/consent.css" />
   <script src="/js/consent.js"></script>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Favicon — Caliber crosshair-C mark -->
   <link rel="icon" type="image/svg+xml" href="/assets/brand/caliber_mark.svg" />
-
-  <!-- SEO — set dynamically by landing.js, these are fallbacks -->
   <title>JFK Airport Car Service Long Island | Caliber Car Service</title>
   <meta name="description" content="Fixed-rate JFK airport car service from Long Island. Meet-and-greet in arrivals, live flight tracking, 60-min complimentary wait. Family owned since 2004. Call (516) 595-2391." />
   <link rel="canonical" href="https://calibercarservice.com/jfk/" />
   <meta name="robots" content="index, follow" />
-
-  <!-- Open Graph -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="JFK Airport Car Service Long Island | Caliber Car Service" />
-  <meta property="og:description" content="Fixed-rate, meet-and-greet JFK car service from every Long Island zip code. Live flight tracking, 60-min wait included." />
-  <meta property="og:url"         content="https://calibercarservice.com/jfk/" />
-  <meta property="og:image"       content="https://calibercarservice.com/og-image.png" />
-  <meta property="og:image:width"  content="1200" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="JFK Airport Car Service Long Island | Caliber Car Service" />
+  <meta property="og:description" content="Fixed-rate JFK airport car service from Long Island. Meet-and-greet in arrivals, live flight tracking, 60-min complimentary wait. Family owned since 2004. Call (516) 595-2391." />
+  <meta property="og:url" content="https://calibercarservice.com/jfk/" />
+  <meta property="og:image" content="https://calibercarservice.com/og-image.webp" />
+  <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:image"       content="https://calibercarservice.com/og-image.png" />
-
-  <!-- Schema.org -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="JFK Airport Car Service Long Island | Caliber Car Service" />
+  <meta name="twitter:description" content="Fixed-rate JFK airport car service from Long Island. Meet-and-greet in arrivals, live flight tracking, 60-min complimentary wait. Family owned since 2004. Call (516) 595-2391." />
+  <meta name="twitter:image" content="https://calibercarservice.com/og-image.webp" />
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "JFK Airport Car Service",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Caliber Car Service",
-      "telephone": "+15165952391",
-      "address": { "@type": "PostalAddress", "addressRegion": "NY", "addressLocality": "Long Island" }
-    },
-    "serviceType": "Airport Transfer",
-    "areaServed": "Long Island, New York",
-    "description": "Fixed-rate luxury car service from Long Island to JFK Airport with meet-and-greet, live flight tracking, and complimentary 60-minute wait."
-  }
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "JFK Airport Car Service",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Caliber Car Service",
+    "telephone": "+15165952391",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "NY",
+      "addressLocality": "Long Island"
+    }
+  },
+  "serviceType": "Airport Transfer",
+  "areaServed": "Long Island, New York",
+  "description": "Fixed-rate JFK airport car service from Long Island. Meet-and-greet in arrivals, live flight tracking, 60-min complimentary wait. Family owned since 2004. Call (516) 595-2391."
+}
   </script>
-
-  <!-- Fonts (same CDN as main site) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link
-    href="https://cdn.jsdelivr.net/npm/@fontsource/bebas-neue@5/index.min.css"
-    rel="stylesheet"
-    media="print" onload="this.media='all'"
-  />
-  <link
-    href="https://cdn.jsdelivr.net/npm/@fontsource/dm-sans@5/index.min.css"
-    rel="stylesheet"
-    media="print" onload="this.media='all'"
-  />
-
-  <!-- GSAP + ScrollTrigger -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does it take to get from Long Island to JFK?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Typically 30\u201375 minutes depending on your pickup location and traffic conditions. We recommend booking at least 3 hours before your departure time, and our team will confirm a precise pickup window."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you monitor my flight for delays?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We track every flight in real time. If your flight is delayed, arrives early, or changes gates, your driver adjusts automatically \u2014 at no extra charge."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which JFK terminals do you serve?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All six terminals: T1 (Air France, Korean Air), T2 (Delta domestic), T4 (Delta international, Emirates, Lufthansa), T5 (JetBlue), T7 (British Airways), and T8 (American Airlines). Your driver will know your terminal and the right arrivals exit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a wait fee if my flight is delayed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Your 60-minute complimentary wait begins from actual touchdown \u2014 not the original scheduled arrival. If your flight is significantly delayed, we stay in contact and adjust at no penalty."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I book a JFK ride same-day?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, subject to availability. For urgent or last-minute bookings, call our dispatch line directly at (516) 595-2391 rather than booking online."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are your JFK rates truly flat \u2014 no tolls on top?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The rate you receive at booking is the rate you pay. Tolls, bridge fees, and gratuity are all-inclusive unless otherwise noted."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://calibercarservice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Airport Service",
+      "item": "https://calibercarservice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "JFK",
+      "item": "https://calibercarservice.com/jfk/"
+    }
+  ]
+}
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/bebas-neue@5/index.min.css" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/dm-sans@5/index.min.css" rel="stylesheet" media="print" onload="this.media='all'" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <!-- Lenis smooth scroll -->
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
-
-  <!-- Shared styles -->
   <link rel="stylesheet" href="/css/styles.css" />
   <link rel="stylesheet" href="/css/landing.css" />
-
-  <!-- Theme vars (applied by config.js) -->
+  <script src="/js/site-shared.js"></script>
   <script src="/js/images.js"></script>
   <script src="/js/config.js"></script>
-
-  <!-- Page-specific config — MUST come before landing.js -->
   <script>
-    window.LANDING_PAGE = {
-      type:     'airport',
-      code:     'jfk',
-      name:     'JFK',
-      fullName: 'John F. Kennedy International Airport',
-      seo: {
-        title:       'JFK Airport Car Service Long Island | Caliber Car Service',
-        description: 'Fixed-rate JFK airport car service from Long Island. Meet-and-greet in arrivals, live flight tracking, 60-min complimentary wait. Family owned since 2004. Call (516) 595-2391.',
-        url:         'https://calibercarservice.com/jfk/',
-      },
-
-      hero: {
-        line1: 'JFK',
-        line2: 'AIRPORT.',
-        sub:   'Fixed-rate, meet-and-greet service from every Long Island zip code to John F. Kennedy International Airport. Live flight tracking, 60-minute complimentary wait, and a driver who knows every terminal exit.',
-      },
-
-      trust: [
-        { value: '500+', label: 'Five-Star Reviews'   },
-        { value: '24/7', label: 'Dispatch Available'  },
-        { value: 'Flat', label: 'Fixed Rates'         },
-        { value: 'Live', label: 'Flight Tracking'     },
-      ],
-
-      features: [
+window.LANDING_PAGE = {
+    "type": "airport",
+    "slug": "jfk",
+    "code": "jfk",
+    "name": "JFK",
+    "fullName": "John F. Kennedy International Airport",
+    "seo": {
+        "title": "JFK Airport Car Service Long Island | Caliber Car Service",
+        "description": "Fixed-rate JFK airport car service from Long Island. Meet-and-greet in arrivals, live flight tracking, 60-min complimentary wait. Family owned since 2004. Call (516) 595-2391.",
+        "url": "https://calibercarservice.com/jfk/"
+    },
+    "hero": {
+        "line1": "JFK",
+        "line2": "AIRPORT.",
+        "sub": "Fixed-rate, meet-and-greet service from every Long Island zip code to John F. Kennedy International Airport. Live flight tracking, 60-minute complimentary wait, and a driver who knows every terminal exit."
+    },
+    "trust": [
         {
-          title: 'Meet & Greet in Arrivals',
-          desc:  'Your chauffeur meets you inside the terminal with a name sign — no searching, no curb chaos.',
+            "value": "★★★★★",
+            "label": "Five-Star Rated"
         },
         {
-          title: 'Live Flight Tracking',
-          desc:  'We monitor your flight from departure to touchdown. Delays and early arrivals adjust automatically.',
+            "value": "24/7",
+            "label": "Dispatch Available"
         },
         {
-          title: 'Fixed Rates — No Surge',
-          desc:  'Flat-rate pricing quoted upfront. No meters, no dynamic pricing, no surprises at the end.',
+            "value": "Flat",
+            "label": "Fixed Rates"
         },
         {
-          title: '60-Min Wait Included',
-          desc:  'Your complimentary wait starts from actual landing time — not scheduled arrival. Delays are on us.',
+            "value": "Live",
+            "label": "Flight Tracking"
+        }
+    ],
+    "features": [
+        {
+            "title": "Meet & Greet in Arrivals",
+            "desc": "Your chauffeur meets you inside the terminal with a name sign — no searching, no curb chaos."
         },
         {
-          title: 'All Six JFK Terminals',
-          desc:  'T1, T2, T4, T5, T7, T8 — we know every arrivals hall, exit, and traffic pattern by heart.',
+            "title": "Live Flight Tracking",
+            "desc": "We monitor your flight from departure to touchdown. Delays and early arrivals adjust automatically."
         },
         {
-          title: '24/7 Dispatch',
-          desc:  'Red-eyes, early departures, last-minute bookings — one number, always answered.',
-        },
-      ],
-
-      airportStrategy: {
-        eyebrow: 'Airport Strategy',
-        title: 'When JFK is the right choice',
-        lede: 'John F. Kennedy International Airport is the tri-state international hub — but it is not always the fastest ground trip from Nassau. We help you compare JFK against LGA and EWR when you book.',
-        cards: [
-          {
-            code: 'JFK',
-            name: 'John F. Kennedy International Airport',
-            badge: 'Best for you',
-            highlight: true,
-            body: 'International flights, wide-body domestic, and carriers that only operate from JFK. All six terminals, 60-minute complimentary wait, meet-and-greet in arrivals.',
-            href: '/jfk/',
-          },
-          {
-            code: 'LGA',
-            name: 'LaGuardia',
-            badge: 'Closer from Nassau',
-            body: 'Often faster for East Coast domestic when your airline flies from LGA — especially from Great Neck, Manhasset, and Garden City.',
-            href: '/lga/',
-          },
-          {
-            code: 'EWR',
-            name: 'Newark',
-            badge: 'United & westbound',
-            body: 'Strong for United-heavy schedules and some transatlantic options — toll-inclusive flat rates from Long Island.',
-            href: '/ewr/',
-          },
-        ],
-      },
-
-      glove: {
-        headline: 'EVERY DETAIL,<br><span class="gold">HANDLED.</span>',
-        body:     'Twenty years of JFK runs taught us that the airport isn\'t where the journey ends — it\'s where the experience begins. Your driver is inside, sign in hand, before your bags hit the belt. You\'ll never wonder where your ride is.',
-      },
-
-      faq: [
-        {
-          q: 'How long does it take to get from Long Island to JFK?',
-          a: 'Typically 30–75 minutes depending on your pickup location and traffic conditions. We recommend booking at least 3 hours before your departure time, and our team will confirm a precise pickup window.',
+            "title": "Fixed Rates — No Surge",
+            "desc": "Flat-rate pricing quoted upfront. No meters, no dynamic pricing, no surprises at the end."
         },
         {
-          q: 'Do you monitor my flight for delays?',
-          a: 'Yes. We track every flight in real time. If your flight is delayed, arrives early, or changes gates, your driver adjusts automatically — at no extra charge.',
+            "title": "60-Min Wait Included",
+            "desc": "Your complimentary wait starts from actual landing time — not scheduled arrival. Delays are on us."
         },
         {
-          q: 'Which JFK terminals do you serve?',
-          a: 'All six terminals: T1 (Air France, Korean Air), T2 (Delta domestic), T4 (Delta international, Emirates, Lufthansa), T5 (JetBlue), T7 (British Airways), and T8 (American Airlines). Your driver will know your terminal and the right arrivals exit.',
+            "title": "All Six JFK Terminals",
+            "desc": "T1, T2, T4, T5, T7, T8 — we know every arrivals hall, exit, and traffic pattern by heart."
         },
         {
-          q: 'Is there a wait fee if my flight is delayed?',
-          a: 'No. Your 60-minute complimentary wait begins from actual touchdown — not the original scheduled arrival. If your flight is significantly delayed, we stay in contact and adjust at no penalty.',
+            "title": "24/7 Dispatch",
+            "desc": "Red-eyes, early departures, last-minute bookings — one number, always answered."
+        }
+    ],
+    "airportStrategy": {
+        "eyebrow": "Airport Strategy",
+        "title": "When JFK is the right choice",
+        "lede": "John F. Kennedy International Airport is the tri-state international hub — but it is not always the fastest ground trip from Nassau. We help you compare JFK against LGA and EWR when you book.",
+        "cards": [
+            {
+                "code": "JFK",
+                "name": "John F. Kennedy International Airport",
+                "badge": "Best for you",
+                "body": "International flights, wide-body domestic, and carriers that only operate from JFK. All six terminals, 60-minute complimentary wait, meet-and-greet in arrivals.",
+                "href": "/jfk/",
+                "highlight": true
+            },
+            {
+                "code": "LGA",
+                "name": "LaGuardia",
+                "badge": "Closer from Nassau",
+                "body": "Often faster for East Coast domestic when your airline flies from LGA — especially from Great Neck, Manhasset, and Garden City.",
+                "href": "/lga/"
+            },
+            {
+                "code": "EWR",
+                "name": "Newark",
+                "badge": "United & westbound",
+                "body": "Strong for United-heavy schedules and some transatlantic options — toll-inclusive flat rates from Long Island.",
+                "href": "/ewr/"
+            }
+        ]
+    },
+    "glove": {
+        "headline": "EVERY DETAIL,<br><span class=\"gold\">HANDLED.</span>",
+        "body": "Twenty years of JFK runs taught us that the airport isn't where the journey ends — it's where the experience begins. Your driver is inside, sign in hand, before your bags hit the belt. You'll never wonder where your ride is."
+    },
+    "faq": [
+        {
+            "q": "How long does it take to get from Long Island to JFK?",
+            "a": "Typically 30–75 minutes depending on your pickup location and traffic conditions. We recommend booking at least 3 hours before your departure time, and our team will confirm a precise pickup window."
         },
         {
-          q: 'Can I book a JFK ride same-day?',
-          a: 'Yes, subject to availability. For urgent or last-minute bookings, call our dispatch line directly at (516) 595-2391 rather than booking online.',
+            "q": "Do you monitor my flight for delays?",
+            "a": "Yes. We track every flight in real time. If your flight is delayed, arrives early, or changes gates, your driver adjusts automatically — at no extra charge."
         },
         {
-          q: 'Are your JFK rates truly flat — no tolls on top?',
-          a: 'Yes. The rate you receive at booking is the rate you pay. Tolls, bridge fees, and gratuity are all-inclusive unless otherwise noted.',
+            "q": "Which JFK terminals do you serve?",
+            "a": "All six terminals: T1 (Air France, Korean Air), T2 (Delta domestic), T4 (Delta international, Emirates, Lufthansa), T5 (JetBlue), T7 (British Airways), and T8 (American Airlines). Your driver will know your terminal and the right arrivals exit."
         },
-      ],
-    };
+        {
+            "q": "Is there a wait fee if my flight is delayed?",
+            "a": "No. Your 60-minute complimentary wait begins from actual touchdown — not the original scheduled arrival. If your flight is significantly delayed, we stay in contact and adjust at no penalty."
+        },
+        {
+            "q": "Can I book a JFK ride same-day?",
+            "a": "Yes, subject to availability. For urgent or last-minute bookings, call our dispatch line directly at (516) 595-2391 rather than booking online."
+        },
+        {
+            "q": "Are your JFK rates truly flat — no tolls on top?",
+            "a": "Yes. The rate you receive at booking is the rate you pay. Tolls, bridge fees, and gratuity are all-inclusive unless otherwise noted."
+        }
+    ]
+};
   </script>
 </head>
 <body>
-  <main id="lp-app"></main>
+  <a class="skip-link" href="#lp-app">Skip to main content</a>
+  <main id="lp-app"><div id="lp-static-prerender" class="lp-static-prerender"><header class="lp-static-hero"><h1>JFK AIRPORT.</h1><p>Fixed-rate, meet-and-greet service from every Long Island zip code to John F. Kennedy International Airport. Live flight tracking, 60-minute complimentary wait, and a driver who knows every terminal exit.</p></header><section class="lp-static-faq" aria-label="Frequently asked questions"><details><summary>How long does it take to get from Long Island to JFK?</summary><p>Typically 30–75 minutes depending on your pickup location and traffic conditions. We recommend booking at least 3 hours before your departure time, and our team will confirm a precise pickup window.</p></details><details><summary>Do you monitor my flight for delays?</summary><p>Yes. We track every flight in real time. If your flight is delayed, arrives early, or changes gates, your driver adjusts automatically — at no extra charge.</p></details><details><summary>Which JFK terminals do you serve?</summary><p>All six terminals: T1 (Air France, Korean Air), T2 (Delta domestic), T4 (Delta international, Emirates, Lufthansa), T5 (JetBlue), T7 (British Airways), and T8 (American Airlines). Your driver will know your terminal and the right arrivals exit.</p></details><details><summary>Is there a wait fee if my flight is delayed?</summary><p>No. Your 60-minute complimentary wait begins from actual touchdown — not the original scheduled arrival. If your flight is significantly delayed, we stay in contact and adjust at no penalty.</p></details><details><summary>Can I book a JFK ride same-day?</summary><p>Yes, subject to availability. For urgent or last-minute bookings, call our dispatch line directly at (516) 595-2391 rather than booking online.</p></details><details><summary>Are your JFK rates truly flat — no tolls on top?</summary><p>Yes. The rate you receive at booking is the rate you pay. Tolls, bridge fees, and gratuity are all-inclusive unless otherwise noted.</p></details></section></div></main>
   <script src="/js/nav.js"></script>
   <script src="/js/nav-drawer-touch.js"></script>
-  <script src="/js/landing.js"></script>
+  <script src="/js/landing.js" defer></script>
 </body>
 </html>

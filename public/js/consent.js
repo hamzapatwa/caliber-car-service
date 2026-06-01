@@ -1,6 +1,6 @@
 /* ================================================================
    CALIBER CAR SERVICE — consent.js
-   Opt-out: Google tags load by default; blocked only after decline.
+   Opt-in: Google tags load only after user accepts.
 ================================================================ */
 
 (function () {
@@ -72,6 +72,8 @@
 
   function onAccept() {
     saveStored(true);
+    gtag('consent', 'update', CONSENT_GRANTED);
+    loadGoogleTags();
     removeBanner();
   }
 
@@ -100,7 +102,7 @@
           '<h2 class="ccs-consent__title" id="ccs-consent-title">Help us get you there faster</h2>' +
           '<p class="ccs-consent__text">' +
             'We use cookies to measure bookings, improve our site, and show relevant offers. ' +
-            'By continuing, you agree to this — or choose essential cookies only below.' +
+            'Choose Accept to enable analytics and ads, or Essential only to continue without them.' +
           '</p>' +
           '<ul class="ccs-consent__benefits" aria-label="What cookies enable">' +
             '<li>Faster, smoother booking experience</li>' +
@@ -126,14 +128,14 @@
 
   function init() {
     var stored = getStored();
-    var declined = stored && stored.granted === false;
+    var granted = stored && stored.granted === true;
 
-    gtag('consent', 'default', declined
-      ? Object.assign({ functionality_storage: 'granted', security_storage: 'granted' }, CONSENT_DENIED)
-      : Object.assign({ functionality_storage: 'granted', security_storage: 'granted' }, CONSENT_GRANTED)
-    );
+    gtag('consent', 'default', Object.assign(
+      { functionality_storage: 'granted', security_storage: 'granted' },
+      granted ? CONSENT_GRANTED : CONSENT_DENIED
+    ));
 
-    if (!declined) {
+    if (granted) {
       loadGoogleTags();
     }
 

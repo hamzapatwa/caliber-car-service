@@ -8,12 +8,14 @@ function navResolveHref(href, linkFn) {
 }
 
 function navMenuLinks(key) {
+  if (!key) return [];
   const menu = CONFIG.navMenu;
-  if (!menu) return [];
-  if (typeof menu[key] === 'string' && CONFIG.footer[menu[key]]) {
+  if (menu?.[key] && Array.isArray(menu[key])) return menu[key];
+  if (CONFIG.footer?.[key]) return CONFIG.footer[key];
+  if (menu && typeof menu[key] === 'string' && CONFIG.footer?.[menu[key]]) {
     return CONFIG.footer[menu[key]];
   }
-  return menu[key] || [];
+  return [];
 }
 
 /** Curated links for desktop “Areas” dropdown (not the full footer list). */

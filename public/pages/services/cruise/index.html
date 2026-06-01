@@ -6,19 +6,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/assets/brand/caliber_mark.svg" />
-  <title>Cruise Terminal Car Service NYC & NJ | Caliber Car Service</title>
+  <title>Cruise Terminal Car Service NYC &amp; NJ | Caliber Car Service</title>
   <meta name="description" content="Long Island to Brooklyn, Manhattan, and Bayonne cruise terminals — door to gangway, luggage handled, flat rates. (516) 595-2391." />
   <link rel="canonical" href="https://calibercarservice.com/cruise/" />
   <meta name="robots" content="index, follow" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Cruise Terminal Car Service NYC & NJ | Caliber Car Service" />
+  <meta property="og:title" content="Cruise Terminal Car Service NYC &amp; NJ | Caliber Car Service" />
   <meta property="og:description" content="Long Island to Brooklyn, Manhattan, and Bayonne cruise terminals — door to gangway, luggage handled, flat rates. (516) 595-2391." />
   <meta property="og:url" content="https://calibercarservice.com/cruise/" />
-  <meta property="og:image" content="https://calibercarservice.com/og-image.png" />
+  <meta property="og:image" content="https://calibercarservice.com/og-image.webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://calibercarservice.com/og-image.png" />
+  <meta name="twitter:title" content="Cruise Terminal Car Service NYC &amp; NJ | Caliber Car Service" />
+  <meta name="twitter:description" content="Long Island to Brooklyn, Manhattan, and Bayonne cruise terminals — door to gangway, luggage handled, flat rates. (516) 595-2391." />
+  <meta name="twitter:image" content="https://calibercarservice.com/og-image.webp" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -39,7 +41,89 @@
   "description": "Long Island to NYC and NJ cruise terminal chauffeur service."
 }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How early should we leave Long Island for a Manhattan cruise sailing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Typically plan 90\u2013120 minutes before your line's boarding window, depending on pickup location and pier. Dispatch confirms pickup time when you book with your ship and terminal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which terminals do you serve?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Brooklyn Cruise Terminal (Red Hook), Manhattan Cruise Terminal (Piers 88/90), and Cape Liberty Cruise Port in Bayonne, NJ."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you pick us up after the cruise returns?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Provide disembarkation date and estimated clearance time. We monitor adjustments and keep dispatch reachable when immigration runs long."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What vehicle fits a family of four with large suitcases?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Premium SUV is the common choice \u2014 six bag capacity with comfortable seating. Larger groups or extra gear may warrant the executive Sprinter."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are tolls to New Jersey included for Bayonne?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes \u2014 Bayonne quotes are flat-rate and include bridge/tunnel tolls unless otherwise noted at confirmation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer round-trip cruise packages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Book embarkation and return together for consistent vehicle class and account billing. Policies for schedule changes are confirmed at booking."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://calibercarservice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Services",
+      "item": "https://calibercarservice.com/areas/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Cruise Terminals",
+      "item": "https://calibercarservice.com/cruise/"
+    }
+  ]
+}
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link href="https://cdn.jsdelivr.net/npm/@fontsource/bebas-neue@5/index.min.css" rel="stylesheet" media="print" onload="this.media='all'" />
   <link href="https://cdn.jsdelivr.net/npm/@fontsource/dm-sans@5/index.min.css" rel="stylesheet" media="print" onload="this.media='all'" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -47,6 +131,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
   <link rel="stylesheet" href="/css/styles.css" />
   <link rel="stylesheet" href="/css/landing.css" />
+  <script src="/js/site-shared.js"></script>
   <script src="/js/images.js"></script>
   <script src="/js/config.js"></script>
   <script>
@@ -66,8 +151,8 @@ window.LANDING_PAGE = {
     },
     "trust": [
         {
-            "value": "500+",
-            "label": "Five-Star Reviews"
+            "value": "★★★★★",
+            "label": "Five-Star Rated"
         },
         {
             "value": "24/7",
@@ -187,9 +272,10 @@ window.LANDING_PAGE = {
   </script>
 </head>
 <body>
-  <main id="lp-app"></main>
+  <a class="skip-link" href="#lp-app">Skip to main content</a>
+  <main id="lp-app"><div id="lp-static-prerender" class="lp-static-prerender"><header class="lp-static-hero"><h1>CRUISE TERMINALS.</h1><p>Brooklyn Red Hook, Manhattan cruise piers, and Cape Liberty Bayonne — chauffeured transfers from Long Island with timing built around embarkation windows and heavy luggage.</p></header><section class="lp-static-faq" aria-label="Frequently asked questions"><details><summary>How early should we leave Long Island for a Manhattan cruise sailing?</summary><p>Typically plan 90–120 minutes before your line&#x27;s boarding window, depending on pickup location and pier. Dispatch confirms pickup time when you book with your ship and terminal.</p></details><details><summary>Which terminals do you serve?</summary><p>Brooklyn Cruise Terminal (Red Hook), Manhattan Cruise Terminal (Piers 88/90), and Cape Liberty Cruise Port in Bayonne, NJ.</p></details><details><summary>Can you pick us up after the cruise returns?</summary><p>Yes. Provide disembarkation date and estimated clearance time. We monitor adjustments and keep dispatch reachable when immigration runs long.</p></details><details><summary>What vehicle fits a family of four with large suitcases?</summary><p>Premium SUV is the common choice — six bag capacity with comfortable seating. Larger groups or extra gear may warrant the executive Sprinter.</p></details><details><summary>Are tolls to New Jersey included for Bayonne?</summary><p>Yes — Bayonne quotes are flat-rate and include bridge/tunnel tolls unless otherwise noted at confirmation.</p></details><details><summary>Do you offer round-trip cruise packages?</summary><p>Yes. Book embarkation and return together for consistent vehicle class and account billing. Policies for schedule changes are confirmed at booking.</p></details></section></div></main>
   <script src="/js/nav.js"></script>
   <script src="/js/nav-drawer-touch.js"></script>
-  <script src="/js/landing.js"></script>
+  <script src="/js/landing.js" defer></script>
 </body>
 </html>

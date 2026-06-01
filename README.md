@@ -10,7 +10,7 @@ Plain HTML, CSS, and JavaScript. No framework. Minimal build scripts for landing
 
 - **HTML / CSS / JS** — static site, no runtime dependencies.
 - **GSAP 3 + ScrollTrigger** (cdnjs) — scroll choreography, hero intro, count-ups.
-- **Lenis** (jsDelivr) — buttery-smooth scroll, wired into the GSAP ticker.
+- **Lenis** (jsDelivr) — smooth scroll, wired into the GSAP ticker.
 - **Bebas Neue + DM Sans** via [@fontsource](https://fontsource.org/) on jsDelivr.
 
 ---
@@ -32,20 +32,18 @@ Plain HTML, CSS, and JavaScript. No framework. Minimal build scripts for landing
 │       └── about/
 ├── scripts/
 │   ├── landing_page_data.py
-│   ├── generate_landing_pages.py  # also syncs vercel.json rewrites
-│   ├── site_routes.py             # slug → category mapping
-│   ├── dev_server.py              # local dev with URL rewrites
-│   └── build_wallpapers.py
-├── design/                 # Source art (SVG, previews — not all deployed)
-│   ├── og-image.svg
-│   ├── wallpapers/
-│   └── …
+│   ├── airport_pages.py
+│   ├── generate_landing_pages.py  # HTML shells, symlinks, sitemap
+│   ├── optimize_images.py
+│   ├── site_routes.py
+│   └── dev_server.py
+├── design/
 ├── package.json
 └── vercel.json
 ```
 
 **Content:** edit `public/js/config.js` for site-wide copy and links.  
-**Landing pages:** edit `scripts/landing_page_data.py`, then `npm run build:landings`.
+**Landing pages:** edit `scripts/landing_page_data.py` and `scripts/airport_pages.py`, then `npm run build:landings`.
 
 ---
 
@@ -55,7 +53,13 @@ Plain HTML, CSS, and JavaScript. No framework. Minimal build scripts for landing
 npm run dev
 ```
 
-Then open `http://localhost:3001`. Landing pages live under `public/pages/…` and are also linked at `public/{slug}/` (symlinks) so URLs like `/jfk/` work with any static server.
+Open `http://localhost:3001`. Landing pages use `public/{slug}/` symlinks to `public/pages/…`.
+
+Regenerate assets and landing HTML:
+
+```bash
+npm run build
+```
 
 Regenerate the Open Graph PNG after editing `design/og-image.svg`:
 
@@ -63,33 +67,19 @@ Regenerate the Open Graph PNG after editing `design/og-image.svg`:
 npm run build:og
 ```
 
-Regenerate landing page HTML shells:
-
-```bash
-npm run build:landings
-```
-
 ---
 
 ## Sections (homepage)
 
-1. **Hero** — cinematic 2-column intro with clip-reveal headline and a slide-in vehicle photo.
-2. **Stats** — four numbers that count up from zero as they enter the viewport.
-3. **Marquee** — gold ticker band with services + locations (CSS-only infinite loop).
-4. **Services** — editorial six-row ledger with hover indicator.
-5. **Fleet** — three alternating full-width spreads (3D-tilt vehicle photo on hover).
-6. **Coverage** — typography-forward 4-column list of regions.
-7. **Reviews** — sticky-meta editorial layout with large pull quotes.
-8. **CTA** — closing reservation block (phone, email, button).
-9. **Footer** — three-column footer with legal badges (Licensed · TLC · Insured).
-
----
-
-## Before launch
-
-- Replace placeholder phone/email/book links in `public/js/config.js`.
-- Update SEO title/description in `CONFIG.seo`.
-- Swap reviewer names/locations if needed in `CONFIG.reviews`.
+1. **Hero** — cinematic intro with vehicle photo.
+2. **Stats** — four numbers that count up on scroll.
+3. **Trust strip** — credentials band.
+4. **Services** — editorial six-row ledger.
+5. **Fleet** — three alternating spreads.
+6. **Coverage** — four-column region list.
+7. **Reviews** — editorial pull quotes.
+8. **CTA** — phone, email, book online.
+9. **Footer** — links, airports, services, areas.
 
 ---
 
@@ -98,10 +88,5 @@ npm run build:landings
 | Token       | Value     | Usage                                  |
 | ----------- | --------- | -------------------------------------- |
 | `bg`        | `#080808` | Page background                        |
-| `surface`   | `#0E0E0C` | Alternating section background         |
-| `border`    | `#1A1A14` | Dividers, card borders                 |
-| `gold`      | `#B8963E` | Accent — logo pipe, marquee, hovers    |
-| `white`     | `#EEEEE8` | Body & headline text                   |
-| `muted`     | `#55554C` | Secondary text, eyebrow labels         |
-
-Typography is fluid — every major size uses `clamp()`.
+| `gold`      | `#B8963E` | Accents, CTAs, highlights              |
+| `white`     | `#EEEEE8` | Primary text                           |

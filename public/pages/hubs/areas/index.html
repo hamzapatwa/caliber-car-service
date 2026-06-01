@@ -14,11 +14,13 @@
   <meta property="og:title" content="Service Areas | Caliber Car Service Long Island" />
   <meta property="og:description" content="Executive black car service areas across Long Island and the tri-state." />
   <meta property="og:url" content="https://calibercarservice.com/areas/" />
-  <meta property="og:image" content="https://calibercarservice.com/og-image.png" />
+  <meta property="og:image" content="https://calibercarservice.com/og-image.webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://calibercarservice.com/og-image.png" />
+  <meta name="twitter:title" content="Service Areas | Caliber Car Service Long Island" />
+  <meta name="twitter:description" content="Executive black car service areas across Long Island and the tri-state." />
+  <meta name="twitter:image" content="https://calibercarservice.com/og-image.webp" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -26,10 +28,66 @@
   "name": "Caliber Car Service \u2014 Tri-State Service Area",
   "telephone": "+15165952391",
   "description": "Caliber Car Service coverage across Long Island and the tri-state.",
-  "areaServed": "Tri-State Service Area"
+  "areaServed": "Tri-State Service Area, NY",
+  "parentOrganization": {
+    "@type": "LocalBusiness",
+    "name": "Caliber Car Service"
+  }
 }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do you cover all of Long Island?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes \u2014 Nassau and Suffolk, including the North Shore, South Shore, and the Hamptons. Town pages above cover our most frequent pickup areas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you serve Westchester and Connecticut?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes \u2014 they are not on Long Island, but we run them daily. See Westchester & Connecticut for HPN-focused guidance and cross-border flat rates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you serve all of New York City?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes \u2014 all five boroughs. Use the NYC Overview or go straight to your borough page for airport strategy and typical routes."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://calibercarservice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Service Areas",
+      "item": "https://calibercarservice.com/areas/"
+    }
+  ]
+}
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link href="https://cdn.jsdelivr.net/npm/@fontsource/bebas-neue@5/index.min.css" rel="stylesheet" media="print" onload="this.media='all'" />
   <link href="https://cdn.jsdelivr.net/npm/@fontsource/dm-sans@5/index.min.css" rel="stylesheet" media="print" onload="this.media='all'" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -37,6 +95,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
   <link rel="stylesheet" href="/css/styles.css" />
   <link rel="stylesheet" href="/css/landing.css" />
+  <script src="/js/site-shared.js"></script>
   <script src="/js/images.js"></script>
   <script src="/js/config.js"></script>
   <script>
@@ -196,9 +255,10 @@ window.LANDING_PAGE = {
   </script>
 </head>
 <body>
-  <main id="lp-app"></main>
+  <a class="skip-link" href="#lp-app">Skip to main content</a>
+  <main id="lp-app"><div id="lp-static-prerender" class="lp-static-prerender"><header class="lp-static-hero"><h1>SERVICE AREAS.</h1><p>Airports, services, NYC boroughs, and Long Island towns — plus Westchester and Connecticut. Pick your destination below.</p></header><section class="lp-static-faq" aria-label="Frequently asked questions"><details><summary>Do you cover all of Long Island?</summary><p>Yes — Nassau and Suffolk, including the North Shore, South Shore, and the Hamptons. Town pages above cover our most frequent pickup areas.</p></details><details><summary>Do you serve Westchester and Connecticut?</summary><p>Yes — they are not on Long Island, but we run them daily. See Westchester &amp; Connecticut for HPN-focused guidance and cross-border flat rates.</p></details><details><summary>Do you serve all of New York City?</summary><p>Yes — all five boroughs. Use the NYC Overview or go straight to your borough page for airport strategy and typical routes.</p></details></section></div></main>
   <script src="/js/nav.js"></script>
   <script src="/js/nav-drawer-touch.js"></script>
-  <script src="/js/landing.js"></script>
+  <script src="/js/landing.js" defer></script>
 </body>
 </html>

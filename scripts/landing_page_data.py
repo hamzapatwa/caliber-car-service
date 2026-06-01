@@ -8,6 +8,13 @@ SITE = "https://calibercarservice.com"
 JFK_LABEL = "John F. Kennedy (JFK)"
 JFK_FULL = "John F. Kennedy International Airport"
 
+TRUST_STRIP = [
+    {"value": "★★★★★", "label": "Five-Star Rated"},
+    {"value": "24/7", "label": "Dispatch Available"},
+    {"value": "Flat", "label": "Fixed Rates"},
+    {"value": "2004", "label": "Family Owned"},
+]
+
 
 def svc_schema(name, stype, desc):
     return json.dumps({
@@ -26,14 +33,17 @@ def svc_schema(name, stype, desc):
     }, indent=2)
 
 
-def place_schema(name, desc):
+def place_schema(name, desc, area_served=None):
+    if area_served is None:
+        area_served = name.replace(" Car Service", ", NY") if " Car Service" in name else f"{name}, NY"
     return json.dumps({
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": f"Caliber Car Service — {name}",
         "telephone": "+15165952391",
         "description": desc,
-        "areaServed": name,
+        "areaServed": area_served,
+        "parentOrganization": {"@type": "LocalBusiness", "name": "Caliber Car Service"},
     }, indent=2)
 
 
@@ -59,12 +69,7 @@ def base(slug, ptype, name, seo_title, seo_desc, hero, features, glove, faq, **e
             "url": f"{SITE}/{slug}/",
         },
         "hero": hero,
-        "trust": [
-            {"value": "500+", "label": "Five-Star Reviews"},
-            {"value": "24/7", "label": "Dispatch Available"},
-            {"value": "Flat", "label": "Fixed Rates"},
-            {"value": "2004", "label": "Family Owned"},
-        ],
+        "trust": list(TRUST_STRIP),
         "features": features,
         "glove": glove,
         "faq": faq,
@@ -174,7 +179,7 @@ def borough_page(slug, name, line1, seo_title, seo_desc, hero_sub, features, glo
         routes=routes,
         airportStrategy=airport_strategy_data,
         related=related,
-        _schema=place_schema(f"{name} Car Service", seo_desc),
+        _schema=place_schema(f"{name} Car Service", seo_desc, area_served=f"{name}, NY"),
     )
 
 
@@ -649,7 +654,7 @@ ALL_PAGES["about"] = {
             {"title": "What we drive", "body": "Executive sedans (Cadillac CT6 class), premium SUVs (Escalade and similar), and executive Sprinters for groups. Every vehicle is detailed before pickup. Wi-Fi, chargers, and water are standard — presentation matters because it is part of your arrival."},
         ],
         "glove": {
-            "headline": "500+ REVIEWS.<br><span class=\"gold\">ONE STANDARD.</span>",
+            "headline": "FIVE-STAR RATED.<br><span class=\"gold\">ONE STANDARD.</span>",
             "body": "Clients stay with us because the ride is predictable — on-time staging, discreet chauffeurs, flat-rate clarity, and a phone line that works at four in the morning. That is the product.",
         },
         "faq": [
@@ -770,7 +775,7 @@ def town_page(slug, name, seo_title, seo_desc, hero_sub, routes, airport_strateg
         routes=routes,
         airportStrategy=airport_strategy_data,
         related=related,
-        _schema=place_schema(f"{name} Car Service", seo_desc),
+        _schema=place_schema(f"{name} Car Service", seo_desc, area_served=f"{name}, NY"),
     )
 
 
@@ -962,3 +967,7 @@ ALL_PAGES["melville"] = town_page(
     ],
     [{"label": "Corporate Travel", "href": "corporate/"}, {"label": "Syosset", "href": "syosset/"}, {"label": "LGA", "href": "lga/"}],
 )
+
+from airport_pages import AIRPORT_PAGES  # noqa: E402
+
+ALL_PAGES.update(AIRPORT_PAGES)

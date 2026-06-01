@@ -27,13 +27,13 @@ const CONFIG = {
   },
 
   /* ----------------------------------------------------------
-     SEO — og-image.png at site root; run npm run build:og after SVG edits
+     SEO — og-image.webp at site root; run npm run build:og after SVG edits
   ---------------------------------------------------------- */
   seo: {
     title:       'Caliber Car Service — Executive Black Car · Long Island & Tri-State',
     description: 'Chauffeured airport transfers, corporate accounts, and as-directed luxury transport across Long Island, NYC, New Jersey, and Connecticut. Available 24/7.',
     url:         'https://calibercarservice.com/',
-    ogImage:     'https://calibercarservice.com/og-image.png',
+    ogImage:     'https://calibercarservice.com/og-image.webp',
     googleReviewsUrl:
       'https://www.google.com/maps/search/?api=1&query=Caliber+Car+Service+Long+Island+NY',
   },
@@ -62,13 +62,25 @@ const CONFIG = {
   navMenu: {
     drawerSections: [
       { title: 'Airports', itemsKey: 'airports' },
-      { title: 'Services', itemsKey: 'services' },
       { title: 'NYC Boroughs', itemsKey: 'nyc' },
       {
         title: 'Long Island & Regions',
         itemsKey: 'longIsland',
         footer: { label: 'All towns & areas', href: '/areas/' },
       },
+    ],
+    airports: [
+      { label: 'John F. Kennedy (JFK)', href: '/jfk/' },
+      { label: 'LaGuardia (LGA)',       href: '/lga/' },
+      { label: 'Newark (EWR)',          href: '/ewr/' },
+      { label: 'White Plains (HPN)',    href: '/hpn/' },
+    ],
+    services: [
+      { label: 'Corporate Travel',      href: '/corporate/' },
+      { label: 'Hourly Chauffeur',      href: '/hourly/' },
+      { label: 'Manhattan Runs',        href: '/manhattan/' },
+      { label: 'Events & Weddings',     href: '/events/' },
+      { label: 'Cruise Terminals',      href: '/cruise/' },
     ],
     nyc: [
       { label: 'NYC Overview',    href: '/nyc/' },
@@ -119,7 +131,7 @@ const CONFIG = {
     ctaPrimary:   { label: 'Book Now', href: 'https://customer.moovs.app/caliber-car-service/request/new' },
     ctaSecondary: { label: 'See the Fleet',          href: '#fleet' },
     image: {
-      src: typeof SITE_IMAGES !== 'undefined' ? SITE_IMAGES.home.hero : 'assets/images/light-trail.jpg.webp',
+      src: typeof SITE_IMAGES !== 'undefined' ? SITE_IMAGES.home.hero : 'assets/images/escalade-night.webp',
       alt: 'Caliber Car Service — Cadillac Escalade at night',
     },
   },
@@ -128,10 +140,10 @@ const CONFIG = {
      STATS — numbers count up when scrolled into view
   ---------------------------------------------------------- */
   stats: [
-    { value: 500, suffix: '+',  label: 'Five-Star Reviews'   },
+    { value: '★★★★★', suffix: '', label: 'Five-Star Rated', static: true },
     { value: 24,  suffix: '/7', label: 'On-Demand Service'   },
     { value: 4,   suffix: '',   label: 'NY Area Airports'    },
-    { value: 100, suffix: '%',  label: 'On-Time Guarantee'   },
+    { value: 100, suffix: '%',  label: 'On-Time Dispatch'    },
   ],
 
   /* ----------------------------------------------------------
@@ -206,7 +218,7 @@ const CONFIG = {
         'Phone chargers & Wi-Fi',
         'Complimentary water',
       ],
-      image: { src: 'assets/images/ct4.jpg', alt: 'Executive Sedan — Cadillac CT4' },
+      image: { src: 'assets/images/ct4.webp', alt: 'Executive Sedan — Cadillac CT6 and Lincoln Continental' },
     },
     {
       num:         '02',
@@ -224,7 +236,7 @@ const CONFIG = {
         'Privacy-tint glass',
       ],
       image: {
-        src: typeof SITE_IMAGES !== 'undefined' ? SITE_IMAGES.fleet.suv : 'assets/images/vistiq.png',
+        src: typeof SITE_IMAGES !== 'undefined' ? SITE_IMAGES.fleet.suv : 'assets/images/vistiq.webp',
         alt: 'Premium SUV — Cadillac Vistiq',
       },
     },
@@ -243,7 +255,7 @@ const CONFIG = {
         'Overhead lighting',
         'Generous luggage hold',
       ],
-      image: { src: 'assets/images/sprinter.jpg', alt: 'Executive Van — Mercedes Sprinter' },
+      image: { src: 'assets/images/sprinter.webp', alt: 'Executive Van — Mercedes Sprinter' },
     },
   ],
 
@@ -331,7 +343,7 @@ const CONFIG = {
     eyebrow:    'Ready When You Are',
     headline:   'RESERVE\nYOUR RIDE.',
     sub:        'Available 24 hours a day, seven days a week. Call dispatch, email reservations, or book online — your chauffeur will be ready.',
-    primary:    { label: 'Book Now',  href: '#cta'  },
+    primary:    { label: 'Book Now',  href: 'https://customer.moovs.app/caliber-car-service/request/new' },
   },
 
   /* ----------------------------------------------------------

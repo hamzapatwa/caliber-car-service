@@ -3,10 +3,12 @@
 
 from __future__ import annotations
 
+import html as html_module
 import json
 import re
 import shutil
 import sys
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,11 +18,27 @@ VERCEL_JSON = ROOT / "vercel.json"
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from site_routes import MANUAL_SLUG_CATEGORIES, category_for_slug, page_dir  # noqa: E402
+from site_routes import category_for_slug, page_dir  # noqa: E402
+
+SITEMAP_PRIORITIES = {
+    "": 1.0,
+    "jfk": 0.9,
+    "lga": 0.9,
+    "ewr": 0.9,
+    "hpn": 0.9,
+    "nyc": 0.85,
+    "manhattan": 0.85,
+    "brooklyn": 0.85,
+    "queens": 0.85,
+    "bronx": 0.85,
+    "staten-island": 0.85,
+    "about": 0.7,
+    "areas": 0.7,
+}
 
 
-def js_obj(obj, indent=4) -> str:
-    return json.dumps(obj, indent=indent, ensure_ascii=False).replace("true", "true").replace("false", "false")
+def _esc(text: str) -> str:
+    return html_module.escape(text, quote=True)
 
 
 _HREF_SKIP = ("http://", "https://", "tel:", "mailto:", "#")
@@ -74,35 +92,81 @@ def normalize_landing_html(html_path: Path) -> bool:
     return False
 
 
-def schema_service(name: str, service_type: str, description: str, area: str = "Long Island, New York") -> str:
+def default_breadcrumb(landing: dict) -> list[dict]:
+    page_type = landing.get("type", "")
+    name = landing.get("name", "")
+    crumbs = [{"label": "Home", "href": "/"}]
+    if page_type == "airport":
+        crumbs.append({"label": "Airport Service"})
+    elif page_type == "borough":
+        crumbs.append({"label": "New York City", "href": "/nyc/"})
+    elif page_type not in ("about", "hub"):
+        crumbs.append({"label": "Services" if page_type == "service" else "Service Areas", "href": "/areas/"})
+    crumbs.append({"label": name})
+    return crumbs
+
+
+def faq_schema_json(faq: list) -> str | None:
+    if not faq:
+        return None
     data = {
         "@context": "https://schema.org",
-        "@type": "Service",
-        "name": name,
-        "provider": {
-            "@type": "LocalBusiness",
-            "name": "Caliber Car Service",
-            "telephone": "+15165952391",
-            "address": {"@type": "PostalAddress", "addressRegion": "NY", "addressLocality": "Long Island"},
-        },
-        "serviceType": service_type,
-        "areaServed": area,
-        "description": description,
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": item["q"],
+                "acceptedAnswer": {"@type": "Answer", "text": item["a"]},
+            }
+            for item in faq
+        ],
     }
     return json.dumps(data, indent=2)
 
 
-def schema_place(name: str, description: str) -> str:
-    data = {
+def breadcrumb_schema_json(landing: dict) -> str | None:
+    crumbs = landing.get("breadcrumb") or default_breadcrumb(landing)
+    seo_url = landing.get("seo", {}).get("url", "")
+    items = []
+    for i, c in enumerate(crumbs):
+        if c.get("href"):
+            href = normalize_href(c["href"])
+            item_url = href if href.startswith("http") else SITE + (href if href.startswith("/") else "/" + href)
+        elif i == len(crumbs) - 1 and seo_url:
+            item_url = seo_url
+        else:
+            item_url = SITE + "/"
+        items.append({
+            "@type": "ListItem",
+            "position": i + 1,
+            "name": c["label"],
+            "item": item_url,
+        })
+    return json.dumps({
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": f"Caliber Car Service — {name}",
-        "telephone": "+15165952391",
-        "description": description,
-        "areaServed": name,
-        "parentOrganization": {"@type": "LocalBusiness", "name": "Caliber Car Service"},
-    }
-    return json.dumps(data, indent=2)
+        "@type": "BreadcrumbList",
+        "itemListElement": items,
+    }, indent=2)
+
+
+def static_prerender_html(landing: dict) -> str:
+    hero = landing.get("hero", {})
+    h1 = f"{hero.get('line1', '')} {hero.get('line2', '')}".strip()
+    sub = hero.get("sub", "")
+    faq = landing.get("faq", [])
+    faq_block = ""
+    if faq:
+        items = "".join(
+            f"<details><summary>{_esc(item['q'])}</summary><p>{_esc(item['a'])}</p></details>"
+            for item in faq
+        )
+        faq_block = f'<section class="lp-static-faq" aria-label="Frequently asked questions">{items}</section>'
+    return (
+        f'<div id="lp-static-prerender" class="lp-static-prerender">'
+        f'<header class="lp-static-hero"><h1>{_esc(h1)}</h1><p>{_esc(sub)}</p></header>'
+        f"{faq_block}"
+        f"</div>"
+    )
 
 
 def render_page(slug: str, seo: dict, landing: dict, schema: str) -> str:
@@ -113,6 +177,20 @@ def render_page(slug: str, seo: dict, landing: dict, schema: str) -> str:
     landing = normalize_hrefs(landing)
     config_js = "window.LANDING_PAGE = " + json.dumps(landing, indent=4, ensure_ascii=False) + ";"
 
+    extra_schemas = []
+    faq_json = faq_schema_json(landing.get("faq", []))
+    if faq_json:
+        extra_schemas.append(faq_json)
+    crumb_json = breadcrumb_schema_json(landing)
+    if crumb_json:
+        extra_schemas.append(crumb_json)
+    extra_ld = "".join(
+        f'\n  <script type="application/ld+json">\n{block}\n  </script>'
+        for block in extra_schemas
+    )
+
+    prerender = static_prerender_html(landing)
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,23 +199,25 @@ def render_page(slug: str, seo: dict, landing: dict, schema: str) -> str:
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/assets/brand/caliber_mark.svg" />
-  <title>{title}</title>
-  <meta name="description" content="{desc}" />
+  <title>{_esc(title)}</title>
+  <meta name="description" content="{_esc(desc)}" />
   <link rel="canonical" href="{canonical}" />
   <meta name="robots" content="index, follow" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="{title}" />
-  <meta property="og:description" content="{og_desc}" />
+  <meta property="og:title" content="{_esc(title)}" />
+  <meta property="og:description" content="{_esc(og_desc)}" />
   <meta property="og:url" content="{canonical}" />
-  <meta property="og:image" content="{SITE}/og-image.png" />
+  <meta property="og:image" content="{SITE}/og-image.webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="{SITE}/og-image.png" />
+  <meta name="twitter:title" content="{_esc(title)}" />
+  <meta name="twitter:description" content="{_esc(og_desc)}" />
+  <meta name="twitter:image" content="{SITE}/og-image.webp" />
   <script type="application/ld+json">
 {schema}
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  </script>{extra_ld}
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link href="https://cdn.jsdelivr.net/npm/@fontsource/bebas-neue@5/index.min.css" rel="stylesheet" media="print" onload="this.media='all'" />
   <link href="https://cdn.jsdelivr.net/npm/@fontsource/dm-sans@5/index.min.css" rel="stylesheet" media="print" onload="this.media='all'" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -145,6 +225,7 @@ def render_page(slug: str, seo: dict, landing: dict, schema: str) -> str:
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
   <link rel="stylesheet" href="/css/styles.css" />
   <link rel="stylesheet" href="/css/landing.css" />
+  <script src="/js/site-shared.js"></script>
   <script src="/js/images.js"></script>
   <script src="/js/config.js"></script>
   <script>
@@ -152,10 +233,11 @@ def render_page(slug: str, seo: dict, landing: dict, schema: str) -> str:
   </script>
 </head>
 <body>
-  <main id="lp-app"></main>
+  <a class="skip-link" href="#lp-app">Skip to main content</a>
+  <main id="lp-app">{prerender}</main>
   <script src="/js/nav.js"></script>
   <script src="/js/nav-drawer-touch.js"></script>
-  <script src="/js/landing.js"></script>
+  <script src="/js/landing.js" defer></script>
 </body>
 </html>
 """
@@ -194,31 +276,50 @@ def clear_vercel_rewrites() -> None:
     VERCEL_JSON.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
 
-def relocate_manual_pages() -> None:
-    """Move legacy public/{slug}/ dirs into pages/{category}/{slug}/ (one-time layout)."""
-    from site_routes import MANUAL_SLUG_CATEGORIES
+def sitemap_priority(slug: str, page_type: str | None) -> float:
+    if slug in SITEMAP_PRIORITIES:
+        return SITEMAP_PRIORITIES[slug]
+    if page_type == "airport":
+        return 0.9
+    if page_type in ("borough", "hub"):
+        return 0.85
+    if page_type in ("service", "town", "area"):
+        return 0.8
+    return 0.7
 
-    for slug, cat in MANUAL_SLUG_CATEGORIES.items():
-        dest = page_dir(PUBLIC, slug, cat)
-        src = PUBLIC / slug
-        # Only move a real directory at the site root — never follow or replace symlinks.
-        if src.is_dir() and not src.is_symlink():
-            try:
-                if src.resolve() != dest.resolve():
-                    dest.parent.mkdir(parents=True, exist_ok=True)
-                    if dest.exists() and not dest.is_symlink():
-                        shutil.rmtree(dest)
-                    shutil.move(str(src), str(dest))
-                    print(f"Relocated {slug} → pages/{cat}/{slug}/")
-            except FileNotFoundError:
-                pass
-        html = dest / "index.html"
-        if html.is_file():
-            text = html.read_text(encoding="utf-8")
-            text = text.replace('src="../', 'src="/').replace("src='../", "src='/")
-            html.write_text(text, encoding="utf-8")
-            normalize_landing_html(html)
-        sync_public_symlink(slug, cat)
+
+def generate_sitemap(pages: dict) -> None:
+    today = date.today().isoformat()
+    urls = [
+        {
+            "loc": f"{SITE}/",
+            "priority": "1.0",
+        }
+    ]
+    for slug, data in sorted(pages.items()):
+        landing = data["landing"]
+        ptype = landing.get("type")
+        urls.append({
+            "loc": f"{SITE}/{slug}/",
+            "priority": f"{sitemap_priority(slug, ptype):.1f}",
+        })
+
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    for entry in urls:
+        lines.extend([
+            "  <url>",
+            f"    <loc>{entry['loc']}</loc>",
+            f"    <lastmod>{today}</lastmod>",
+            "    <changefreq>monthly</changefreq>",
+            f"    <priority>{entry['priority']}</priority>",
+            "  </url>",
+        ])
+    lines.append("</urlset>")
+    (PUBLIC / "sitemap.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"Wrote sitemap.xml ({len(urls)} URLs)")
 
 
 def main():
@@ -234,21 +335,18 @@ def main():
         sync_public_symlink(slug, cat)
         print(f"Wrote pages/{cat}/{slug}/index.html")
 
-    relocate_manual_pages()
-
     for slug, data in ALL_PAGES.items():
         cat = category_for_slug(slug, data["landing"].get("type"))
         sync_public_symlink(slug, cat)
-    for slug, cat in MANUAL_SLUG_CATEGORIES.items():
-        sync_public_symlink(slug, cat)
 
     normalized = 0
-    for html in PUBLIC.rglob("index.html"):
-        if "LANDING_PAGE" in html.read_text(encoding="utf-8") and normalize_landing_html(html):
+    for html_path in PUBLIC.rglob("index.html"):
+        if "LANDING_PAGE" in html_path.read_text(encoding="utf-8") and normalize_landing_html(html_path):
             normalized += 1
     if normalized:
         print(f"Normalized hrefs in {normalized} landing page(s)")
 
+    generate_sitemap(ALL_PAGES)
     clear_vercel_rewrites()
     print("Synced public/{slug} symlinks; removed Vercel rewrites")
 

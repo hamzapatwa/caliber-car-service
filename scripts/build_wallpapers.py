@@ -178,6 +178,13 @@ def downscale_linear(image: np.ndarray, width: int, height: int) -> np.ndarray:
     return np.stack(channels, axis=-1)
 
 
+def save_webp(path: Path, image: np.ndarray, quality: int = 90) -> None:
+    """Save linear RGB float array as WebP (8-bit sRGB)."""
+    rgb16 = linear_to_srgb16(image)
+    rgb8 = (rgb16 / 257.0).clip(0, 255).astype(np.uint8)
+    Image.fromarray(rgb8, mode="RGB").save(path, "WEBP", quality=quality, method=6)
+
+
 def save_png16(path: Path, image: np.ndarray) -> None:
     height, width, _ = image.shape
     yy, xx = np.mgrid[0:height, 0:width].astype(np.float64)
@@ -220,9 +227,12 @@ def render_wallpaper(spec: WallpaperSpec) -> None:
     if SUPERSAMPLE > 1:
         composed = downscale_linear(composed, spec.width, spec.height)
 
-    out_path = OUT / f"{spec.name}.png"
-    save_png16(out_path, composed)
-    print(f"Wrote {out_path} ({spec.width}x{spec.height}, 16-bit RGB)")
+    out_path = OUT / f"{spec.name}.webp"
+    save_webp(out_path, composed, quality=92)
+    legacy = OUT / f"{spec.name}.png"
+    if legacy.is_file():
+        legacy.unlink()
+    print(f"Wrote {out_path} ({spec.width}x{spec.height}, WebP)")
 
 
 def main() -> None:

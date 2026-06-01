@@ -34,6 +34,46 @@
    RESET & BASE
 ================================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  z-index: 10000;
+  padding: 12px 20px;
+  background: var(--gold);
+  color: var(--bg);
+  font-family: var(--font-body);
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 2px;
+}
+.skip-link:focus {
+  left: 16px;
+  top: 16px;
+}
+
+.lp-static-prerender {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: clamp(100px, 14vw, 140px) var(--shell-pad-x) 48px;
+}
+.lp-static-prerender h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.lp-static-prerender p {
+  font-family: var(--font-body);
+  color: var(--muted);
+  max-width: 42rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+.lp-static-prerender a { color: var(--gold); }
+
 html  { scroll-behavior: auto; }              /* Lenis handles smooth scroll */
 body  {
   background:    var(--bg);
@@ -804,6 +844,11 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
   letter-spacing: -.005em;
 }
 .stat-number .stat-suffix { color: var(--gold); }
+.stat-number--static {
+  color:          var(--gold);
+  font-size:      clamp(36px, 5vw, 56px);
+  letter-spacing: 0.06em;
+}
 .stat-label {
   font-size:      10px;
   letter-spacing: .28em;
