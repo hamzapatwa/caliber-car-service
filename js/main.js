@@ -189,6 +189,7 @@ function renderTrustStrip() {
 function renderServices() {
   const cards = CONFIG.services
     .map((s) => {
+      const external = !s.href;
       const attrs = external ? MOOVS_BOOK_ONCLICK(CONFIG.bookHref) : '';
       return `
       <a class="service-card" href="${s.href || CONFIG.bookHref}" aria-label="${s.name}"${attrs}>
