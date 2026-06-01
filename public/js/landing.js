@@ -54,7 +54,7 @@ const LP_DEFAULT_STEPS_GENERAL = [
 function lpImageFile(file) {
   if (!file) return null;
   if (file.startsWith('http') || file.startsWith('/')) return file;
-  if (file.startsWith('../')) return '/' + file.replace(/^\.\.\//, '');
+  if (file.includes('..')) return lpRel(file);
   if (file.startsWith('assets/')) return '/' + file;
   return '/assets/images/' + file;
 }
@@ -95,8 +95,8 @@ function lpRel(href) {
   if (!href || href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:')) {
     return href;
   }
-  const cleaned = href.replace(/^\.\.\//g, '');
-  if (cleaned.startsWith('#')) return '/' + cleaned;
+  const cleaned = href.replace(/^(\.\.\/)+/, '');
+  if (cleaned.startsWith('#')) return cleaned.startsWith('/#') ? cleaned : '/' + cleaned;
   if (cleaned.startsWith('/')) return cleaned.endsWith('/') || cleaned.includes('#') ? cleaned : cleaned + '/';
   return '/' + cleaned.replace(/\/$/, '') + '/';
 }
@@ -134,8 +134,8 @@ function lpInjectBreadcrumbSchema(page) {
   const items = crumbs.map((c, i) => {
     let item = 'https://calibercarservice.com/';
     if (c.href) {
-      const h = c.href.replace(/^\.\.\//, '');
-      item = h.startsWith('http') ? h : 'https://calibercarservice.com/' + h.replace(/^\//, '');
+      const h = lpRel(c.href);
+      item = h.startsWith('http') ? h : 'https://calibercarservice.com' + (h.startsWith('/') ? h : '/' + h);
     } else if (i === crumbs.length - 1 && page.seo && page.seo.url) {
       item = page.seo.url;
     }

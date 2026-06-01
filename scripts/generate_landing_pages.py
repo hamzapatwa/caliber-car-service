@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -20,6 +21,57 @@ from site_routes import MANUAL_SLUG_CATEGORIES, category_for_slug, page_dir  # n
 
 def js_obj(obj, indent=4) -> str:
     return json.dumps(obj, indent=indent, ensure_ascii=False).replace("true", "true").replace("false", "false")
+
+
+_HREF_SKIP = ("http://", "https://", "tel:", "mailto:", "#")
+
+
+def normalize_href(h: str) -> str:
+    """Root-absolute internal path (e.g. jfk/ or ../lga/ → /jfk/, /lga/)."""
+    if not h or any(h.startswith(p) for p in _HREF_SKIP):
+        return h
+    cleaned = re.sub(r"^(\.\./)+", "", h)
+    if cleaned.startswith("/"):
+        if cleaned.endswith("/") or "#" in cleaned:
+            return cleaned
+        return cleaned + "/"
+    return "/" + cleaned.strip("/") + "/"
+
+
+def normalize_hrefs(obj):
+    if isinstance(obj, dict):
+        return {
+            k: normalize_href(v) if k == "href" and isinstance(v, str) else normalize_hrefs(v)
+            for k, v in obj.items()
+        }
+    if isinstance(obj, list):
+        return [normalize_hrefs(x) for x in obj]
+    return obj
+
+
+def normalize_landing_html(html_path: Path) -> bool:
+    """Normalize href values inside inline window.LANDING_PAGE configs."""
+    text = html_path.read_text(encoding="utf-8")
+    original = text
+
+    def fix_quoted(m: re.Match) -> str:
+        quote, val = m.group(1), m.group(2)
+        return f"href: {quote}{normalize_href(val)}{quote}"
+
+    text = re.sub(
+        r'href:\s*(["\'])([^"\']+)\1',
+        fix_quoted,
+        text,
+    )
+    text = re.sub(
+        r'"href"\s*:\s*"([^"]+)"',
+        lambda m: f'"href": "{normalize_href(m.group(1))}"',
+        text,
+    )
+    if text != original:
+        html_path.write_text(text, encoding="utf-8")
+        return True
+    return False
 
 
 def schema_service(name: str, service_type: str, description: str, area: str = "Long Island, New York") -> str:
@@ -58,6 +110,7 @@ def render_page(slug: str, seo: dict, landing: dict, schema: str) -> str:
     title = seo["title"]
     desc = seo["description"]
     og_desc = seo.get("ogDescription", desc)
+    landing = normalize_hrefs(landing)
     config_js = "window.LANDING_PAGE = " + json.dumps(landing, indent=4, ensure_ascii=False) + ";"
 
     return f"""<!DOCTYPE html>
@@ -141,25 +194,30 @@ def clear_vercel_rewrites() -> None:
 
 
 def relocate_manual_pages() -> None:
-    """Move hand-maintained airport shells into pages/airports/."""
+    """Move legacy public/{slug}/ dirs into pages/{category}/{slug}/ (one-time layout)."""
     from site_routes import MANUAL_SLUG_CATEGORIES
 
     for slug, cat in MANUAL_SLUG_CATEGORIES.items():
-        src = PUBLIC / slug
         dest = page_dir(PUBLIC, slug, cat)
-        if src.is_dir() and src != dest:
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            if dest.exists():
-                shutil.rmtree(dest)
-            shutil.move(str(src), str(dest))
+        src = PUBLIC / slug
+        # Only move a real directory at the site root — never follow or replace symlinks.
+        if src.is_dir() and not src.is_symlink():
+            try:
+                if src.resolve() != dest.resolve():
+                    dest.parent.mkdir(parents=True, exist_ok=True)
+                    if dest.exists() and not dest.is_symlink():
+                        shutil.rmtree(dest)
+                    shutil.move(str(src), str(dest))
+                    print(f"Relocated {slug} → pages/{cat}/{slug}/")
+            except FileNotFoundError:
+                pass
         html = dest / "index.html"
         if html.is_file():
             text = html.read_text(encoding="utf-8")
-            text = text.replace('href="../', 'href="/').replace("href='../", "href='/")
             text = text.replace('src="../', 'src="/').replace("src='../", "src='/")
             html.write_text(text, encoding="utf-8")
+            normalize_landing_html(html)
         sync_public_symlink(slug, cat)
-        print(f"Relocated {slug} → pages/{cat}/{slug}/")
 
 
 def main():
@@ -182,6 +240,13 @@ def main():
         sync_public_symlink(slug, cat)
     for slug, cat in MANUAL_SLUG_CATEGORIES.items():
         sync_public_symlink(slug, cat)
+
+    normalized = 0
+    for html in PUBLIC.rglob("index.html"):
+        if "LANDING_PAGE" in html.read_text(encoding="utf-8") and normalize_landing_html(html):
+            normalized += 1
+    if normalized:
+        print(f"Normalized hrefs in {normalized} landing page(s)")
 
     clear_vercel_rewrites()
     print("Synced public/{slug} symlinks; removed Vercel rewrites")

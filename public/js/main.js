@@ -405,8 +405,8 @@ function renderFooter() {
           <span class="footer-col-title">Airports &amp; Areas</span>
           <div class="footer-list">
             ${CONFIG.footer.airports.map((a) => `<a href="${a.href}">${a.label}</a>`).join('')}
-            <a href="areas/">All Service Areas</a>
-            <a href="about/">About Caliber</a>
+            <a href="/areas/">All Service Areas</a>
+            <a href="/about/">About Caliber</a>
           </div>
         </div>
       </div>
