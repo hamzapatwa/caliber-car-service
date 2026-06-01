@@ -72,6 +72,13 @@ body.nav-open .nav-overlay {
   opacity:        1;
   pointer-events: auto;
 }
+body.nav-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
 
 /* ================================================================
    NAVIGATION — sticky, mobile menu
@@ -164,6 +171,8 @@ body.nav-open .nav::before {
   position:        fixed;
   inset:           0 0 0 auto;
   width:           min(86vw, 360px);
+  height:          100%;
+  max-height:      100dvh;
   background:      rgba(8, 8, 8, 0.72);
   backdrop-filter: blur(24px) saturate(1.1);
   -webkit-backdrop-filter: blur(24px) saturate(1.1);
@@ -177,6 +186,11 @@ body.nav-open .nav::before {
   z-index:         520;
   visibility:      hidden;
   pointer-events:  none;
+  overflow-y:      auto;
+  overflow-x:      hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action:    pan-y;
 }
 body.nav-open .nav-drawer {
   transform:       translateX(0);

@@ -605,7 +605,7 @@ function lpRender() {
 }
 
 function lpSetupLenis() {
-  if (typeof Lenis === 'undefined') return;
+  if (typeof Lenis === 'undefined') return null;
   const lenis = new Lenis({ lerp: 0.085, smoothWheel: true });
   lenis.on('scroll', () => ScrollTrigger && ScrollTrigger.update());
   function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
@@ -614,9 +614,10 @@ function lpSetupLenis() {
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
   }
+  return lenis;
 }
 
-function lpSetupNav() {
+function lpSetupNav(lenis) {
   const nav = document.getElementById('nav');
   const toggle = document.getElementById('navToggle');
   const drawer = document.getElementById('navDrawer');
@@ -638,15 +639,36 @@ function lpSetupNav() {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  let scrollLockY = 0;
+  let blockPageTouch = null;
+
   function openDrawer() {
+    scrollLockY = window.scrollY || document.documentElement.scrollTop;
     document.body.classList.add('nav-open');
+    document.body.style.top = `-${scrollLockY}px`;
     toggle?.setAttribute('aria-expanded', 'true');
     toggle?.setAttribute('aria-label', 'Close menu');
+    if (lenis && typeof lenis.stop === 'function') lenis.stop();
+
+    blockPageTouch = (e) => {
+      if (drawer && (drawer === e.target || drawer.contains(e.target))) return;
+      e.preventDefault();
+    };
+    document.addEventListener('touchmove', blockPageTouch, { passive: false });
   }
+
   function closeDrawer() {
     document.body.classList.remove('nav-open');
+    document.body.style.top = '';
     toggle?.setAttribute('aria-expanded', 'false');
     toggle?.setAttribute('aria-label', 'Open menu');
+    window.scrollTo(0, scrollLockY);
+    if (lenis && typeof lenis.start === 'function') lenis.start();
+
+    if (blockPageTouch) {
+      document.removeEventListener('touchmove', blockPageTouch);
+      blockPageTouch = null;
+    }
   }
 
   toggle?.addEventListener('click', () => {
@@ -733,7 +755,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.LANDING_PAGE = Object.assign({ type: 'airport' }, window.AIRPORT_PAGE);
   }
   lpRender();
-  lpSetupNav();
-  lpSetupLenis();
+  const lenis = lpSetupLenis();
+  lpSetupNav(lenis);
   lpInitAnimations();
 });

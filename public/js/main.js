@@ -450,27 +450,13 @@ function setupLenis() {
   gsap.ticker.add((time) => { lenis.raf(time * 1000); });
   gsap.ticker.lagSmoothing(0);
 
-  document.addEventListener('click', (e) => {
-    const anchor = e.target.closest('a[href^="#"]');
-    if (!anchor) return;
-    const sel = anchor.getAttribute('href');
-    if (!sel || sel.length < 2) return;
-    const target = document.querySelector(sel);
-    if (!target) return;
-    e.preventDefault();
-    lenis.scrollTo(target, { offset: -64, duration: 1.4 });
-    document.body.classList.remove('nav-open');
-    const t = document.getElementById('navToggle');
-    if (t) t.setAttribute('aria-expanded', 'false');
-  });
-
   return lenis;
 }
 
 /* ----------------------------------------------------------------
    MOBILE NAV TOGGLE
 ---------------------------------------------------------------- */
-function setupNav() {
+function setupNav(lenis) {
   const toggle   = document.getElementById('navToggle');
   const drawer   = document.getElementById('navDrawer');
   const closeBtn = document.getElementById('navDrawerClose');
@@ -488,15 +474,36 @@ function setupNav() {
     document.body.appendChild(overlay);
   }
 
+  let scrollLockY = 0;
+  let blockPageTouch = null;
+
   function openDrawer() {
+    scrollLockY = window.scrollY || document.documentElement.scrollTop;
     document.body.classList.add('nav-open');
+    document.body.style.top = `-${scrollLockY}px`;
     toggle.setAttribute('aria-expanded', 'true');
     toggle.setAttribute('aria-label', 'Close menu');
+    if (lenis && typeof lenis.stop === 'function') lenis.stop();
+
+    blockPageTouch = (e) => {
+      if (drawer && (drawer === e.target || drawer.contains(e.target))) return;
+      e.preventDefault();
+    };
+    document.addEventListener('touchmove', blockPageTouch, { passive: false });
   }
+
   function closeDrawer() {
     document.body.classList.remove('nav-open');
+    document.body.style.top = '';
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-label', 'Open menu');
+    window.scrollTo(0, scrollLockY);
+    if (lenis && typeof lenis.start === 'function') lenis.start();
+
+    if (blockPageTouch) {
+      document.removeEventListener('touchmove', blockPageTouch);
+      blockPageTouch = null;
+    }
   }
 
   toggle.addEventListener('click', () => {
@@ -512,6 +519,19 @@ function setupNav() {
   // Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeDrawer();
+  });
+
+  document.addEventListener('click', (e) => {
+    const anchor = e.target.closest('a[href^="#"]');
+    if (!anchor) return;
+    const sel = anchor.getAttribute('href');
+    if (!sel || sel.length < 2) return;
+    const target = document.querySelector(sel);
+    if (!target) return;
+    e.preventDefault();
+    if (document.body.classList.contains('nav-open')) closeDrawer();
+    if (lenis) lenis.scrollTo(target, { offset: -64, duration: 1.4 });
+    else target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   document.querySelectorAll('.nav-dropdown').forEach((dd) => {
@@ -787,8 +807,8 @@ function initFleetTilt() {
 ---------------------------------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
   render();
-  setupNav();
-  setupLenis();
+  const lenis = setupLenis();
+  setupNav(lenis);
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
