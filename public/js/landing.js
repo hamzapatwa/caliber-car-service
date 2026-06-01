@@ -623,9 +623,16 @@ function lpSetupNav() {
   const closeBtn = document.getElementById('navDrawerClose');
   if (!nav) return;
 
-  const overlay = document.createElement('div');
-  overlay.className = 'nav-overlay';
-  document.body.appendChild(overlay);
+  if (drawer && drawer.parentElement !== document.body) {
+    document.body.appendChild(drawer);
+  }
+
+  let overlay = document.querySelector('.nav-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'nav-overlay';
+    document.body.appendChild(overlay);
+  }
 
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 50);
   window.addEventListener('scroll', onScroll, { passive: true });

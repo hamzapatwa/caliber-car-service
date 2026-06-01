@@ -476,11 +476,17 @@ function setupNav() {
   const closeBtn = document.getElementById('navDrawerClose');
   if (!toggle) return;
 
-  // Inject overlay as direct child of <body> so position:fixed covers the full
-  // viewport even when nav has backdrop-filter (which would break fixed inside nav).
-  const overlay = document.createElement('div');
-  overlay.className = 'nav-overlay';
-  document.body.appendChild(overlay);
+  // Drawer + overlay live on <body> so nav backdrop-filter never composites over the panel.
+  if (drawer && drawer.parentElement !== document.body) {
+    document.body.appendChild(drawer);
+  }
+
+  let overlay = document.querySelector('.nav-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'nav-overlay';
+    document.body.appendChild(overlay);
+  }
 
   function openDrawer() {
     document.body.classList.add('nav-open');
