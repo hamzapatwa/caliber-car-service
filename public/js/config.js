@@ -111,8 +111,8 @@ const CONFIG = {
   /* ----------------------------------------------------------
      CONTACT
   ---------------------------------------------------------- */
-  phone:     '(516) 595-2391',
-  phoneHref: 'tel:+15165952391',
+  phone:     '(516) 888-1290',
+  phoneHref: 'tel:+15168881290',
   email:     'info@calibercarservice.com',
   emailHref: 'mailto:info@calibercarservice.com',
   bookHref:  'https://customer.moovs.app/caliber-car-service/request/new',

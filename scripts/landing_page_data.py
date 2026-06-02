@@ -24,7 +24,7 @@ def svc_schema(name, stype, desc):
         "provider": {
             "@type": "LocalBusiness",
             "name": "Caliber Car Service",
-            "telephone": "+15165952391",
+            "telephone": "+15168881290",
             "address": {"@type": "PostalAddress", "addressRegion": "NY", "addressLocality": "Long Island"},
         },
         "serviceType": stype,
@@ -40,7 +40,7 @@ def place_schema(name, desc, area_served=None):
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": f"Caliber Car Service — {name}",
-        "telephone": "+15165952391",
+        "telephone": "+15168881290",
         "description": desc,
         "areaServed": area_served,
         "parentOrganization": {"@type": "LocalBusiness", "name": "Caliber Car Service"},
@@ -92,7 +92,7 @@ ALL_PAGES = {}
 ALL_PAGES["corporate"] = base(
     "corporate", "service", "Corporate Travel",
     "Corporate Car Service Long Island | Caliber Car Service",
-    "Dedicated corporate accounts for Long Island executives — monthly billing, one dispatch contact, sedan to Sprinter fleet. Family owned since 2004. (516) 595-2391.",
+    "Dedicated corporate accounts for Long Island executives — monthly billing, one dispatch contact, sedan to Sprinter fleet. Family owned since 2004. (516) 888-1290.",
     {"line1": "CORPORATE", "line2": "TRAVEL.", "sub": "One dispatch line for your executive team — dedicated accounts, monthly billing, and chauffeurs who understand board schedules, not just addresses."},
     [
         {"title": "Dedicated Account Manager", "desc": "A single point of contact at dispatch who knows your travelers, preferences, and billing codes — not a new voice every call."},
@@ -104,7 +104,7 @@ ALL_PAGES["corporate"] = base(
     ],
     {"headline": "YOUR TEAM.<br><span class=\"gold\">ONE VENDOR.</span>", "body": "Most companies stitch together rideshare receipts and ad-hoc sedans until an executive misses a board meeting. We built corporate accounts so travel coordinators stop chasing receipts and start trusting one dispatch desk that picks up at 4 a.m."},
     [
-        {"q": "How do we open a corporate account?", "a": "Call dispatch at (516) 595-2391 or email info@calibercarservice.com with your company name, billing contact, and typical routes. We set up your account profile and confirm billing terms before the first trip."},
+        {"q": "How do we open a corporate account?", "a": "Call dispatch at (516) 888-1290 or email info@calibercarservice.com with your company name, billing contact, and typical routes. We set up your account profile and confirm billing terms before the first trip."},
         {"q": "Can multiple employees book under one account?", "a": "Yes. Travel coordinators, EAs, and authorized bookers can reserve on behalf of any traveler. Trip detail appears on your consolidated invoice with passenger names and cost centers when you provide them."},
         {"q": "Do you support multi-stop roadshows?", "a": "Yes. As-directed hourly service works well for investor days and client visits. Share your itinerary at booking so dispatch can assign the right vehicle and build realistic timing between stops."},
         {"q": "What vehicles do executives typically use?", "a": "Solo airport and Manhattan runs usually go in our executive sedan (Cadillac CT6 class). Teams of three to six often choose the premium SUV. Groups use the executive Sprinter with limo-style seating."},
@@ -132,7 +132,7 @@ ALL_PAGES["corporate"] = base(
 ALL_PAGES["hourly"] = base(
     "hourly", "service", "Hourly Chauffeur",
     "Hourly Chauffeur Service Long Island | Caliber Car Service",
-    "As-directed hourly black car service on Long Island — meetings, errands, full-day itineraries with a dedicated chauffeur. Call (516) 595-2391 for block-time availability.",
+    "As-directed hourly black car service on Long Island — meetings, errands, full-day itineraries with a dedicated chauffeur. Call (516) 888-1290 for block-time availability.",
     {"line1": "HOURLY", "line2": "CHAUFFEUR.", "sub": "Block-time service with one dedicated driver for as-directed travel — board meetings, client visits, shopping, or a full day across the tri-state."},
     [
         {"title": "As-Directed Flexibility", "desc": "Your chauffeur follows your schedule — multiple stops, wait time included while you are in meetings, no meter running street by street."},
@@ -144,7 +144,7 @@ ALL_PAGES["hourly"] = base(
     ],
     {"headline": "YOUR DAY.<br><span class=\"gold\">YOUR ROUTE.</span>", "body": "Point-to-point transfers work until your schedule has four stops and a dinner afterward. Hourly service keeps a professional chauffeur with you — door held, car staged, timing adjusted when meetings run long."},
     [
-        {"q": "What is the minimum booking for hourly service?", "a": "Minimum hours depend on date, vehicle class, and itinerary. Call dispatch at (516) 595-2391 for current minimums — we will quote your block time upfront before you confirm."},
+        {"q": "What is the minimum booking for hourly service?", "a": "Minimum hours depend on date, vehicle class, and itinerary. Call dispatch at (516) 888-1290 for current minimums — we will quote your block time upfront before you confirm."},
         {"q": "Can we make unplanned stops during the block?", "a": "Yes, within the geographic scope agreed at booking. Tell your chauffeur or dispatch if the day expands — additional time may be billed in agreed increments."},
         {"q": "Is wait time at each stop included?", "a": "Standard hourly blocks include reasonable wait time while you are at appointments. Extended waits (e.g., multi-hour events) should be discussed when booking so dispatch can plan."},
         {"q": "When is hourly better than point-to-point?", "a": "Choose hourly when you have three or more stops, uncertain meeting lengths, or need the vehicle to stay nearby all day. Single airport or Manhattan legs are usually better as flat transfers."},
@@ -186,7 +186,7 @@ def borough_page(slug, name, line1, seo_title, seo_desc, hero_sub, features, glo
 ALL_PAGES["manhattan"] = borough_page(
     "manhattan", "Manhattan", "MANHATTAN",
     "Manhattan Car Service & Airport Transfers | Caliber",
-    "Manhattan black car service — Midtown, Financial District, Upper East & West Side. Airport transfers, Long Island connections, flat rates. (516) 595-2391.",
+    "Manhattan black car service — Midtown, Financial District, Upper East & West Side. Airport transfers, Long Island connections, flat rates. (516) 888-1290.",
     "Midtown boardrooms, downtown courts, hospital entrances, and hotel staging — chauffeured service in Manhattan with Long Island roots since 2004.",
     [
         {"title": "All Manhattan Neighborhoods", "desc": "Financial District, Midtown, Chelsea, Upper East and West Side, Harlem — door-to-door, not corner drop-offs."},
@@ -194,7 +194,7 @@ ALL_PAGES["manhattan"] = borough_page(
         {"title": "Long Island Connections", "desc": "Daily service between Manhattan and Nassau, Suffolk, and the Hamptons — toll-inclusive flat quotes."},
         {"title": "Bridge & Tunnel Routing", "desc": "Queens Midtown, Lincoln, Holland, FDR — we pick crossings based on live traffic, not habit."},
         {"title": "Hourly & Corporate", "desc": "As-directed days and executive accounts for teams with NYC and Long Island travel."},
-        {"title": "24/7 Dispatch", "desc": "Theater exits, gala returns, and 5 a.m. airport departures — (516) 595-2391 always answered."},
+        {"title": "24/7 Dispatch", "desc": "Theater exits, gala returns, and 5 a.m. airport departures — (516) 888-1290 always answered."},
     ],
     {"headline": "THE CITY<br><span class=\"gold\">DONE RIGHT.</span>", "body": "Manhattan punishes drivers who only know highways. Our chauffeurs stage at building loading zones, know hotel bell desks, and build tunnel buffer into every airport run — whether you live here or are crossing in from Long Island."},
     [
@@ -223,7 +223,7 @@ ALL_PAGES["manhattan"] = borough_page(
 ALL_PAGES["brooklyn"] = borough_page(
     "brooklyn", "Brooklyn", "BROOKLYN",
     "Brooklyn Car Service & Airport Transfers | Caliber",
-    "Brooklyn black car service — airport transfers to JFK, LGA, EWR, Manhattan connections, and Long Island. Flat rates. (516) 595-2391.",
+    "Brooklyn black car service — airport transfers to JFK, LGA, EWR, Manhattan connections, and Long Island. Flat rates. (516) 888-1290.",
     "Brownstone pickups, waterfront towers, and cruise terminals — chauffeured service across Brooklyn with drivers who know bridge timing to JFK and Manhattan.",
     [
         {"title": "All Brooklyn Neighborhoods", "desc": "Park Slope, DUMBO, Williamsburg, Brooklyn Heights, Bay Ridge, and beyond — residential and commercial staging."},
@@ -296,7 +296,7 @@ ALL_PAGES["queens"] = borough_page(
 ALL_PAGES["bronx"] = borough_page(
     "bronx", "The Bronx", "THE BRONX",
     "Bronx Car Service & Airport Transfers | Caliber",
-    "Bronx black car service — LaGuardia, JFK, Manhattan, and Westchester connections. Flat-rate chauffeur service. (516) 595-2391.",
+    "Bronx black car service — LaGuardia, JFK, Manhattan, and Westchester connections. Flat-rate chauffeur service. (516) 888-1290.",
     "Riverdale, Fordham, the South Bronx, and Co-op City — chauffeured pickups with fast access to LGA, HPN, and Manhattan via the GW Bridge corridor.",
     [
         {"title": "All Bronx Neighborhoods", "desc": "Riverdale, Fordham, Pelham, Throgs Neck — residential and hospital destinations."},
@@ -332,7 +332,7 @@ ALL_PAGES["bronx"] = borough_page(
 ALL_PAGES["staten-island"] = borough_page(
     "staten-island", "Staten Island", "STATEN ISLAND",
     "Staten Island Car Service & Airport Transfers | Caliber",
-    "Staten Island car service — Newark, JFK, Manhattan, and Long Island via Verrazzano. Flat-rate chauffeur. (516) 595-2391.",
+    "Staten Island car service — Newark, JFK, Manhattan, and Long Island via Verrazzano. Flat-rate chauffeur. (516) 888-1290.",
     "Verrazzano crossings to Brooklyn, Manhattan, and New Jersey — chauffeured service with toll-inclusive flat quotes and airport expertise.",
     [
         {"title": "All Staten Island", "desc": "North Shore, South Shore, St. George, and Tottenville — door-to-door residential service."},
@@ -368,7 +368,7 @@ ALL_PAGES["staten-island"] = borough_page(
 ALL_PAGES["events"] = base(
     "events", "service", "Events & Occasions",
     "Wedding & Event Transportation Long Island | Caliber Car Service",
-    "Wedding, gala, and special-event transportation on Long Island — Sprinter bridal parties, discreet sedans, coordinated timing. Family owned since 2004. (516) 595-2391.",
+    "Wedding, gala, and special-event transportation on Long Island — Sprinter bridal parties, discreet sedans, coordinated timing. Family owned since 2004. (516) 888-1290.",
     {"line1": "EVENTS &", "line2": "OCCASIONS.", "sub": "Weddings, galas, anniversaries, and milestones — multi-vehicle coordination, immaculate Sprinters, and chauffeurs who understand that being early is the only kind of on-time that matters."},
     [
         {"title": "Wedding Party Sprinters", "desc": "Bridal parties, groomsmen, and family groups — standing-height cabin, limo seating, room for gowns and garment bags."},
@@ -407,7 +407,7 @@ ALL_PAGES["events"] = base(
 ALL_PAGES["cruise"] = base(
     "cruise", "service", "Cruise Terminals",
     "Cruise Terminal Car Service NYC & NJ | Caliber Car Service",
-    "Long Island to Brooklyn, Manhattan, and Bayonne cruise terminals — door to gangway, luggage handled, flat rates. (516) 595-2391.",
+    "Long Island to Brooklyn, Manhattan, and Bayonne cruise terminals — door to gangway, luggage handled, flat rates. (516) 888-1290.",
     {"line1": "CRUISE", "line2": "TERMINALS.", "sub": "Brooklyn Red Hook, Manhattan cruise piers, and Cape Liberty Bayonne — chauffeured transfers from Long Island with timing built around embarkation windows and heavy luggage."},
     [
         {"title": "Brooklyn Cruise Terminal", "desc": "Red Hook — we know pier access, staging lanes, and Brooklyn bridge traffic from Nassau and Suffolk."},
@@ -498,7 +498,7 @@ ALL_PAGES["nyc"] = {
             },
         ],
         "faq": [
-            {"q": "Are you based in NYC?", "a": "We are family owned and operated on Long Island with daily NYC service since 2004. Dispatch is (516) 595-2391 — we serve all five boroughs."},
+            {"q": "Are you based in NYC?", "a": "We are family owned and operated on Long Island with daily NYC service since 2004. Dispatch is (516) 888-1290 — we serve all five boroughs."},
             {"q": "Which borough page should I read?", "a": "Each borough has its own page with airport strategy and typical routes — start with the borough where your pickup or drop-off occurs."},
         ],
         "related": [
@@ -514,7 +514,7 @@ ALL_PAGES["nyc"] = {
 ALL_PAGES["hamptons"] = base(
     "hamptons", "area", "Hamptons & East End",
     "Hamptons Car Service & Airport Transfers | Caliber Car Service",
-    "Hamptons and East End chauffeur service — JFK, HPN, seasonal traffic expertise, weddings and summer events. 24/7 dispatch. (516) 595-2391.",
+    "Hamptons and East End chauffeur service — JFK, HPN, seasonal traffic expertise, weddings and summer events. 24/7 dispatch. (516) 888-1290.",
     {"line1": "HAMPTONS", "line2": "& EAST END.", "sub": "Seasonal traffic, Friday exodus, and event weekends — chauffeured service from Montauk to Manhattan with drivers who plan buffer time honestly."},
     [
         {"title": "Summer & Event Season", "desc": "Weddings, benefits, and house weekends — book early for June through September peak dates."},
@@ -590,7 +590,7 @@ ALL_PAGES["north-shore"] = base(
 ALL_PAGES["westchester-ct"] = base(
     "westchester-ct", "area", "Westchester & Connecticut",
     "Westchester & Connecticut Car Service | Caliber Car Service",
-    "Executive car service for Westchester County and Connecticut — HPN airport, cross-border runs, corporate travel. (516) 595-2391.",
+    "Executive car service for Westchester County and Connecticut — HPN airport, cross-border runs, corporate travel. (516) 888-1290.",
     {"line1": "WESTCHESTER", "line2": "& CT.", "sub": "White Plains Airport, Connecticut border towns, and cross-county executive travel — chauffeurs who route across state lines with tolls and timing built into flat quotes."},
     [
         {"title": "HPN Specialists", "desc": "White Plains County Airport — compact terminal, shorter security, ideal for select domestic routes."},
@@ -649,7 +649,7 @@ ALL_PAGES["about"] = {
         },
         "aboutBlocks": [
             {"title": "Family owned and operated", "body": "Caliber Car Service has operated from Long Island since 2004. The same family that answers strategy questions still cares whether your 6 a.m. JFK pickup happened on time — because reputation in this business is every single trip."},
-            {"title": "How dispatch works", "body": "When you call (516) 595-2391, you reach our dispatch desk — not an overseas call center. We confirm your flight, assign your chauffeur, and stay reachable when plans change. For corporate accounts, you get a consistent billing contact and trip records your travel team can audit."},
+            {"title": "How dispatch works", "body": "When you call (516) 888-1290, you reach our dispatch desk — not an overseas call center. We confirm your flight, assign your chauffeur, and stay reachable when plans change. For corporate accounts, you get a consistent billing contact and trip records your travel team can audit."},
             {"title": "Licensed, insured, TLC compliant", "body": "Our vehicles and chauffeurs meet New York TLC requirements. We carry commercial insurance appropriate for executive transportation. If your company needs certificates for vendors, ask dispatch — we provide documentation regularly."},
             {"title": "What we drive", "body": "Executive sedans (Cadillac CT6 class), premium SUVs (Escalade and similar), and executive Sprinters for groups. Every vehicle is detailed before pickup. Wi-Fi, chargers, and water are standard — presentation matters because it is part of your arrival."},
         ],
@@ -659,7 +659,7 @@ ALL_PAGES["about"] = {
         },
         "faq": [
             {"q": "Where are you based?", "a": "We are family owned and operated on Long Island, New York, serving Nassau, Suffolk, NYC, New Jersey, Connecticut, and Westchester."},
-            {"q": "How do I book?", "a": "Book online through our Moovs reservation link, call (516) 595-2391, or email info@calibercarservice.com. Same-day availability is subject to fleet schedule — call for urgent trips."},
+            {"q": "How do I book?", "a": "Book online through our Moovs reservation link, call (516) 888-1290, or email info@calibercarservice.com. Same-day availability is subject to fleet schedule — call for urgent trips."},
             {"q": "Do you only do airports?", "a": "No. Airports are a core specialty, but we also handle corporate travel, hourly as-directed service, Manhattan runs, weddings and events, and cruise terminals."},
             {"q": "Can I request the same chauffeur?", "a": "We note preferences on your account when possible. Chauffeur assignment depends on schedule and vehicle class for each trip."},
         ],
@@ -673,7 +673,7 @@ ALL_PAGES["about"] = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Caliber Car Service",
-        "telephone": "+15165952391",
+        "telephone": "+15168881290",
         "foundingDate": "2004",
         "description": "Family-owned executive black car service on Long Island since 2004.",
         "areaServed": ["Long Island", "New York City", "New Jersey", "Connecticut"],
@@ -767,7 +767,7 @@ def town_page(slug, name, seo_title, seo_desc, hero_sub, routes, airport_strateg
             {"title": "Manhattan Runs", "desc": "Dinner, theater, offices, and hospitals — chauffeurs who know your usual crossings."},
             {"title": "Corporate & Hourly", "desc": f"Dedicated accounts and as-directed blocks for executives based in {name}."},
             {"title": "Events & Weddings", "desc": "Sprinters and sedans for local celebrations — coordinated timing with your planner."},
-            {"title": "24/7 Dispatch", "desc": "Call (516) 595-2391 for same-day availability and account bookings."},
+            {"title": "24/7 Dispatch", "desc": "Call (516) 888-1290 for same-day availability and account bookings."},
             {"title": "Fixed-Rate Quotes", "desc": "Price confirmed at booking — tolls included on standard routes unless noted otherwise."},
         ],
         {"headline": "LOCAL<br><span class=\"gold\">EXPERTISE.</span>", "body": f"We have run {name} pickups daily for years — not occasional GPS guesses. Your chauffeur knows residential staging, school traffic pockets, and which airport makes sense for your flight."},
@@ -809,7 +809,7 @@ ALL_PAGES["garden-city"] = town_page(
 ALL_PAGES["great-neck"] = town_page(
     "great-neck", "Great Neck",
     "Great Neck Car Service & Airport Transfers | Caliber",
-    "Great Neck, NY executive car service — LGA proximity, JFK transfers, Manhattan runs. 24/7 dispatch. (516) 595-2391.",
+    "Great Neck, NY executive car service — LGA proximity, JFK transfers, Manhattan runs. 24/7 dispatch. (516) 888-1290.",
     "Great Neck and the Great Neck peninsula — chauffeurs who know LGA loops, Kings Point staging, and Manhattan rush patterns.",
     [
         {"dest": "Great Neck → LaGuardia", "time": "20–35 min typical", "note": "Among the shortest major-airport drives from Nassau — ideal for many domestic itineraries."},
@@ -836,7 +836,7 @@ ALL_PAGES["great-neck"] = town_page(
 ALL_PAGES["manhasset"] = town_page(
     "manhasset", "Manhasset",
     "Manhasset Car Service & Airport Transfers | Caliber",
-    "Manhasset, NY black car service — North Shore chauffeur for LGA, JFK, HPN, and Manhattan. Flat rates. (516) 595-2391.",
+    "Manhasset, NY black car service — North Shore chauffeur for LGA, JFK, HPN, and Manhattan. Flat rates. (516) 888-1290.",
     "Manhasset and Plandome — North Shore chauffeur service with LGA and HPN expertise for Gold Coast travel patterns.",
     [
         {"dest": "Manhasset → LaGuardia", "time": "25–40 min typical", "note": "Reliable domestic hub — terminal confirmed at booking."},
@@ -909,7 +909,7 @@ ALL_PAGES["syosset"] = town_page(
     [
         {"q": "Do you pick up in Woodbury and Jericho?", "a": "Yes — the entire 11791 area and adjacent ZIP codes on regular schedules."},
         {"q": "Can our company open a corporate account?", "a": "Yes — popular for Melville-area firms with executives in Syosset. Call dispatch for onboarding."},
-        {"q": "Same-day airport booking from Syosset?", "a": "Subject to availability — call (516) 595-2391 for fastest confirmation."},
+        {"q": "Same-day airport booking from Syosset?", "a": "Subject to availability — call (516) 888-1290 for fastest confirmation."},
     ],
     [{"label": "Corporate Travel", "href": "corporate/"}, {"label": "LGA", "href": "lga/"}, {"label": "North Shore", "href": "north-shore/"}],
 )
@@ -917,7 +917,7 @@ ALL_PAGES["syosset"] = town_page(
 ALL_PAGES["rockville-centre"] = town_page(
     "rockville-centre", "Rockville Centre",
     "Rockville Centre Car Service & Airport Transfers | Caliber",
-    "Rockville Centre, NY black car service — South Shore Nassau, LGA and JFK access, Manhattan runs. Flat rates. (516) 595-2391.",
+    "Rockville Centre, NY black car service — South Shore Nassau, LGA and JFK access, Manhattan runs. Flat rates. (516) 888-1290.",
     "Rockville Centre and the South Shore — village pickups with strong LaGuardia and JFK access via the Southern State and Belt Parkway corridors.",
     [
         {"dest": "Rockville Centre → LaGuardia", "time": "30–50 min typical", "note": "Belt Parkway and Grand Central routing — traffic-dependent."},
@@ -944,7 +944,7 @@ ALL_PAGES["rockville-centre"] = town_page(
 ALL_PAGES["melville"] = town_page(
     "melville", "Melville",
     "Melville Car Service & Airport Transfers | Caliber",
-    "Melville, NY corporate car service — Route 110 corridor, LGA and JFK, Manhattan. Executive accounts. (516) 595-2391.",
+    "Melville, NY corporate car service — Route 110 corridor, LGA and JFK, Manhattan. Executive accounts. (516) 888-1290.",
     "Melville and the Route 110 corporate corridor — executive home pickups and office-adjacent departures with dedicated account billing.",
     [
         {"dest": "Melville → LaGuardia", "time": "30–45 min typical", "note": "Popular corporate airport — Northern State and LIE routing."},
@@ -963,7 +963,7 @@ ALL_PAGES["melville"] = town_page(
     [
         {"q": "Do you serve the Route 110 office corridor?", "a": "Yes — Melville, Huntington (south), and adjacent commercial addresses daily."},
         {"q": "Can our company open a corporate account?", "a": "Yes — popular for firms along Route 110. Call dispatch to onboard billing and authorized bookers."},
-        {"q": "Same-day airport booking from Melville?", "a": "Subject to availability — call (516) 595-2391 for fastest confirmation."},
+        {"q": "Same-day airport booking from Melville?", "a": "Subject to availability — call (516) 888-1290 for fastest confirmation."},
     ],
     [{"label": "Corporate Travel", "href": "corporate/"}, {"label": "Syosset", "href": "syosset/"}, {"label": "LGA", "href": "lga/"}],
 )
