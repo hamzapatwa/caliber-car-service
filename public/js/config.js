@@ -68,6 +68,7 @@ const CONFIG = {
         itemsKey: 'longIsland',
         footer: { label: 'All towns & areas', href: '/areas/' },
       },
+      { title: 'Services', itemsKey: 'services' },
     ],
     airports: [
       { label: 'John F. Kennedy (JFK)', href: '/jfk/' },

@@ -51,3 +51,21 @@ const SITE_IMAGES = {
     areas:          { hero: 'light-trail.webp', glove: 'vistiq.webp' },
   },
 };
+
+/** Pixel width of each master .webp (used to avoid srcset entries for missing variants). */
+const SITE_IMG_NATURAL_W = {
+  'back-seat': 1980,
+  'car-and-jet': 1024,
+  ct4: 1200,
+  'escalade-night': 1200,
+  'escalade-wine-tour': 1920,
+  'light-trail': 1920,
+  'merc-and-jet': 1920,
+  planepluscar: 1920,
+  'rear-seat': 1920,
+  'special-event': 1920,
+  'sprinter-cruise': 1920,
+  sprinter: 1080,
+  vistiq: 1536,
+  whiteglove: 1920,
+};
