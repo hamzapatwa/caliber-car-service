@@ -401,16 +401,41 @@ function lpRenderGlove(page) {
     </section>`;
 }
 
+function lpCtaHeadline(page) {
+  if (page.cta && page.cta.headline) return page.cta.headline;
+  if (page.type === 'about') return 'Book your next<br>executive ride';
+  if (page.type === 'hub') return 'Book your trip<br>with Caliber';
+  return `Book your<br>${lpPageDisplayName(page)} ride`;
+}
+
 function lpRenderAboutBlocks(page) {
   if (!page.aboutBlocks || !page.aboutBlocks.length) return '';
-  const blocks = page.aboutBlocks.map((b) => `
-      <div class="ap-about-block">
-        <h3>${b.title}</h3>
-        <p>${b.body}</p>
-      </div>`).join('');
+  const head = page.aboutBlocksHead || { eyebrow: 'Who we are', title: 'Built on Long Island' };
+  const cards = page.aboutBlocks.map((b, i) => {
+    const src = b.image ? lpImageFile(b.image) : lpGloveImg(page);
+    const num = b.num || `0${i + 1}`;
+    const alt = b.imageAlt || `${b.title} — Caliber Car Service`;
+    return `
+      <article class="ap-about-card">
+        <div class="ap-about-card-img-wrap">
+          <img src="${src}" alt="${alt}" class="ap-about-card-img" loading="lazy" ${LP_IMG_FB} />
+        </div>
+        <div class="ap-about-card-body">
+          <span class="ap-about-card-num">${num}</span>
+          <h3 class="ap-about-card-title">${b.title}</h3>
+          <p class="ap-about-card-desc">${b.body}</p>
+        </div>
+      </article>`;
+  }).join('');
   return `
     <section class="ap-about-blocks">
-      <div class="ap-about-blocks-inner">${blocks}</div>
+      <div class="ap-about-blocks-inner">
+        <div class="ap-about-blocks-head">
+          <span class="section-eyebrow">${head.eyebrow}</span>
+          <h2 class="section-title">${head.title}<span class="gold">.</span></h2>
+        </div>
+        <div class="ap-about-cards">${cards}</div>
+      </div>
     </section>`;
 }
 
@@ -463,7 +488,7 @@ function lpRenderRelated(page) {
 
 function lpRenderCTA(page) {
   const cta = page.cta || {};
-  const headline = cta.headline || `Book your<br>${lpPageDisplayName(page)} ride`;
+  const headline = lpCtaHeadline(page);
   const sub = cta.sub || 'One call, one driver, on time — every time. Available 24 hours a day, 7 days a week.';
   return `
     <section class="cta" id="cta">
