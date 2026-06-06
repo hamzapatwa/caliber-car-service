@@ -127,10 +127,10 @@ const CONFIG = {
   hero: {
     badge:    'Family Owned &amp; Operated Since 2004',
     headline: {
-      line1: 'EXECUTIVE',
-      line2: 'BLACK CAR',
-      line3: 'SERVICE',
-      line4: 'NYC',
+      line1:       'EXECUTIVE',
+      line2:       'BLACK CAR',
+      line3:       'SERVICE',
+      line3Suffix: 'NYC',
     },
     sub:      'Chauffeured airport transfers, corporate accounts, and as-directed service across New York, New Jersey, and Connecticut. One call. Your ride. On time.',
     ctaPrimary:   { label: 'Request Quote', href: 'https://customer.moovs.app/caliber-car-service/request/new' },

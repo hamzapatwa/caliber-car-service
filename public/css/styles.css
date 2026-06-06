@@ -689,7 +689,27 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
   display:             inline-block;
   transform:           translateX(-.06em);
 }
-.hero-name-row.gold .hero-name-inner { color: var(--gold); }
+.hero-name-row--pair {
+  display:         flex;
+  flex-wrap:       nowrap;
+  align-items:     baseline;
+  gap:             0.12em;
+  white-space:     nowrap;
+  overflow:        visible;
+  font-size:       clamp(66px, 10.5vw, 172px);
+  width:           fit-content;
+}
+.hero-name-row--pair .hero-name-inner { display: block; flex: 0 0 auto; }
+.hero-name-suffix {
+  display:         block;
+  flex:            0 0 auto;
+  color:           var(--gold);
+  font-family:     inherit;
+  font-size:       inherit;
+  line-height:     inherit;
+  letter-spacing:  inherit;
+  padding-right:   0.06em;
+}
 .hero-sub {
   font-family:   var(--font-body);
   font-size:     clamp(15px, 1.2vw, 17px);
@@ -1686,6 +1706,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 @media (max-width: 480px) {
   .stats-grid           { grid-template-columns: 1fr 1fr; }
   .hero-name            { font-size: clamp(56px, 18vw, 96px); }
+  .hero-name-row--pair  { font-size: clamp(52px, 16.5vw, 90px); }
 
   /* Keep 2-column layout in coverage — scale text down so both
      columns fit comfortably at small viewport widths */

@@ -88,12 +88,8 @@ function renderHero() {
             <span class="hero-name-inner">${headline.line2}</span>
           </span>
           ${headline.line3 ? `
-          <span class="hero-name-row">
-            <span class="hero-name-inner">${headline.line3}</span>
-          </span>` : ''}
-          ${headline.line4 ? `
-          <span class="hero-name-row gold">
-            <span class="hero-name-inner">${headline.line4}</span>
+          <span class="hero-name-row${headline.line3Suffix ? ' hero-name-row--pair' : ''}">
+            <span class="hero-name-inner">${headline.line3}</span>${headline.line3Suffix ? `<span class="hero-name-suffix">${headline.line3Suffix}</span>` : ''}
           </span>` : ''}
         </h1>
         <p class="hero-sub">${sub}</p>
@@ -572,7 +568,7 @@ function playHeroIntro() {
   }, 0);
 
   // Headline rows
-  tl.from('.hero-name-inner', {
+  tl.from('.hero-name-inner, .hero-name-suffix', {
     yPercent: 110,
     duration: 1.05,
     stagger:  0.12,
