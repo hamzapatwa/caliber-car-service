@@ -52,7 +52,7 @@ function renderNav() {
           ${ar}
         </ul>
         <a href="${CONFIG.phoneHref}" class="nav-phone">${PHONE_ICON}${CONFIG.phone}</a>
-        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>${CONFIG.quoteCtaLabel}</a>
+        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ATTR(CONFIG.bookHref)}>${CONFIG.quoteCtaLabel}</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -94,7 +94,7 @@ function renderHero() {
         </h1>
         <p class="hero-sub">${sub}</p>
         <div class="hero-ctas">
-          <a href="${ctaPrimary.href}" class="btn btn-gold"${MOOVS_BOOK_ONCLICK(ctaPrimary.href)}>
+          <a href="${ctaPrimary.href}" class="btn btn-gold"${MOOVS_BOOK_ATTR(ctaPrimary.href)}>
             ${ctaPrimary.label}
             <span class="btn-arrow">→</span>
           </a>
@@ -160,7 +160,7 @@ function renderServices() {
   const cards = CONFIG.services
     .map((s) => {
       const external = !s.href;
-      const attrs = external ? MOOVS_BOOK_ONCLICK(CONFIG.bookHref) : '';
+      const attrs = external ? MOOVS_BOOK_ATTR(CONFIG.bookHref) : '';
       const img = serviceCardImage(s.href);
       return `
       <a class="service-card" href="${s.href || CONFIG.bookHref}" aria-label="${s.name}"${attrs}>
@@ -219,7 +219,7 @@ function renderFleet() {
             </div>
           </div>
           <div class="fleet-features">${features}</div>
-          <a href="${CONFIG.bookHref}" class="btn btn-outline fleet-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
+          <a href="${CONFIG.bookHref}" class="btn btn-outline fleet-cta"${MOOVS_BOOK_ATTR(CONFIG.bookHref)}>
             ${CONFIG.quoteCtaLabel}
             <span class="btn-arrow">→</span>
           </a>
@@ -325,7 +325,7 @@ function renderCTA() {
             <span class="cta-contact-value cta-contact-value--email">${CONFIG.email}</span>
           </a>
         </div>
-        <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
+        <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ATTR(CONFIG.bookHref)}>
           ${c.primary.label}
           <span class="btn-arrow">→</span>
         </a>
@@ -339,7 +339,10 @@ function renderFooter() {
     .map((b) => `<span class="footer-badge">${b}</span>`)
     .join('');
   const linkHtml = links
-    .map((l) => `<a href="${l.href}">${l.label}</a>`)
+    .map((l) => {
+      const href = l.href === '#cta' ? CONFIG.bookHref : l.href;
+      return `<a href="${href}"${moovsBookLinkAttrs(href)}>${l.label}</a>`;
+    })
     .join('');
 
   return `

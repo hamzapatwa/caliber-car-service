@@ -208,7 +208,7 @@ function lpRenderNav() {
           ${ar}
         </ul>
         <a href="${CONFIG.phoneHref}" class="nav-phone">${LP_PHONE_ICON}${CONFIG.phone}</a>
-        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>${CONFIG.quoteCtaLabel}</a>
+        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ATTR(CONFIG.bookHref)}>${CONFIG.quoteCtaLabel}</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -238,7 +238,7 @@ function lpRenderHero(page) {
         </h1>
         <p class="ap-hero-sub">${hero.sub}</p>
         <div class="ap-hero-ctas">
-          <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
+          <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ATTR(CONFIG.bookHref)}>
             ${CONFIG.quoteCtaLabel} <span class="btn-arrow">→</span>
           </a>
           <a href="${CONFIG.phoneHref}" class="btn btn-outline">
@@ -390,7 +390,7 @@ function lpRenderGlove(page) {
           <span class="section-eyebrow">White Glove Service</span>
           <h2 class="ap-glove-headline">${glove.headline}</h2>
           <p class="ap-glove-body">${glove.body}</p>
-          <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
+          <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ATTR(CONFIG.bookHref)}>
             ${CONFIG.quoteCtaLabel} <span class="btn-arrow">→</span>
           </a>
         </div>
@@ -504,7 +504,7 @@ function lpRenderCTA(page) {
             <span class="cta-contact-value">${LP_PHONE_ICON}${CONFIG.phone}</span>
           </a>
         </div>
-        <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
+        <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ATTR(CONFIG.bookHref)}>
           ${CONFIG.quoteCtaLabel} <span class="btn-arrow">→</span>
         </a>
       </div>
@@ -555,7 +555,7 @@ function lpRenderFooter() {
         <nav class="footer-nav" aria-label="Footer">
           <a href="/">Home</a>
           <a href="/#services">Services</a>
-          <a href="${CONFIG.bookHref}"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>${CONFIG.quoteCtaLabel}</a>
+          <a href="${CONFIG.bookHref}"${MOOVS_BOOK_ATTR(CONFIG.bookHref)}>${CONFIG.quoteCtaLabel}</a>
         </nav>
       </div>
     </footer>`;

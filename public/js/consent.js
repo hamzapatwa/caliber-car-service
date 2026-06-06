@@ -9,10 +9,6 @@
   var STORAGE_KEY = 'ccs_consent';
   var AW_ID = 'AW-18199416292';
 
-  var script = document.currentScript;
-  var src = (script && script.getAttribute('src')) || 'js/consent.js';
-  var BASE = src.replace(/js\/consent\.js(\?.*)?$/i, '');
-
   window.dataLayer = window.dataLayer || [];
   function gtag() { window.dataLayer.push(arguments); }
   window.gtag = gtag;
@@ -56,10 +52,6 @@
     loader.onload = function () {
       gtag('js', new Date());
       gtag('config', AW_ID);
-
-      var conv = document.createElement('script');
-      conv.src = BASE + 'js/conversion.js';
-      document.head.appendChild(conv);
     };
     document.head.appendChild(loader);
   }

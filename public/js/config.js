@@ -371,7 +371,7 @@ const CONFIG = {
       { label: 'Top',      href: '#hero'     },
       { label: 'Services', href: '#services' },
       { label: 'Fleet',    href: '#fleet'    },
-      { label: 'Request Quote', href: '#cta' },
+      { label: 'Request Quote', href: 'https://customer.moovs.app/caliber-car-service/request/new' },
     ],
     airports: [
       { label: 'John F. Kennedy (JFK)', href: '/jfk/' },

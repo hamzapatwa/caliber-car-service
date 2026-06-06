@@ -22,8 +22,41 @@ const SITE_PHONE_ICON =
   `2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>` +
   `</svg>`;
 
-const MOOVS_BOOK_ONCLICK = (url) =>
-  ` onclick="if(typeof gtag_report_conversion==='function'){return gtag_report_conversion('${url}');}window.open('${url}','_blank','noopener,noreferrer');return false;"`;
+/** Marks a Moovs booking link for delegated conversion tracking. */
+const MOOVS_BOOK_ATTR = (url) => ` data-moovs-book="${url}"`;
+
+/** Returns data-moovs-book when href is a Moovs booking URL. */
+function moovsBookLinkAttrs(href) {
+  if (!href || href.indexOf('moovs.app') === -1) return '';
+  return MOOVS_BOOK_ATTR(href);
+}
+
+function moovsBookNavigate(url) {
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function moovsBookFromLink(link) {
+  return link.getAttribute('data-moovs-book') || link.href;
+}
+
+function moovsBookClick(e) {
+  const link = e.target.closest('[data-moovs-book]');
+  if (!link) return;
+
+  e.preventDefault();
+  const url = moovsBookFromLink(link);
+  if (typeof gtag_report_conversion === 'function') {
+    gtag_report_conversion(url);
+  } else {
+    moovsBookNavigate(url);
+  }
+}
+
+document.addEventListener('click', moovsBookClick, true);
+document.addEventListener('auxclick', function (e) {
+  if (e.button !== 1) return;
+  moovsBookClick(e);
+}, true);
 
 const SITE_BRAND_MARK_SVG =
   `<svg class="brand-mark" viewBox="0 0 200 200" aria-hidden="true">` +
