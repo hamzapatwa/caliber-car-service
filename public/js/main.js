@@ -52,7 +52,7 @@ function renderNav() {
           ${ar}
         </ul>
         <a href="${CONFIG.phoneHref}" class="nav-phone">${PHONE_ICON}${CONFIG.phone}</a>
-        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>Book Now</a>
+        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>${CONFIG.quoteCtaLabel}</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -90,6 +90,10 @@ function renderHero() {
           ${headline.line3 ? `
           <span class="hero-name-row">
             <span class="hero-name-inner">${headline.line3}</span>
+          </span>` : ''}
+          ${headline.line4 ? `
+          <span class="hero-name-row gold">
+            <span class="hero-name-inner">${headline.line4}</span>
           </span>` : ''}
         </h1>
         <p class="hero-sub">${sub}</p>
@@ -206,7 +210,7 @@ function renderFleet() {
           </div>
           <div class="fleet-features">${features}</div>
           <a href="${CONFIG.bookHref}" class="btn btn-outline fleet-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
-            Reserve ${v.category}
+            ${CONFIG.quoteCtaLabel}
             <span class="btn-arrow">→</span>
           </a>
         </div>
@@ -299,7 +303,7 @@ function renderCTA() {
     <section class="cta" id="cta">
       <div class="cta-inner">
         <span class="section-eyebrow cta-eyebrow">${c.eyebrow}</span>
-        <h2 class="cta-heading">${c.headline.replace('YOUR RIDE.', '<span class="gold">YOUR RIDE.</span>')}</h2>
+        <h2 class="cta-heading">${c.headline.replace('A QUOTE.', '<span class="gold">A QUOTE.</span>')}</h2>
         <p class="cta-sub">${c.sub}</p>
         <div class="cta-contact">
           <a href="${CONFIG.phoneHref}" class="cta-contact-item">

@@ -70,7 +70,7 @@ function buildNavDrawerHTML(opts = {}) {
   const actions = `
     <div class="nav-drawer-actions">
       <a href="${bookHref}" class="nav-drawer-book btn btn-gold"${typeof MOOVS_BOOK_ONCLICK === 'function' ? MOOVS_BOOK_ONCLICK(CONFIG.bookHref) : ''}>
-        Book Now <span class="btn-arrow">→</span>
+        ${CONFIG.quoteCtaLabel} <span class="btn-arrow">→</span>
       </a>
       <a href="${phoneHref}" class="nav-drawer-phone">
         <span class="nav-drawer-phone-label">Dispatch 24/7</span>

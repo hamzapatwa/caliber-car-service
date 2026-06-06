@@ -208,7 +208,7 @@ function lpRenderNav() {
           ${ar}
         </ul>
         <a href="${CONFIG.phoneHref}" class="nav-phone">${LP_PHONE_ICON}${CONFIG.phone}</a>
-        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>Book Now</a>
+        <a href="${CONFIG.bookHref}" class="nav-cta"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>${CONFIG.quoteCtaLabel}</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -239,7 +239,7 @@ function lpRenderHero(page) {
         <p class="ap-hero-sub">${hero.sub}</p>
         <div class="ap-hero-ctas">
           <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
-            Reserve Your Ride <span class="btn-arrow">→</span>
+            ${CONFIG.quoteCtaLabel} <span class="btn-arrow">→</span>
           </a>
           <a href="${CONFIG.phoneHref}" class="btn btn-outline">
             ${LP_PHONE_ICON}${CONFIG.phone} <span class="btn-arrow">&#x2197;&#xFE0E;</span>
@@ -391,7 +391,7 @@ function lpRenderGlove(page) {
           <h2 class="ap-glove-headline">${glove.headline}</h2>
           <p class="ap-glove-body">${glove.body}</p>
           <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
-            Book Online <span class="btn-arrow">→</span>
+            ${CONFIG.quoteCtaLabel} <span class="btn-arrow">→</span>
           </a>
         </div>
         <div class="ap-glove-img-wrap">
@@ -403,9 +403,9 @@ function lpRenderGlove(page) {
 
 function lpCtaHeadline(page) {
   if (page.cta && page.cta.headline) return page.cta.headline;
-  if (page.type === 'about') return 'Book your next<br>executive ride';
-  if (page.type === 'hub') return 'Book your trip<br>with Caliber';
-  return `Book your<br>${lpPageDisplayName(page)} ride`;
+  if (page.type === 'about') return 'Request your next<br>executive quote';
+  if (page.type === 'hub') return 'Request a quote<br>with Caliber';
+  return `Request a quote<br>for ${lpPageDisplayName(page)}`;
 }
 
 function lpRenderAboutBlocks(page) {
@@ -505,7 +505,7 @@ function lpRenderCTA(page) {
           </a>
         </div>
         <a href="${CONFIG.bookHref}" class="btn btn-gold"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>
-          Book Online <span class="btn-arrow">→</span>
+          ${CONFIG.quoteCtaLabel} <span class="btn-arrow">→</span>
         </a>
       </div>
     </section>`;
@@ -555,7 +555,7 @@ function lpRenderFooter() {
         <nav class="footer-nav" aria-label="Footer">
           <a href="/">Home</a>
           <a href="/#services">Services</a>
-          <a href="${CONFIG.bookHref}"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>Book</a>
+          <a href="${CONFIG.bookHref}"${MOOVS_BOOK_ONCLICK(CONFIG.bookHref)}>${CONFIG.quoteCtaLabel}</a>
         </nav>
       </div>
     </footer>`;

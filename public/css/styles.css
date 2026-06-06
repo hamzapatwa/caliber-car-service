@@ -689,6 +689,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
   display:             inline-block;
   transform:           translateX(-.06em);
 }
+.hero-name-row.gold .hero-name-inner { color: var(--gold); }
 .hero-sub {
   font-family:   var(--font-body);
   font-size:     clamp(15px, 1.2vw, 17px);
@@ -1620,7 +1621,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 @media (max-width: 720px) {
   /* Tighter nav padding on mobile so the burger has more room */
   .nav              { padding: 14px var(--shell-pad-x); }
-  /* Hide Book Now from the sticky bar only — drawer's Book Now stays */
+  /* Hide Request Quote from the sticky bar only — drawer CTA stays */
   .nav-right .nav-cta { display: none; }
   /* No gap needed when only the burger is left in nav-right */
   .nav-right        { gap: 0; }

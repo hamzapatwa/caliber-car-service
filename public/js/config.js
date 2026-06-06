@@ -118,7 +118,8 @@ const CONFIG = {
   phoneHref: 'tel:+15165952391',
   email:     'info@calibercarservice.com',
   emailHref: 'mailto:info@calibercarservice.com',
-  bookHref:  'https://customer.moovs.app/caliber-car-service/request/new',
+  bookHref:       'https://customer.moovs.app/caliber-car-service/request/new',
+  quoteCtaLabel:  'Request Quote',
 
   /* ----------------------------------------------------------
      HERO
@@ -129,9 +130,10 @@ const CONFIG = {
       line1: 'EXECUTIVE',
       line2: 'BLACK CAR',
       line3: 'SERVICE',
+      line4: 'NYC',
     },
     sub:      'Chauffeured airport transfers, corporate accounts, and as-directed service across New York, New Jersey, and Connecticut. One call. Your ride. On time.',
-    ctaPrimary:   { label: 'Book Now', href: 'https://customer.moovs.app/caliber-car-service/request/new' },
+    ctaPrimary:   { label: 'Request Quote', href: 'https://customer.moovs.app/caliber-car-service/request/new' },
     ctaSecondary: { label: 'See the Fleet',          href: '#fleet' },
     image: {
       src: typeof SITE_IMAGES !== 'undefined' ? SITE_IMAGES.home.hero : 'assets/images/escalade-night.webp',
@@ -351,9 +353,9 @@ const CONFIG = {
   ---------------------------------------------------------- */
   cta: {
     eyebrow:    'Ready When You Are',
-    headline:   'RESERVE\nYOUR RIDE.',
-    sub:        'Available 24 hours a day, seven days a week. Call dispatch, email reservations, or book online — your chauffeur will be ready.',
-    primary:    { label: 'Book Now',  href: 'https://customer.moovs.app/caliber-car-service/request/new' },
+    headline:   'REQUEST\nA QUOTE.',
+    sub:        'Available 24 hours a day, seven days a week. Call dispatch, email reservations, or request a quote online — your chauffeur will be ready.',
+    primary:    { label: 'Request Quote', href: 'https://customer.moovs.app/caliber-car-service/request/new' },
   },
 
   /* ----------------------------------------------------------
@@ -367,7 +369,7 @@ const CONFIG = {
       { label: 'Top',      href: '#hero'     },
       { label: 'Services', href: '#services' },
       { label: 'Fleet',    href: '#fleet'    },
-      { label: 'Book',     href: '#cta'      },
+      { label: 'Request Quote', href: '#cta' },
     ],
     airports: [
       { label: 'John F. Kennedy (JFK)', href: '/jfk/' },
