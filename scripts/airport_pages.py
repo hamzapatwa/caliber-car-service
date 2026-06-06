@@ -47,7 +47,7 @@ AIRPORT_PAGES = {
         "JFK",
         "John F. Kennedy International Airport",
         "JFK Airport Car Service Long Island | Caliber Car Service",
-        "Fixed-rate JFK airport car service from Long Island. Meet-and-greet in arrivals, live flight tracking, 60-min complimentary wait. Family owned since 2004. Call (516) 888-1290.",
+        "Fixed-rate JFK airport car service from Long Island. Meet-and-greet in arrivals, live flight tracking, 60-min complimentary wait. Family owned since 2004. Call (516) 595-2391.",
         {
             "line1": "JFK",
             "line2": "AIRPORT.",
@@ -80,7 +80,7 @@ AIRPORT_PAGES = {
             {"q": "Do you monitor my flight for delays?", "a": "Yes. We track every flight in real time. If your flight is delayed, arrives early, or changes gates, your driver adjusts automatically — at no extra charge."},
             {"q": "Which JFK terminals do you serve?", "a": "All six terminals: T1 (Air France, Korean Air), T2 (Delta domestic), T4 (Delta international, Emirates, Lufthansa), T5 (JetBlue), T7 (British Airways), and T8 (American Airlines). Your driver will know your terminal and the right arrivals exit."},
             {"q": "Is there a wait fee if my flight is delayed?", "a": "No. Your 60-minute complimentary wait begins from actual touchdown — not the original scheduled arrival. If your flight is significantly delayed, we stay in contact and adjust at no penalty."},
-            {"q": "Can I book a JFK ride same-day?", "a": "Yes, subject to availability. For urgent or last-minute bookings, call our dispatch line directly at (516) 888-1290 rather than booking online."},
+            {"q": "Can I book a JFK ride same-day?", "a": "Yes, subject to availability. For urgent or last-minute bookings, call our dispatch line directly at (516) 595-2391 rather than booking online."},
             {"q": "Are your JFK rates truly flat — no tolls on top?", "a": "Yes. The rate you receive at booking is the rate you pay. Tolls, bridge fees, and gratuity are all-inclusive unless otherwise noted."},
         ],
     ),
@@ -90,7 +90,7 @@ AIRPORT_PAGES = {
         "LGA",
         "LaGuardia Airport",
         "LGA Airport Car Service Long Island | Caliber Car Service",
-        "LGA airport car service from Long Island. Nassau County's closest airport — meet-and-greet, live flight tracking, fixed rates. Family owned since 2004. Call (516) 888-1290.",
+        "LGA airport car service from Long Island. Nassau County's closest airport — meet-and-greet, live flight tracking, fixed rates. Family owned since 2004. Call (516) 595-2391.",
         {
             "line1": "LGA",
             "line2": "AIRPORT.",
@@ -132,7 +132,7 @@ AIRPORT_PAGES = {
         "EWR",
         "Newark Liberty International Airport",
         "Newark Airport Car Service Long Island | Caliber Car Service",
-        "EWR airport car service from Long Island. Cross-state flat rates including tolls and bridges. Meet-and-greet, live tracking, all terminals. Family owned since 2004. (516) 888-1290.",
+        "EWR airport car service from Long Island. Cross-state flat rates including tolls and bridges. Meet-and-greet, live tracking, all terminals. Family owned since 2004. (516) 595-2391.",
         {
             "line1": "NEWARK",
             "line2": "AIRPORT.",
@@ -179,7 +179,7 @@ AIRPORT_PAGES = {
         "HPN",
         "Westchester County Airport",
         "White Plains Airport Car Service Long Island | Caliber Car Service",
-        "HPN airport car service from Long Island. Westchester County Airport transfers with meet-and-greet, live flight tracking, and fixed rates. Family owned since 2004. Call (516) 888-1290.",
+        "HPN airport car service from Long Island. Westchester County Airport transfers with meet-and-greet, live flight tracking, and fixed rates. Family owned since 2004. Call (516) 595-2391.",
         {
             "line1": "WHITE PLAINS",
             "line2": "AIRPORT.",
@@ -212,7 +212,7 @@ AIRPORT_PAGES = {
             {"q": "Why choose HPN over JFK or LaGuardia?", "a": "Westchester County Airport is ideal for travelers based in northern Nassau, western Suffolk, or Connecticut who want a smaller terminal, shorter security lines, and competitive fares on select domestic routes — especially JetBlue and American."},
             {"q": "Do you monitor my flight for delays?", "a": "Yes. We track every flight in real time. If your flight is delayed, arrives early, or changes gates, your driver adjusts automatically — at no extra charge."},
             {"q": "Is there a wait fee if my flight is delayed?", "a": "No. Your 45-minute complimentary wait starts from actual landing time. If your flight is substantially delayed, we stay in contact and won't charge a penalty."},
-            {"q": "Can I book an HPN ride same-day?", "a": "Yes, subject to availability. For urgent or last-minute bookings, call our dispatch line directly at (516) 888-1290 rather than booking online."},
+            {"q": "Can I book an HPN ride same-day?", "a": "Yes, subject to availability. For urgent or last-minute bookings, call our dispatch line directly at (516) 595-2391 rather than booking online."},
             {"q": "Are your HPN rates truly flat — no tolls on top?", "a": "Yes. The rate you receive at booking is the rate you pay. Tolls and bridge fees are included unless otherwise noted at confirmation."},
         ],
     ),
