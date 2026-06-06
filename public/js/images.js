@@ -5,6 +5,14 @@
 const SITE_IMAGES = {
   home: {
     hero: 'assets/images/escalade-night.webp',
+    services: {
+      jfk:        { file: 'planepluscar.webp',    alt: 'Luxury sedan at airport terminal' },
+      corporate:  { file: 'rear-seat.webp',       alt: 'Executive rear seat interior' },
+      hourly:     { file: 'back-seat.webp',       alt: 'Premium chauffeured interior' },
+      manhattan:  { file: 'light-trail.webp',     alt: 'Luxury vehicle in Manhattan at night' },
+      events:     { file: 'special-event.webp',   alt: 'Chauffeured vehicle for special events' },
+      cruise:     { file: 'sprinter-cruise.webp', alt: 'Sprinter van at cruise terminal' },
+    },
   },
   fleet: {
     sedan: 'assets/images/ct4.webp',

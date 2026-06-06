@@ -4,11 +4,11 @@
 
 const SITE_FALLBACK_SVG =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">' +
-    '<rect width="800" height="600" fill="#0E0E0C"/>' +
+    '<rect width="800" height="600" fill="#F7F6F2"/>' +
     '<text x="400" y="295" font-family="Bebas Neue,Impact,sans-serif" font-size="84" ' +
-      'letter-spacing="12" fill="#B8963E" text-anchor="middle">CALIBER</text>' +
+      'letter-spacing="12" fill="#9A7A2F" text-anchor="middle">CALIBER</text>' +
     '<text x="400" y="335" font-family="sans-serif" font-size="14" ' +
-      'letter-spacing="6" fill="#55554C" text-anchor="middle">CAR SERVICE</text>' +
+      'letter-spacing="6" fill="#646458" text-anchor="middle">CAR SERVICE</text>' +
   '</svg>';
 const SITE_FALLBACK_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(SITE_FALLBACK_SVG);
 const SITE_IMG_FB = ` onerror="this.onerror=null;this.src='${SITE_FALLBACK_URI}';this.classList.add('is-fallback');"`;

@@ -18,12 +18,14 @@ const CONFIG = {
      THEME — edit colors here, no CSS editing needed
   ---------------------------------------------------------- */
   theme: {
-    bg:      '#080808',
-    surface: '#0E0E0C',
-    border:  '#1A1A14',
-    gold:    '#B8963E',
-    white:   '#EEEEE8',
-    muted:   '#55554C',
+    bg:       '#F7F6F2',
+    surface:  '#FFFFFF',
+    border:   '#E2E1DA',
+    gold:     '#9A7A2F',
+    white:    '#1A1A18',
+    muted:    '#646458',
+    onDark:   '#EEEEE8',
+    scrimRgb: '8, 8, 8',
   },
 
   /* ----------------------------------------------------------
@@ -414,10 +416,12 @@ const CONFIG = {
 (function applyTheme() {
   const s = document.documentElement.style;
   const t = CONFIG.theme;
-  s.setProperty('--bg',      t.bg);
-  s.setProperty('--surface', t.surface);
-  s.setProperty('--border',  t.border);
-  s.setProperty('--gold',    t.gold);
-  s.setProperty('--white',   t.white);
-  s.setProperty('--muted',   t.muted);
+  s.setProperty('--bg',        t.bg);
+  s.setProperty('--surface',   t.surface);
+  s.setProperty('--border',    t.border);
+  s.setProperty('--gold',      t.gold);
+  s.setProperty('--white',     t.white);
+  s.setProperty('--muted',     t.muted);
+  s.setProperty('--on-dark',   t.onDark);
+  s.setProperty('--scrim-rgb', t.scrimRgb);
 }());

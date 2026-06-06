@@ -147,17 +147,31 @@ function renderTrustStrip() {
     </div>`;
 }
 
+function serviceCardImage(href) {
+  const slug = (href || '').replace(/^\/|\/$/g, '').split('/')[0] || 'jfk';
+  const map = typeof SITE_IMAGES !== 'undefined' && SITE_IMAGES.home.services;
+  const entry = map && (map[slug] || map.jfk);
+  const file = entry ? entry.file : 'planepluscar.webp';
+  const alt = entry ? entry.alt : 'Caliber Car Service';
+  return { src: `assets/images/${file}`, alt };
+}
+
 function renderServices() {
   const cards = CONFIG.services
     .map((s) => {
       const external = !s.href;
       const attrs = external ? MOOVS_BOOK_ONCLICK(CONFIG.bookHref) : '';
+      const img = serviceCardImage(s.href);
       return `
       <a class="service-card" href="${s.href || CONFIG.bookHref}" aria-label="${s.name}"${attrs}>
-        <span class="service-num">${s.num}</span>
-        <h3 class="service-name">${s.name}</h3>
-        <p class="service-desc">${s.desc}</p>
-        <span class="service-arrow" aria-hidden="true">→</span>
+        <img class="service-card-bg" src="${img.src}" alt="" aria-hidden="true" loading="lazy" decoding="async"${IMG_FALLBACK_ATTR} />
+        <div class="service-card-scrim" aria-hidden="true"></div>
+        <div class="service-card-content">
+          <span class="service-num">${s.num}</span>
+          <h3 class="service-name">${s.name}</h3>
+          <p class="service-desc">${s.desc}</p>
+          <span class="service-arrow" aria-hidden="true">→</span>
+        </div>
       </a>`;
     })
     .join('');

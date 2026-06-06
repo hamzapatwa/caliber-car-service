@@ -39,10 +39,10 @@
   inset:      0;
   background: linear-gradient(
     180deg,
-    rgba(8,8,8,0.28) 0%,
-    rgba(8,8,8,0.48) 40%,
-    rgba(8,8,8,0.82) 85%,
-    #080808 100%
+    rgba(var(--scrim-rgb),0.28) 0%,
+    rgba(var(--scrim-rgb),0.48) 40%,
+    rgba(var(--scrim-rgb),0.82) 85%,
+    rgba(var(--scrim-rgb), 1) 100%
   );
 }
 
@@ -51,6 +51,15 @@
   z-index:    1;
   max-width:  900px;
   margin:     0 auto;
+  color:      var(--on-dark);
+}
+.ap-hero-content .btn {
+  border-color: var(--on-dark);
+  color:        var(--on-dark);
+}
+.ap-hero-content .btn:hover {
+  background: var(--on-dark);
+  color:      var(--bg);
 }
 
 .ap-breadcrumb {
@@ -89,14 +98,14 @@
 .ap-hero-headline .ap-gold  { color: var(--gold); }
 .ap-hero-headline .ap-ghost {
   color:               transparent;
-  -webkit-text-stroke: 1.5px rgba(238,238,232,.5);
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--on-dark) 50%, transparent);
   paint-order:         stroke fill;
 }
 
 .ap-hero-sub {
   font-size:      clamp(14px, 1.15vw, 17px);
   line-height:    1.7;
-  color:          rgba(238,238,232,.68);
+  color:          color-mix(in srgb, var(--on-dark) 68%, transparent);
   max-width:      620px;
   margin:         0 auto 44px;
 }
@@ -193,7 +202,7 @@
 .ap-feature-desc {
   font-size:   clamp(13px, .95vw, 15px);
   line-height: 1.65;
-  color:       rgba(238,238,232,.62);
+  color:       var(--text-soft);
   flex:        1;
 }
 
@@ -238,7 +247,7 @@
 .ap-step-desc {
   font-size:   clamp(13px, .95vw, 15px);
   line-height: 1.65;
-  color:       rgba(238,238,232,.6);
+  color:       var(--text-soft);
 }
 
 /* ================================================================
@@ -269,7 +278,7 @@
 .ap-glove-body {
   font-size:      clamp(14px, 1.05vw, 17px);
   line-height:    1.7;
-  color:          rgba(238,238,232,.7);
+  color:          var(--text-soft);
   margin-bottom:  clamp(24px, 3vw, 40px);
   max-width:      480px;
 }
@@ -354,7 +363,7 @@
 .ap-faq-answer {
   font-size:      clamp(13px, .95vw, 15px);
   line-height:    1.72;
-  color:          rgba(238,238,232,.62);
+  color:          var(--text-soft);
   padding-bottom: clamp(16px, 2vw, 24px);
   max-width:      680px;
 }
@@ -427,7 +436,7 @@
 .ap-route-note {
   font-size:   clamp(13px, .9vw, 14px);
   line-height: 1.6;
-  color:       rgba(238,238,232,.58);
+  color:       var(--text-soft);
   flex:        1;
 }
 
@@ -450,7 +459,7 @@
 .ap-strategy-lede {
   font-size:   clamp(14px, 1.05vw, 17px);
   line-height: 1.72;
-  color:       rgba(238,238,232,.65);
+  color:       var(--text-soft);
   margin-top:  16px;
 }
 .ap-strategy-grid {
@@ -503,7 +512,7 @@
   letter-spacing: .2em;
   text-transform: uppercase;
   font-weight:    600;
-  color:          rgba(238,238,232,.55);
+  color:          var(--text-soft);
   border:         1px solid var(--border);
   padding:        5px 10px;
   border-radius:  100px;
@@ -522,7 +531,7 @@
 .ap-strategy-card-body {
   font-size:   clamp(13px, .95vw, 15px);
   line-height: 1.68;
-  color:       rgba(238,238,232,.62);
+  color:       var(--text-soft);
   flex:        1;
 }
 .ap-strategy-card-link {
@@ -580,7 +589,7 @@
   text-transform: uppercase;
   padding:        10px 18px;
   border:         1px solid var(--border);
-  color:          rgba(238,238,232,.72);
+  color:          color-mix(in srgb, var(--white) 72%, transparent);
   transition:     border-color .2s, color .2s;
 }
 .ap-related-links a:hover {
@@ -623,7 +632,7 @@
   font-size:      12px;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color:          rgba(238,238,232,.72);
+  color:          color-mix(in srgb, var(--white) 72%, transparent);
   transition:     background .2s, color .2s;
 }
 .ap-hub-links a:hover {
@@ -696,7 +705,7 @@
 .ap-about-card-desc {
   font-size:   clamp(13px, .95vw, 15px);
   line-height: 1.68;
-  color:       rgba(238,238,232,.62);
+  color:       var(--text-soft);
 }
 
 @media (max-width: 1100px) {
