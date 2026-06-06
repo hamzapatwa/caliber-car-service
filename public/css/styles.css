@@ -1269,7 +1269,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 .coverage-group li:hover { color: var(--gold); transform: translateX(4px); }
 
 /* ================================================================
-   REVIEWS — 3-card grid
+   REVIEWS — curated Google review cards
 ================================================================ */
 .reviews {
   background: var(--bg);
@@ -1288,7 +1288,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate
 
 .reviews-grid {
   display:    grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap:        clamp(16px, 2vw, 28px);
 }
 

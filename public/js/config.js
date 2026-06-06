@@ -35,7 +35,9 @@ const CONFIG = {
     url:         'https://calibercarservice.com/',
     ogImage:     'https://calibercarservice.com/og-image.webp',
     googleReviewsUrl:
-      'https://www.google.com/maps/search/?api=1&query=Caliber+Car+Service+Long+Island+NY',
+      'https://share.google/yh3vwcNMPvUH2Y9Bw',
+    googleLeaveReviewUrl:
+      'https://g.page/r/CUmzSEGPI6HCEAE/review',
   },
 
   /* ----------------------------------------------------------
@@ -311,29 +313,36 @@ const CONFIG = {
   },
 
   /* ----------------------------------------------------------
-     REVIEWS — three editorial spreads
+     REVIEWS — curated 5-star Google reviews
   ---------------------------------------------------------- */
   reviews: [
     {
       num:      '01',
       stars:    5,
-      quote:    'On time, every single trip. My driver knew the JFK terminal layout cold and had me at my international gate with time to spare. This is what executive transport should feel like.',
+      quote:    '100% on time, every single trip. My driver knew the JFK terminal layout better than anyone I&rsquo;ve had before. Had me at my international gate with time to spare. This is what executive transport should feel like.',
       name:     'Michael H.',
-      location: 'Garden City, NY',
+      location: 'Queens, NY',
     },
     {
       num:      '02',
       stars:    5,
-      quote:    'We switched our entire C-suite to Caliber after one trip. Clean vehicles, professional chauffeurs, and a dispatch team that actually picks up the phone at four in the morning.',
-      name:     'Mehtab M.',
-      location: 'Melville, NY',
+      quote:    'Used them for my daughter&rsquo;s wedding. The Sprinter was immaculate, the driver was a gentleman, and the entire bridal party arrived calm and on time. Worth every dollar.',
+      name:     'Chuck N.',
+      location: 'Elmont, NY',
     },
     {
       num:      '03',
       stars:    5,
-      quote:    'Used them for my daughter&rsquo;s wedding. The Sprinter was immaculate, the driver was a gentleman, and the entire bridal party arrived calm and on time. Worth every dollar.',
-      name:     'Chuck W.',
-      location: 'Great Neck, NY',
+      quote:    'Booked last minute for an early JFK flight and honestly didn&rsquo;t know what to expect. Driver was outside my door at 4:45am, car was beautiful, and I didn&rsquo;t have to say a word the whole ride. He just knew where to go. Landed, texted them for my return, same experience. I&rsquo;m never using anyone else.',
+      name:     'Naurin A.',
+      location: 'Queens, NY',
+    },
+    {
+      num:      '04',
+      stars:    5,
+      quote:    'We switched our entire C-suite to Caliber after one trip. Clean vehicles, professional chauffeurs, and a dispatch team that actually picks up the phone at four in the morning.',
+      name:     'Mehtab M.',
+      location: 'Hempstead, NY',
     },
   ],
 
